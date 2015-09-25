@@ -106,6 +106,12 @@ void iter_free(iter_t *);
 */
 list_t *list_clone(list_t *);
 
+
+/**
+Eget
+ */
+void list_add_timetable(list_t *, char* start, int line, char* time);
+
 /**
   Frees all memory that the list allocated.
 */

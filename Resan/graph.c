@@ -305,10 +305,10 @@ void graph_print(graph_t *g)
 
 void graph_add_timetable(graph_t *g,char* start,int line,char* time) //Egen Funktion
 {
-
-
-
-  
+  if(graph_has_node(g, start))
+    {
+      list_add_timetable(g->nodes, start, line, time);
+    }  
 }
 
 

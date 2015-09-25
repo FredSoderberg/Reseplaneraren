@@ -10,22 +10,30 @@ typedef struct _timetable_t timetable_t;
 struct _list_node_t
 {
   void *element;
-  timetable_t *timetable;
+  struct _time_list_t *timetable;
   struct _list_node_t *next;
 };
-
-struct _timetable_t
-{
-  void *line;
-  void *departs;
-};
-
 
 struct _list_t
 {
     list_node_t *first;
     list_node_t *last;
 };
+
+struct _time_list_t
+{
+  timetable_t *first;
+  timetable_t *last;
+};
+
+struct _timetable_t
+{
+  void *line;
+  void *destination;
+  void *departs;
+  struct _timetable_t *next;
+};
+
 
 // PRIVATE ===========================================================
 
@@ -175,6 +183,15 @@ list_t *list_clone(list_t *l)
         }
     return ret;
 }
+
+
+void list_add_timetable(list_t *l, char* start, int line, char* time) //Egen funktion
+{
+  
+}
+
+
+
 
 void list_free(list_t *l)
 {
