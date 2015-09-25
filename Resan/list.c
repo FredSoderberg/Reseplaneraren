@@ -12,6 +12,8 @@ struct _list_node_t
   void *element;
   struct _time_list_t *timetable;
   struct _list_node_t *next;
+
+  
 };
 
 struct _list_t
