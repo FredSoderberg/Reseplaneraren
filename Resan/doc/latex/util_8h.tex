@@ -1,0 +1,72 @@
+\hypertarget{util_8h}{}\section{util.\+h File Reference}
+\label{util_8h}\index{util.\+h@{util.\+h}}
+
+
+Utility functions.  
+
+
+{\ttfamily \#include $<$string.\+h$>$}\\*
+{\ttfamily \#include $<$stdbool.\+h$>$}\\*
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef void($\ast$ \hyperlink{util_8h_a9f4a24f55b14f528a998b64fb3918852}{void\+\_\+fun\+\_\+t}) (void $\ast$)
+\item 
+typedef void($\ast$ \hyperlink{util_8h_a1eca6bfd2cff7af9bba9de4b7408a8fe}{void\+\_\+fun2\+\_\+t}) (void $\ast$, void $\ast$)
+\item 
+typedef void($\ast$ \hyperlink{util_8h_a3c5cc06645471a57142bb2e1cf0f0e86}{void\+\_\+fun3\+\_\+t}) (void $\ast$, void $\ast$, void $\ast$)
+\item 
+typedef bool($\ast$ \hyperlink{util_8h_a49b4e67d12d0b82395b75063127fff0b}{comparator\+\_\+t}) (const void $\ast$, const void $\ast$)
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{util_8h_a424b82a09608e0a37f04fab8b514872d}{streq} (const void $\ast$a, const void $\ast$b)
+\item 
+void \hyperlink{util_8h_a984f3902966a3499fb55138b6dd338d4}{printstr} (void $\ast$)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Utility functions. 
+
+
+
+\subsection{Typedef Documentation}
+\hypertarget{util_8h_a49b4e67d12d0b82395b75063127fff0b}{}\index{util.\+h@{util.\+h}!comparator\+\_\+t@{comparator\+\_\+t}}
+\index{comparator\+\_\+t@{comparator\+\_\+t}!util.\+h@{util.\+h}}
+\subsubsection[{comparator\+\_\+t}]{\setlength{\rightskip}{0pt plus 5cm}typedef bool($\ast$ comparator\+\_\+t) (const void $\ast$, const void $\ast$)}\label{util_8h_a49b4e67d12d0b82395b75063127fff0b}
+A comparator is a function that needs to be sideeffect-\/free and symmetric ({\ttfamily fun(x,y)} == {\ttfamily fun(y,x)} for all {\ttfamily x} and {\ttfamily y}). \hypertarget{util_8h_a1eca6bfd2cff7af9bba9de4b7408a8fe}{}\index{util.\+h@{util.\+h}!void\+\_\+fun2\+\_\+t@{void\+\_\+fun2\+\_\+t}}
+\index{void\+\_\+fun2\+\_\+t@{void\+\_\+fun2\+\_\+t}!util.\+h@{util.\+h}}
+\subsubsection[{void\+\_\+fun2\+\_\+t}]{\setlength{\rightskip}{0pt plus 5cm}typedef void($\ast$ void\+\_\+fun2\+\_\+t) (void $\ast$, void $\ast$)}\label{util_8h_a1eca6bfd2cff7af9bba9de4b7408a8fe}
+A function with two pointer args and no return value. \hypertarget{util_8h_a3c5cc06645471a57142bb2e1cf0f0e86}{}\index{util.\+h@{util.\+h}!void\+\_\+fun3\+\_\+t@{void\+\_\+fun3\+\_\+t}}
+\index{void\+\_\+fun3\+\_\+t@{void\+\_\+fun3\+\_\+t}!util.\+h@{util.\+h}}
+\subsubsection[{void\+\_\+fun3\+\_\+t}]{\setlength{\rightskip}{0pt plus 5cm}typedef void($\ast$ void\+\_\+fun3\+\_\+t) (void $\ast$, void $\ast$, void $\ast$)}\label{util_8h_a3c5cc06645471a57142bb2e1cf0f0e86}
+A function with three pointer args and no return value. \hypertarget{util_8h_a9f4a24f55b14f528a998b64fb3918852}{}\index{util.\+h@{util.\+h}!void\+\_\+fun\+\_\+t@{void\+\_\+fun\+\_\+t}}
+\index{void\+\_\+fun\+\_\+t@{void\+\_\+fun\+\_\+t}!util.\+h@{util.\+h}}
+\subsubsection[{void\+\_\+fun\+\_\+t}]{\setlength{\rightskip}{0pt plus 5cm}typedef void($\ast$ void\+\_\+fun\+\_\+t) (void $\ast$)}\label{util_8h_a9f4a24f55b14f528a998b64fb3918852}
+A function with one pointer arg and no return value. 
+
+\subsection{Function Documentation}
+\hypertarget{util_8h_a984f3902966a3499fb55138b6dd338d4}{}\index{util.\+h@{util.\+h}!printstr@{printstr}}
+\index{printstr@{printstr}!util.\+h@{util.\+h}}
+\subsubsection[{printstr(void $\ast$)}]{\setlength{\rightskip}{0pt plus 5cm}void printstr (
+\begin{DoxyParamCaption}
+\item[{void $\ast$}]{}
+\end{DoxyParamCaption}
+)}\label{util_8h_a984f3902966a3499fb55138b6dd338d4}
+Print a string.
+
+Like {\ttfamily puts} but ignores the return value. Can be cast to a \hyperlink{util_8h_a9f4a24f55b14f528a998b64fb3918852}{void\+\_\+fun\+\_\+t}. \hypertarget{util_8h_a424b82a09608e0a37f04fab8b514872d}{}\index{util.\+h@{util.\+h}!streq@{streq}}
+\index{streq@{streq}!util.\+h@{util.\+h}}
+\subsubsection[{streq(const void $\ast$a, const void $\ast$b)}]{\setlength{\rightskip}{0pt plus 5cm}bool streq (
+\begin{DoxyParamCaption}
+\item[{const void $\ast$}]{a, }
+\item[{const void $\ast$}]{b}
+\end{DoxyParamCaption}
+)}\label{util_8h_a424b82a09608e0a37f04fab8b514872d}
+Test whether two strings are equal.
+
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} iff {\ttfamily strcmp(a, b) == 0}. 
+\end{DoxyReturn}

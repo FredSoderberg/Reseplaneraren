@@ -40,6 +40,36 @@ void printEdge(void *from, void *to, void *label)
     // assert(false);
 }
 
+
+
+void timetable_parse(network_t *netw,FILE *file) // Egen funktion
+{
+    assert(file);
+
+    char buffer[BUFSIZE];
+    while (fgets(buffer, BUFSIZE, file))
+        {
+	  char bus_start[BUFSIZE];
+	  int bus_line;
+	  char bus_time[BUFSIZE];
+	  
+	  sscanf(strtok(buffer, ","), "%i", &(bus_line));
+	  trim_leading_space(bus_start, strtok(NULL, ","));
+	  sscanf(strtok(NULL, ","), "%s", (bus_time));
+	  
+	  int bus_line_dup = bus_line;
+	  char *bus_start_dup = strdup(bus_start);
+	  char *bus_time_dup = strdup(bus_time);
+	  
+	  printf("%d - %s - %s\n",bus_line_dup,bus_start_dup,bus_time_dup);
+
+	  graph_add_timetable(netw->g, bus_start_dup, bus_line_dup, bus_time_dup);
+	}
+}
+
+
+
+
 network_t *network_parse(FILE *file)
 {
     assert(file);
@@ -59,21 +89,29 @@ network_t *network_parse(FILE *file)
             trim_leading_space(bus_to, strtok(NULL, ","));
             sscanf(strtok(NULL, ","), "%i", &(e->duration));
 
-            puts("adding edge...");
-            printEdge(bus_from, bus_to, &(e->duration));
+	    //            puts("adding edge...");
+	    // printEdge(bus_from, bus_to, &(e->duration));
 
+
+	    
             assert(e->duration > 0 && e->duration < 100);
 
             char *bus_from_dup = strdup(bus_from);
             char *bus_to_dup = strdup(bus_to);
-
+            	    
             graph_add_node(netw->g, bus_from_dup);
             graph_add_node(netw->g, bus_to_dup);
             graph_add_edge(netw->g, bus_from_dup, bus_to_dup, e);
         }
 
+    timetable_parse(netw,fopen("start.txt","r"));
+    
     return netw;
 }
+
+
+
+
 
 void network_print(network_t *n)
 {

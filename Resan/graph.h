@@ -140,6 +140,14 @@ list_t *graph_find_neighbors(graph_t *, void *node);
 */
 list_t *graph_find_path(graph_t *, void *from, void *to);
 
+
+
+/**
+Egen funktion
+ */
+void graph_add_timetable(graph_t *,char* bus_start,int bus_line,char* bus_time);
+
+
 /**
 
   Deallocate all memory alloceted by the graph.

@@ -1,0 +1,208 @@
+\hypertarget{list_8h}{}\section{list.\+h File Reference}
+\label{list_8h}\index{list.\+h@{list.\+h}}
+
+
+A generic linked list implementation.  
+
+
+{\ttfamily \#include $<$stdbool.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}util.\+h\char`\"{}}\\*
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{list_8h_a12ad5afee26e79d11d5b06e4c8663ab0}{}typedef struct \+\_\+list\+\_\+t {\bfseries list\+\_\+t}\label{list_8h_a12ad5afee26e79d11d5b06e4c8663ab0}
+
+\item 
+\hypertarget{list_8h_acaf69c5c30c617e8adb6727a76ada487}{}typedef struct \hyperlink{struct__iter__t}{\+\_\+iter\+\_\+t} {\bfseries iter\+\_\+t}\label{list_8h_acaf69c5c30c617e8adb6727a76ada487}
+
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+list\+\_\+t $\ast$ \hyperlink{list_8h_a9dd3eafdb56dcc64689f78fb4acdff3f}{list\+\_\+new} ()
+\item 
+void \hyperlink{list_8h_a97e5eb115d554d4496fead77273d1e2d}{list\+\_\+add} (list\+\_\+t $\ast$, void $\ast$)
+\item 
+int \hyperlink{list_8h_a60df0d67f9ba7ef08837be69810a868e}{list\+\_\+len} (list\+\_\+t $\ast$)
+\item 
+bool \hyperlink{list_8h_a548a5ca8b83f626bec84d07c3d2980e7}{list\+\_\+nth} (list\+\_\+t $\ast$, int n, void $\ast$$\ast$res)
+\item 
+bool \hyperlink{list_8h_ac10953658910804c8d2ce0cecd23f3ee}{list\+\_\+has} (list\+\_\+t $\ast$, \hyperlink{util_8h_a49b4e67d12d0b82395b75063127fff0b}{comparator\+\_\+t} comp, void $\ast$elt)
+\item 
+void \hyperlink{list_8h_a087908e637e74da70bbc5439ef1ace9f}{list\+\_\+foreach} (list\+\_\+t $\ast$, \hyperlink{util_8h_a9f4a24f55b14f528a998b64fb3918852}{void\+\_\+fun\+\_\+t})
+\item 
+\hyperlink{struct__iter__t}{iter\+\_\+t} $\ast$ \hyperlink{list_8h_a192e8bf9c9a1102589fcb51cf4468a7b}{iter} (list\+\_\+t $\ast$)
+\item 
+void \hyperlink{list_8h_a2394fa8d238729679542074468051c09}{iter\+\_\+next} (\hyperlink{struct__iter__t}{iter\+\_\+t} $\ast$)
+\item 
+bool \hyperlink{list_8h_ae87df5ecdcb6f56f562bdae494ca23b8}{iter\+\_\+done} (\hyperlink{struct__iter__t}{iter\+\_\+t} $\ast$)
+\item 
+void $\ast$ \hyperlink{list_8h_a3bdbcd13e4f1256939b27084b72ba101}{iter\+\_\+get} (\hyperlink{struct__iter__t}{iter\+\_\+t} $\ast$)
+\item 
+void \hyperlink{list_8h_a4a2b61b11b9898d3bf885ab46cfbc39a}{iter\+\_\+free} (\hyperlink{struct__iter__t}{iter\+\_\+t} $\ast$)
+\item 
+list\+\_\+t $\ast$ \hyperlink{list_8h_a237338d77010c94ff48818cab7117277}{list\+\_\+clone} (list\+\_\+t $\ast$)
+\item 
+void \hyperlink{list_8h_af715c06c704af470136b76093778fe8d}{list\+\_\+free} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A generic linked list implementation. 
+
+
+
+\subsection{Function Documentation}
+\hypertarget{list_8h_a192e8bf9c9a1102589fcb51cf4468a7b}{}\index{list.\+h@{list.\+h}!iter@{iter}}
+\index{iter@{iter}!list.\+h@{list.\+h}}
+\subsubsection[{iter(list\+\_\+t $\ast$)}]{\setlength{\rightskip}{0pt plus 5cm}{\bf iter\+\_\+t}$\ast$ iter (
+\begin{DoxyParamCaption}
+\item[{list\+\_\+t $\ast$}]{}
+\end{DoxyParamCaption}
+)}\label{list_8h_a192e8bf9c9a1102589fcb51cf4468a7b}
+Create an iterator to a list. Needs to be freed using \hyperlink{list_8h_a4a2b61b11b9898d3bf885ab46cfbc39a}{iter\+\_\+free}.
+
+\begin{DoxySeeAlso}{See also}
+\href{http://en.wikipedia.org/wiki/Iterator}{\tt http\+://en.\+wikipedia.\+org/wiki/\+Iterator} 
+\end{DoxySeeAlso}
+\hypertarget{list_8h_ae87df5ecdcb6f56f562bdae494ca23b8}{}\index{list.\+h@{list.\+h}!iter\+\_\+done@{iter\+\_\+done}}
+\index{iter\+\_\+done@{iter\+\_\+done}!list.\+h@{list.\+h}}
+\subsubsection[{iter\+\_\+done(iter\+\_\+t $\ast$)}]{\setlength{\rightskip}{0pt plus 5cm}bool iter\+\_\+done (
+\begin{DoxyParamCaption}
+\item[{{\bf iter\+\_\+t} $\ast$}]{}
+\end{DoxyParamCaption}
+)}\label{list_8h_ae87df5ecdcb6f56f562bdae494ca23b8}
+Test whether the iterator has additional elements.
+
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if the iterator has additional elements, {\ttfamily false} otherwise. 
+\end{DoxyReturn}
+\hypertarget{list_8h_a4a2b61b11b9898d3bf885ab46cfbc39a}{}\index{list.\+h@{list.\+h}!iter\+\_\+free@{iter\+\_\+free}}
+\index{iter\+\_\+free@{iter\+\_\+free}!list.\+h@{list.\+h}}
+\subsubsection[{iter\+\_\+free(iter\+\_\+t $\ast$)}]{\setlength{\rightskip}{0pt plus 5cm}void iter\+\_\+free (
+\begin{DoxyParamCaption}
+\item[{{\bf iter\+\_\+t} $\ast$}]{}
+\end{DoxyParamCaption}
+)}\label{list_8h_a4a2b61b11b9898d3bf885ab46cfbc39a}
+Free the memory allocated by the iterator. \hypertarget{list_8h_a3bdbcd13e4f1256939b27084b72ba101}{}\index{list.\+h@{list.\+h}!iter\+\_\+get@{iter\+\_\+get}}
+\index{iter\+\_\+get@{iter\+\_\+get}!list.\+h@{list.\+h}}
+\subsubsection[{iter\+\_\+get(iter\+\_\+t $\ast$)}]{\setlength{\rightskip}{0pt plus 5cm}void$\ast$ iter\+\_\+get (
+\begin{DoxyParamCaption}
+\item[{{\bf iter\+\_\+t} $\ast$}]{}
+\end{DoxyParamCaption}
+)}\label{list_8h_a3bdbcd13e4f1256939b27084b72ba101}
+Access the current element.
+
+\begin{DoxyReturn}{Returns}
+The current element. 
+\end{DoxyReturn}
+\hypertarget{list_8h_a2394fa8d238729679542074468051c09}{}\index{list.\+h@{list.\+h}!iter\+\_\+next@{iter\+\_\+next}}
+\index{iter\+\_\+next@{iter\+\_\+next}!list.\+h@{list.\+h}}
+\subsubsection[{iter\+\_\+next(iter\+\_\+t $\ast$)}]{\setlength{\rightskip}{0pt plus 5cm}void iter\+\_\+next (
+\begin{DoxyParamCaption}
+\item[{{\bf iter\+\_\+t} $\ast$}]{}
+\end{DoxyParamCaption}
+)}\label{list_8h_a2394fa8d238729679542074468051c09}
+Advance the iterator by one step.
+
+\begin{DoxyWarning}{Warning}
+Must only be called if \hyperlink{list_8h_ae87df5ecdcb6f56f562bdae494ca23b8}{iter\+\_\+done} returns {\ttfamily false}.
+\end{DoxyWarning}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{list_8h_ae87df5ecdcb6f56f562bdae494ca23b8}{iter\+\_\+done} 
+\end{DoxySeeAlso}
+\hypertarget{list_8h_a97e5eb115d554d4496fead77273d1e2d}{}\index{list.\+h@{list.\+h}!list\+\_\+add@{list\+\_\+add}}
+\index{list\+\_\+add@{list\+\_\+add}!list.\+h@{list.\+h}}
+\subsubsection[{list\+\_\+add(list\+\_\+t $\ast$, void $\ast$)}]{\setlength{\rightskip}{0pt plus 5cm}void list\+\_\+add (
+\begin{DoxyParamCaption}
+\item[{list\+\_\+t $\ast$}]{, }
+\item[{void $\ast$}]{}
+\end{DoxyParamCaption}
+)}\label{list_8h_a97e5eb115d554d4496fead77273d1e2d}
+Add an item to a list (at the end); \hypertarget{list_8h_a237338d77010c94ff48818cab7117277}{}\index{list.\+h@{list.\+h}!list\+\_\+clone@{list\+\_\+clone}}
+\index{list\+\_\+clone@{list\+\_\+clone}!list.\+h@{list.\+h}}
+\subsubsection[{list\+\_\+clone(list\+\_\+t $\ast$)}]{\setlength{\rightskip}{0pt plus 5cm}list\+\_\+t$\ast$ list\+\_\+clone (
+\begin{DoxyParamCaption}
+\item[{list\+\_\+t $\ast$}]{}
+\end{DoxyParamCaption}
+)}\label{list_8h_a237338d77010c94ff48818cab7117277}
+Make a shallow clone of a list.
+
+This operation is {\itshape shallow}, it will {\itshape not} clone the elements, just the list\textquotesingle{}s spine.
+
+\begin{DoxyReturn}{Returns}
+A shallow clone of the list. 
+\end{DoxyReturn}
+\hypertarget{list_8h_a087908e637e74da70bbc5439ef1ace9f}{}\index{list.\+h@{list.\+h}!list\+\_\+foreach@{list\+\_\+foreach}}
+\index{list\+\_\+foreach@{list\+\_\+foreach}!list.\+h@{list.\+h}}
+\subsubsection[{list\+\_\+foreach(list\+\_\+t $\ast$, void\+\_\+fun\+\_\+t)}]{\setlength{\rightskip}{0pt plus 5cm}void list\+\_\+foreach (
+\begin{DoxyParamCaption}
+\item[{list\+\_\+t $\ast$}]{, }
+\item[{{\bf void\+\_\+fun\+\_\+t}}]{}
+\end{DoxyParamCaption}
+)}\label{list_8h_a087908e637e74da70bbc5439ef1ace9f}
+Iterate over a list.
+
+Execute the function once for each element in the list and in order. \hypertarget{list_8h_af715c06c704af470136b76093778fe8d}{}\index{list.\+h@{list.\+h}!list\+\_\+free@{list\+\_\+free}}
+\index{list\+\_\+free@{list\+\_\+free}!list.\+h@{list.\+h}}
+\subsubsection[{list\+\_\+free()}]{\setlength{\rightskip}{0pt plus 5cm}void list\+\_\+free (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{list_8h_af715c06c704af470136b76093778fe8d}
+Frees all memory that the list allocated. \hypertarget{list_8h_ac10953658910804c8d2ce0cecd23f3ee}{}\index{list.\+h@{list.\+h}!list\+\_\+has@{list\+\_\+has}}
+\index{list\+\_\+has@{list\+\_\+has}!list.\+h@{list.\+h}}
+\subsubsection[{list\+\_\+has(list\+\_\+t $\ast$, comparator\+\_\+t comp, void $\ast$elt)}]{\setlength{\rightskip}{0pt plus 5cm}bool list\+\_\+has (
+\begin{DoxyParamCaption}
+\item[{list\+\_\+t $\ast$}]{, }
+\item[{{\bf comparator\+\_\+t}}]{comp, }
+\item[{void $\ast$}]{elt}
+\end{DoxyParamCaption}
+)}\label{list_8h_ac10953658910804c8d2ce0cecd23f3ee}
+Test whether a certain element exists.
+
+
+\begin{DoxyParams}{Parameters}
+{\em comp} & The \hyperlink{util_8h_a49b4e67d12d0b82395b75063127fff0b}{comparator\+\_\+t} to search with.\\
+\hline
+{\em elt} & The element to search for.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if there is at least one element in the list that, compared using the \hyperlink{util_8h_a49b4e67d12d0b82395b75063127fff0b}{comparator\+\_\+t}, compares equal to {\ttfamily elt}. 
+\end{DoxyReturn}
+\hypertarget{list_8h_a60df0d67f9ba7ef08837be69810a868e}{}\index{list.\+h@{list.\+h}!list\+\_\+len@{list\+\_\+len}}
+\index{list\+\_\+len@{list\+\_\+len}!list.\+h@{list.\+h}}
+\subsubsection[{list\+\_\+len(list\+\_\+t $\ast$)}]{\setlength{\rightskip}{0pt plus 5cm}int list\+\_\+len (
+\begin{DoxyParamCaption}
+\item[{list\+\_\+t $\ast$}]{}
+\end{DoxyParamCaption}
+)}\label{list_8h_a60df0d67f9ba7ef08837be69810a868e}
+Calculate the length of the list.
+
+\begin{DoxyReturn}{Returns}
+The list\textquotesingle{}s length. 
+\end{DoxyReturn}
+\hypertarget{list_8h_a9dd3eafdb56dcc64689f78fb4acdff3f}{}\index{list.\+h@{list.\+h}!list\+\_\+new@{list\+\_\+new}}
+\index{list\+\_\+new@{list\+\_\+new}!list.\+h@{list.\+h}}
+\subsubsection[{list\+\_\+new()}]{\setlength{\rightskip}{0pt plus 5cm}list\+\_\+t$\ast$ list\+\_\+new (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{list_8h_a9dd3eafdb56dcc64689f78fb4acdff3f}
+Create an empty list. \hypertarget{list_8h_a548a5ca8b83f626bec84d07c3d2980e7}{}\index{list.\+h@{list.\+h}!list\+\_\+nth@{list\+\_\+nth}}
+\index{list\+\_\+nth@{list\+\_\+nth}!list.\+h@{list.\+h}}
+\subsubsection[{list\+\_\+nth(list\+\_\+t $\ast$, int n, void $\ast$$\ast$res)}]{\setlength{\rightskip}{0pt plus 5cm}bool list\+\_\+nth (
+\begin{DoxyParamCaption}
+\item[{list\+\_\+t $\ast$}]{, }
+\item[{int}]{n, }
+\item[{void $\ast$$\ast$}]{res}
+\end{DoxyParamCaption}
+)}\label{list_8h_a548a5ca8b83f626bec84d07c3d2980e7}
+Access the nth member of a list. Zero-\/based.
+
+{\ttfamily $\ast$res} will be assigned to the list element at this location if the list is long enough, to {\ttfamily N\+U\+L\+L} otherwise.
+
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if the list is long enough, {\ttfamily false} otherwise. 
+\end{DoxyReturn}

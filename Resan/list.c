@@ -4,12 +4,22 @@
 #include <stdio.h>
 
 typedef struct _list_node_t list_node_t;
+typedef struct _timetable_t timetable_t;
+
 
 struct _list_node_t
 {
-    void *element;
-    struct _list_node_t *next;
+  void *element;
+  timetable_t *timetable;
+  struct _list_node_t *next;
 };
+
+struct _timetable_t
+{
+  void *line;
+  void *departs;
+};
+
 
 struct _list_t
 {

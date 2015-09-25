@@ -10,7 +10,7 @@ typedef struct _distance_label_t distance_label_t;
 
 struct _graph_edge_t
 {
-    node_t *from;
+    node_t *from; 
     node_t *to;
     void *label;
 };
@@ -138,13 +138,13 @@ distance_label_t *get_distance_label(list_t *distanceLabels, void *lbl,
             distance_label_t *dl = iter_get(dliter);
             if (comp(dl->label, lbl))
                 {
-                    // printf("Did find distance label for %s: path is: %p\n", lbl, dl->path);
+		  printf("Did find distance label for %s: path is: %p\n", lbl, dl->path);
 
                     iter_free(dliter);
                     return dl;
                 }
         }
-    // printf("did not find distance label for %s\n", lbl);
+       printf("did not find distance label for %s\n", lbl);
     iter_free(dliter);
     return NULL;
 }
@@ -160,15 +160,15 @@ void *get_min_distance_node(list_t *distanceLabels, comparator_t comp,
     for (it = iter(distanceLabels); !iter_done(it); iter_next(it))
         {
             distance_label_t *itdl = iter_get(it);
-            if (itdl->dist == -1)
+            if (itdl->dist == -1) // inte varit där
                 {
                     continue;
                 }
-            if (list_has(visited, comp, itdl->label))
+            if (list_has(visited, comp, itdl->label)) // finns redan i visited, abort
                 {
                     continue;
                 }
-            if (minDist == -1 || itdl->dist < minDist)
+            if (minDist == -1 || itdl->dist < minDist)// om inte ändrats en enda gång eller nya distansen 'r mindre än förra minsta distans.
                 {
                     minDist = itdl->dist;
                     minLabel = itdl->label;
@@ -230,35 +230,34 @@ void dijkstra(graph_t *g, void *current, void *to, list_t *visited,
     assert(visited);
     assert(distanceLabels);
     while (true)
-        {
-            if (!list_has(visited, g->comp, current))
-                {
-
-                    list_t *unvisited_neighs = unvisited_neighbors(g, current, visited);
-                    distance_label_t *here =
-                        get_distance_label(distanceLabels, current, g->comp);
-
-                    iter_t *it;
-                    for (it = iter(unvisited_neighs); !iter_done(it); iter_next(it))
-                        {
-                            void *neigh = iter_get(it);
-                            list_t *tentativePath = list_clone(here->path);
-                            list_add(tentativePath, neigh);
-                            update_distance(distanceLabels, neigh, g->comp, here->dist + 1,
-                                            tentativePath);
-                        }
-                    iter_free(it);
-                }
-            list_add(visited, current);
-
-            if (g->comp(current, to))
-                {
-                    return;
-                }
-
-            current = get_min_distance_node(distanceLabels, g->comp, visited);
-            assert(current);
-        }
+      {
+	if (!list_has(visited, g->comp, current))
+	  {
+	    list_t *unvisited_neighs = unvisited_neighbors(g, current, visited);
+	    distance_label_t *here =
+	      get_distance_label(distanceLabels, current, g->comp);
+	    
+	    iter_t *it;
+	    for (it = iter(unvisited_neighs); !iter_done(it); iter_next(it))
+	      {
+		void *neigh = iter_get(it);
+		list_t *tentativePath = list_clone(here->path);
+		list_add(tentativePath, neigh);
+		update_distance(distanceLabels, neigh, g->comp, here->dist + 1,
+				tentativePath); //ost-bågen borde gå in här!!
+	      }
+	    iter_free(it);
+	  }
+	list_add(visited, current);
+	
+	if (g->comp(current, to))
+	  {
+	    return;
+	  }
+	
+	current = get_min_distance_node(distanceLabels, g->comp, visited);
+	assert(current);
+      }
 }
 
 list_t *graph_find_path(graph_t *g, void *from, void *to)
@@ -302,6 +301,17 @@ void graph_print(graph_t *g)
             list_nth(g->edges, i, (void **)&e);
         }
 }
+
+
+void graph_add_timetable(graph_t *g,char* start,int line,char* time) //Egen Funktion
+{
+
+
+
+  
+}
+
+
 
 void graph_free(graph_t *g)
 {
