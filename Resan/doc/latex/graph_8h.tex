@@ -31,9 +31,11 @@ bool \hyperlink{graph_8h_ac9bbfaa5b87679dcbbf516a69b2608e9}{graph\+\_\+add\+\_\+
 \item 
 bool \hyperlink{graph_8h_a3cc6fd01db6550738b9354695a4b811a}{graph\+\_\+has\+\_\+edge} (\hyperlink{struct__graph__t}{graph\+\_\+t} $\ast$, void $\ast$from, void $\ast$to, void $\ast$$\ast$label)
 \item 
-list\+\_\+t $\ast$ \hyperlink{graph_8h_a314e9a9cd6dedf883f3be604e8f73525}{graph\+\_\+find\+\_\+neighbors} (\hyperlink{struct__graph__t}{graph\+\_\+t} $\ast$, void $\ast$node)
+\hyperlink{struct__list__t}{list\+\_\+t} $\ast$ \hyperlink{graph_8h_a314e9a9cd6dedf883f3be604e8f73525}{graph\+\_\+find\+\_\+neighbors} (\hyperlink{struct__graph__t}{graph\+\_\+t} $\ast$, void $\ast$node)
 \item 
-list\+\_\+t $\ast$ \hyperlink{graph_8h_a755f2ffd6479fb5e26119bac16825445}{graph\+\_\+find\+\_\+path} (\hyperlink{struct__graph__t}{graph\+\_\+t} $\ast$, void $\ast$from, void $\ast$to)
+\hyperlink{struct__list__t}{list\+\_\+t} $\ast$ \hyperlink{graph_8h_a755f2ffd6479fb5e26119bac16825445}{graph\+\_\+find\+\_\+path} (\hyperlink{struct__graph__t}{graph\+\_\+t} $\ast$, void $\ast$from, void $\ast$to)
+\item 
+void \hyperlink{graph_8h_aa09ef8967d9b1d1adca36624704f2f67}{graph\+\_\+add\+\_\+timetable} (\hyperlink{struct__graph__t}{graph\+\_\+t} $\ast$, char $\ast$bus\+\_\+start, int bus\+\_\+line, char $\ast$bus\+\_\+time)
 \item 
 void \hyperlink{graph_8h_a1f6e6ee4af7796685dd29ee54939e868}{graph\+\_\+free} (\hyperlink{struct__graph__t}{graph\+\_\+t} $\ast$)
 \end{DoxyCompactItemize}
@@ -89,9 +91,19 @@ The graph\+\_\+t $\ast$ will never deallocate a node. You can deallocate all gra
 \begin{DoxySeeAlso}{See also}
 \hyperlink{graph_8h_af09d835a57d713978fe5bf5d6cba33c3}{graph\+\_\+foreach\+\_\+node} 
 \end{DoxySeeAlso}
-\hypertarget{graph_8h_a314e9a9cd6dedf883f3be604e8f73525}{}\index{graph.\+h@{graph.\+h}!graph\+\_\+find\+\_\+neighbors@{graph\+\_\+find\+\_\+neighbors}}
+\hypertarget{graph_8h_aa09ef8967d9b1d1adca36624704f2f67}{}\index{graph.\+h@{graph.\+h}!graph\+\_\+add\+\_\+timetable@{graph\+\_\+add\+\_\+timetable}}
+\index{graph\+\_\+add\+\_\+timetable@{graph\+\_\+add\+\_\+timetable}!graph.\+h@{graph.\+h}}
+\subsubsection[{graph\+\_\+add\+\_\+timetable(graph\+\_\+t $\ast$, char $\ast$bus\+\_\+start, int bus\+\_\+line, char $\ast$bus\+\_\+time)}]{\setlength{\rightskip}{0pt plus 5cm}void graph\+\_\+add\+\_\+timetable (
+\begin{DoxyParamCaption}
+\item[{{\bf graph\+\_\+t} $\ast$}]{, }
+\item[{char $\ast$}]{bus\+\_\+start, }
+\item[{int}]{bus\+\_\+line, }
+\item[{char $\ast$}]{bus\+\_\+time}
+\end{DoxyParamCaption}
+)}\label{graph_8h_aa09ef8967d9b1d1adca36624704f2f67}
+Egen funktion \hypertarget{graph_8h_a314e9a9cd6dedf883f3be604e8f73525}{}\index{graph.\+h@{graph.\+h}!graph\+\_\+find\+\_\+neighbors@{graph\+\_\+find\+\_\+neighbors}}
 \index{graph\+\_\+find\+\_\+neighbors@{graph\+\_\+find\+\_\+neighbors}!graph.\+h@{graph.\+h}}
-\subsubsection[{graph\+\_\+find\+\_\+neighbors(graph\+\_\+t $\ast$, void $\ast$node)}]{\setlength{\rightskip}{0pt plus 5cm}list\+\_\+t$\ast$ graph\+\_\+find\+\_\+neighbors (
+\subsubsection[{graph\+\_\+find\+\_\+neighbors(graph\+\_\+t $\ast$, void $\ast$node)}]{\setlength{\rightskip}{0pt plus 5cm}{\bf list\+\_\+t}$\ast$ graph\+\_\+find\+\_\+neighbors (
 \begin{DoxyParamCaption}
 \item[{{\bf graph\+\_\+t} $\ast$}]{, }
 \item[{void $\ast$}]{node}
@@ -112,7 +124,7 @@ If the node is not in the graph, behaviour is undefined.
 \end{DoxyWarning}
 \hypertarget{graph_8h_a755f2ffd6479fb5e26119bac16825445}{}\index{graph.\+h@{graph.\+h}!graph\+\_\+find\+\_\+path@{graph\+\_\+find\+\_\+path}}
 \index{graph\+\_\+find\+\_\+path@{graph\+\_\+find\+\_\+path}!graph.\+h@{graph.\+h}}
-\subsubsection[{graph\+\_\+find\+\_\+path(graph\+\_\+t $\ast$, void $\ast$from, void $\ast$to)}]{\setlength{\rightskip}{0pt plus 5cm}list\+\_\+t$\ast$ graph\+\_\+find\+\_\+path (
+\subsubsection[{graph\+\_\+find\+\_\+path(graph\+\_\+t $\ast$, void $\ast$from, void $\ast$to)}]{\setlength{\rightskip}{0pt plus 5cm}{\bf list\+\_\+t}$\ast$ graph\+\_\+find\+\_\+path (
 \begin{DoxyParamCaption}
 \item[{{\bf graph\+\_\+t} $\ast$}]{, }
 \item[{void $\ast$}]{from, }

@@ -10,7 +10,7 @@ A generic linked list implementation.
 \subsection*{Typedefs}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{list_8h_a12ad5afee26e79d11d5b06e4c8663ab0}{}typedef struct \+\_\+list\+\_\+t {\bfseries list\+\_\+t}\label{list_8h_a12ad5afee26e79d11d5b06e4c8663ab0}
+\hypertarget{list_8h_a12ad5afee26e79d11d5b06e4c8663ab0}{}typedef struct \hyperlink{struct__list__t}{\+\_\+list\+\_\+t} {\bfseries list\+\_\+t}\label{list_8h_a12ad5afee26e79d11d5b06e4c8663ab0}
 
 \item 
 \hypertarget{list_8h_acaf69c5c30c617e8adb6727a76ada487}{}typedef struct \hyperlink{struct__iter__t}{\+\_\+iter\+\_\+t} {\bfseries iter\+\_\+t}\label{list_8h_acaf69c5c30c617e8adb6727a76ada487}
@@ -19,19 +19,19 @@ A generic linked list implementation.
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-list\+\_\+t $\ast$ \hyperlink{list_8h_a9dd3eafdb56dcc64689f78fb4acdff3f}{list\+\_\+new} ()
+\hyperlink{struct__list__t}{list\+\_\+t} $\ast$ \hyperlink{list_8h_a9dd3eafdb56dcc64689f78fb4acdff3f}{list\+\_\+new} ()
 \item 
-void \hyperlink{list_8h_a97e5eb115d554d4496fead77273d1e2d}{list\+\_\+add} (list\+\_\+t $\ast$, void $\ast$)
+void \hyperlink{list_8h_a97e5eb115d554d4496fead77273d1e2d}{list\+\_\+add} (\hyperlink{struct__list__t}{list\+\_\+t} $\ast$, void $\ast$)
 \item 
-int \hyperlink{list_8h_a60df0d67f9ba7ef08837be69810a868e}{list\+\_\+len} (list\+\_\+t $\ast$)
+int \hyperlink{list_8h_a60df0d67f9ba7ef08837be69810a868e}{list\+\_\+len} (\hyperlink{struct__list__t}{list\+\_\+t} $\ast$)
 \item 
-bool \hyperlink{list_8h_a548a5ca8b83f626bec84d07c3d2980e7}{list\+\_\+nth} (list\+\_\+t $\ast$, int n, void $\ast$$\ast$res)
+bool \hyperlink{list_8h_a548a5ca8b83f626bec84d07c3d2980e7}{list\+\_\+nth} (\hyperlink{struct__list__t}{list\+\_\+t} $\ast$, int n, void $\ast$$\ast$res)
 \item 
-bool \hyperlink{list_8h_ac10953658910804c8d2ce0cecd23f3ee}{list\+\_\+has} (list\+\_\+t $\ast$, \hyperlink{util_8h_a49b4e67d12d0b82395b75063127fff0b}{comparator\+\_\+t} comp, void $\ast$elt)
+bool \hyperlink{list_8h_ac10953658910804c8d2ce0cecd23f3ee}{list\+\_\+has} (\hyperlink{struct__list__t}{list\+\_\+t} $\ast$, \hyperlink{util_8h_a49b4e67d12d0b82395b75063127fff0b}{comparator\+\_\+t} comp, void $\ast$elt)
 \item 
-void \hyperlink{list_8h_a087908e637e74da70bbc5439ef1ace9f}{list\+\_\+foreach} (list\+\_\+t $\ast$, \hyperlink{util_8h_a9f4a24f55b14f528a998b64fb3918852}{void\+\_\+fun\+\_\+t})
+void \hyperlink{list_8h_a087908e637e74da70bbc5439ef1ace9f}{list\+\_\+foreach} (\hyperlink{struct__list__t}{list\+\_\+t} $\ast$, \hyperlink{util_8h_a9f4a24f55b14f528a998b64fb3918852}{void\+\_\+fun\+\_\+t})
 \item 
-\hyperlink{struct__iter__t}{iter\+\_\+t} $\ast$ \hyperlink{list_8h_a192e8bf9c9a1102589fcb51cf4468a7b}{iter} (list\+\_\+t $\ast$)
+\hyperlink{struct__iter__t}{iter\+\_\+t} $\ast$ \hyperlink{list_8h_a192e8bf9c9a1102589fcb51cf4468a7b}{iter} (\hyperlink{struct__list__t}{list\+\_\+t} $\ast$)
 \item 
 void \hyperlink{list_8h_a2394fa8d238729679542074468051c09}{iter\+\_\+next} (\hyperlink{struct__iter__t}{iter\+\_\+t} $\ast$)
 \item 
@@ -41,7 +41,9 @@ void $\ast$ \hyperlink{list_8h_a3bdbcd13e4f1256939b27084b72ba101}{iter\+\_\+get}
 \item 
 void \hyperlink{list_8h_a4a2b61b11b9898d3bf885ab46cfbc39a}{iter\+\_\+free} (\hyperlink{struct__iter__t}{iter\+\_\+t} $\ast$)
 \item 
-list\+\_\+t $\ast$ \hyperlink{list_8h_a237338d77010c94ff48818cab7117277}{list\+\_\+clone} (list\+\_\+t $\ast$)
+\hyperlink{struct__list__t}{list\+\_\+t} $\ast$ \hyperlink{list_8h_a237338d77010c94ff48818cab7117277}{list\+\_\+clone} (\hyperlink{struct__list__t}{list\+\_\+t} $\ast$)
+\item 
+void \hyperlink{list_8h_a1ed2b6b82e5b441cd828ae8045063e53}{list\+\_\+add\+\_\+timetable} (\hyperlink{struct__list__t}{list\+\_\+t} $\ast$, char $\ast$start, int line, char $\ast$time)
 \item 
 void \hyperlink{list_8h_af715c06c704af470136b76093778fe8d}{list\+\_\+free} ()
 \end{DoxyCompactItemize}
@@ -57,7 +59,7 @@ A generic linked list implementation.
 \index{iter@{iter}!list.\+h@{list.\+h}}
 \subsubsection[{iter(list\+\_\+t $\ast$)}]{\setlength{\rightskip}{0pt plus 5cm}{\bf iter\+\_\+t}$\ast$ iter (
 \begin{DoxyParamCaption}
-\item[{list\+\_\+t $\ast$}]{}
+\item[{{\bf list\+\_\+t} $\ast$}]{}
 \end{DoxyParamCaption}
 )}\label{list_8h_a192e8bf9c9a1102589fcb51cf4468a7b}
 Create an iterator to a list. Needs to be freed using \hyperlink{list_8h_a4a2b61b11b9898d3bf885ab46cfbc39a}{iter\+\_\+free}.
@@ -115,15 +117,25 @@ Must only be called if \hyperlink{list_8h_ae87df5ecdcb6f56f562bdae494ca23b8}{ite
 \index{list\+\_\+add@{list\+\_\+add}!list.\+h@{list.\+h}}
 \subsubsection[{list\+\_\+add(list\+\_\+t $\ast$, void $\ast$)}]{\setlength{\rightskip}{0pt plus 5cm}void list\+\_\+add (
 \begin{DoxyParamCaption}
-\item[{list\+\_\+t $\ast$}]{, }
+\item[{{\bf list\+\_\+t} $\ast$}]{, }
 \item[{void $\ast$}]{}
 \end{DoxyParamCaption}
 )}\label{list_8h_a97e5eb115d554d4496fead77273d1e2d}
-Add an item to a list (at the end); \hypertarget{list_8h_a237338d77010c94ff48818cab7117277}{}\index{list.\+h@{list.\+h}!list\+\_\+clone@{list\+\_\+clone}}
-\index{list\+\_\+clone@{list\+\_\+clone}!list.\+h@{list.\+h}}
-\subsubsection[{list\+\_\+clone(list\+\_\+t $\ast$)}]{\setlength{\rightskip}{0pt plus 5cm}list\+\_\+t$\ast$ list\+\_\+clone (
+Add an item to a list (at the end); \hypertarget{list_8h_a1ed2b6b82e5b441cd828ae8045063e53}{}\index{list.\+h@{list.\+h}!list\+\_\+add\+\_\+timetable@{list\+\_\+add\+\_\+timetable}}
+\index{list\+\_\+add\+\_\+timetable@{list\+\_\+add\+\_\+timetable}!list.\+h@{list.\+h}}
+\subsubsection[{list\+\_\+add\+\_\+timetable(list\+\_\+t $\ast$, char $\ast$start, int line, char $\ast$time)}]{\setlength{\rightskip}{0pt plus 5cm}void list\+\_\+add\+\_\+timetable (
 \begin{DoxyParamCaption}
-\item[{list\+\_\+t $\ast$}]{}
+\item[{{\bf list\+\_\+t} $\ast$}]{, }
+\item[{char $\ast$}]{start, }
+\item[{int}]{line, }
+\item[{char $\ast$}]{time}
+\end{DoxyParamCaption}
+)}\label{list_8h_a1ed2b6b82e5b441cd828ae8045063e53}
+Eget \hypertarget{list_8h_a237338d77010c94ff48818cab7117277}{}\index{list.\+h@{list.\+h}!list\+\_\+clone@{list\+\_\+clone}}
+\index{list\+\_\+clone@{list\+\_\+clone}!list.\+h@{list.\+h}}
+\subsubsection[{list\+\_\+clone(list\+\_\+t $\ast$)}]{\setlength{\rightskip}{0pt plus 5cm}{\bf list\+\_\+t}$\ast$ list\+\_\+clone (
+\begin{DoxyParamCaption}
+\item[{{\bf list\+\_\+t} $\ast$}]{}
 \end{DoxyParamCaption}
 )}\label{list_8h_a237338d77010c94ff48818cab7117277}
 Make a shallow clone of a list.
@@ -137,7 +149,7 @@ A shallow clone of the list.
 \index{list\+\_\+foreach@{list\+\_\+foreach}!list.\+h@{list.\+h}}
 \subsubsection[{list\+\_\+foreach(list\+\_\+t $\ast$, void\+\_\+fun\+\_\+t)}]{\setlength{\rightskip}{0pt plus 5cm}void list\+\_\+foreach (
 \begin{DoxyParamCaption}
-\item[{list\+\_\+t $\ast$}]{, }
+\item[{{\bf list\+\_\+t} $\ast$}]{, }
 \item[{{\bf void\+\_\+fun\+\_\+t}}]{}
 \end{DoxyParamCaption}
 )}\label{list_8h_a087908e637e74da70bbc5439ef1ace9f}
@@ -154,7 +166,7 @@ Frees all memory that the list allocated. \hypertarget{list_8h_ac10953658910804c
 \index{list\+\_\+has@{list\+\_\+has}!list.\+h@{list.\+h}}
 \subsubsection[{list\+\_\+has(list\+\_\+t $\ast$, comparator\+\_\+t comp, void $\ast$elt)}]{\setlength{\rightskip}{0pt plus 5cm}bool list\+\_\+has (
 \begin{DoxyParamCaption}
-\item[{list\+\_\+t $\ast$}]{, }
+\item[{{\bf list\+\_\+t} $\ast$}]{, }
 \item[{{\bf comparator\+\_\+t}}]{comp, }
 \item[{void $\ast$}]{elt}
 \end{DoxyParamCaption}
@@ -175,7 +187,7 @@ Test whether a certain element exists.
 \index{list\+\_\+len@{list\+\_\+len}!list.\+h@{list.\+h}}
 \subsubsection[{list\+\_\+len(list\+\_\+t $\ast$)}]{\setlength{\rightskip}{0pt plus 5cm}int list\+\_\+len (
 \begin{DoxyParamCaption}
-\item[{list\+\_\+t $\ast$}]{}
+\item[{{\bf list\+\_\+t} $\ast$}]{}
 \end{DoxyParamCaption}
 )}\label{list_8h_a60df0d67f9ba7ef08837be69810a868e}
 Calculate the length of the list.
@@ -185,7 +197,7 @@ The list\textquotesingle{}s length.
 \end{DoxyReturn}
 \hypertarget{list_8h_a9dd3eafdb56dcc64689f78fb4acdff3f}{}\index{list.\+h@{list.\+h}!list\+\_\+new@{list\+\_\+new}}
 \index{list\+\_\+new@{list\+\_\+new}!list.\+h@{list.\+h}}
-\subsubsection[{list\+\_\+new()}]{\setlength{\rightskip}{0pt plus 5cm}list\+\_\+t$\ast$ list\+\_\+new (
+\subsubsection[{list\+\_\+new()}]{\setlength{\rightskip}{0pt plus 5cm}{\bf list\+\_\+t}$\ast$ list\+\_\+new (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
@@ -194,7 +206,7 @@ Create an empty list. \hypertarget{list_8h_a548a5ca8b83f626bec84d07c3d2980e7}{}\
 \index{list\+\_\+nth@{list\+\_\+nth}!list.\+h@{list.\+h}}
 \subsubsection[{list\+\_\+nth(list\+\_\+t $\ast$, int n, void $\ast$$\ast$res)}]{\setlength{\rightskip}{0pt plus 5cm}bool list\+\_\+nth (
 \begin{DoxyParamCaption}
-\item[{list\+\_\+t $\ast$}]{, }
+\item[{{\bf list\+\_\+t} $\ast$}]{, }
 \item[{int}]{n, }
 \item[{void $\ast$$\ast$}]{res}
 \end{DoxyParamCaption}
