@@ -2,6 +2,7 @@ var searchData=
 [
   ['graph_5fadd_5fedge',['graph_add_edge',['../graph_8h.html#ac9bbfaa5b87679dcbbf516a69b2608e9',1,'graph.c']]],
   ['graph_5fadd_5fnode',['graph_add_node',['../graph_8h.html#a6c33a727613a3d307df209b9f1308597',1,'graph.c']]],
+  ['graph_5fadd_5ftimetable',['graph_add_timetable',['../graph_8h.html#aa09ef8967d9b1d1adca36624704f2f67',1,'graph.c']]],
   ['graph_5ffind_5fneighbors',['graph_find_neighbors',['../graph_8h.html#a314e9a9cd6dedf883f3be604e8f73525',1,'graph.c']]],
   ['graph_5ffind_5fpath',['graph_find_path',['../graph_8h.html#a755f2ffd6479fb5e26119bac16825445',1,'graph.c']]],
   ['graph_5fforeach_5fedge',['graph_foreach_edge',['../graph_8h.html#a21950957a4493a122b201935aaa70cf2',1,'graph.c']]],
