@@ -11,10 +11,8 @@ typedef struct _time_list_t time_list_t;
 struct _list_node_t
 {
   void *element;
-  struct _time_list_t *timetable;
+  time_list_t *timetable;
   struct _list_node_t *next;
-
-  
 };
 
 struct _list_t
@@ -31,8 +29,8 @@ struct _time_list_t
 
 struct _timetable_t
 {
-  int *line;
-  void *destination;
+  int line;
+  char *destination;
   void *departs;
   struct _timetable_t *next;
 };
@@ -43,6 +41,17 @@ list_node_t *list_node_new()
 {
     return calloc(1, sizeof(struct _list_node_t));
 }
+
+timetable_t *timetable_new() // Egen FUnktion
+{
+    return calloc(1, sizeof(struct _timetable_t));
+}
+
+time_list_t *time_list_new() // Egen FUnktion
+{
+    return calloc(1, sizeof(struct _time_list_t));
+}
+
 
 // PUBLIC ============================================================
 
@@ -64,13 +73,11 @@ int list_len(list_t *l)
     return ret;
 }
 
-void list_add(list_t *l, void *elt)
+void time_list_add(time_list_t *l) // Egen funktion
 {
-    assert(l);
-    assert((l->first && l->last) || (!l->first && !l->last));
-
-    list_node_t *new_last = list_node_new();
-    new_last->element = elt;
+  assert(l);
+  assert((l->first && l->last) || (!l->first && !l->last));
+  timetable_t *new_last = timetable_new();
 
     if (l->first && l->last)
         {
@@ -81,7 +88,30 @@ void list_add(list_t *l, void *elt)
         {
             // list is empty
             l->first = l->last = new_last;
+	    puts("Fucking natlagligen ");
         }
+}
+
+
+void list_add(list_t *l, void *elt)
+{
+    assert(l);
+    assert((l->first && l->last) || (!l->first && !l->last));
+
+    list_node_t *new_last = list_node_new();
+    new_last->element = elt;
+    new_last->timetable = time_list_new(); // Egen Rad!!
+
+    if (l->first && l->last)
+        {
+            l->last->next = new_last;
+            l->last = new_last;
+        }
+    else
+        {
+            // list is empty
+            l->first = l->last = new_last;
+	}
 }
 
 bool list_nth(list_t *l, int n, void **elt)
@@ -187,15 +217,16 @@ list_t *list_clone(list_t *l)
 }
 
 
-bool list_has_timetable(time_list_t *l, int line)
+bool list_has_timetable(time_list_t *l, int line) //Egen funktion
 {
   if(l->first != NULL)
     {
       timetable_t *temp_table;
-      for(temp_table = l->first; temp_table->next == NULL; temp_table = temp_table->next)
+      for(temp_table = l->first; temp_table != NULL; temp_table = temp_table->next)
 	{
-	  int *temp_line = temp_table->line;
-	  if(*temp_line == line)
+	  puts("hej");
+	  int temp_line = temp_table->line;
+	  if(temp_line == line)
 	    {
 	      return true;
 	    }
@@ -204,19 +235,34 @@ bool list_has_timetable(time_list_t *l, int line)
   return false;
 }
 
+
+
 //TODO Funktion1: Ifall den existerar
 //funktion 2: ifall den inte existerar
 
 void list_add_timetable(list_t *nodes, char* start, int line, char* time) //Egen funktion
 {
+  assert(nodes);
   iter_t *it;
   for (it = iter(nodes); !iter_done(it); iter_next(it))
     {
       if (strncmp(iter_get(it),start,30) == 0)
 	{
+	  time_list_add(it->cur->timetable);
 	  
-        
+	  assert(it->cur->timetable->first);
 	  
+	  list_has_timetable(it->cur->timetable,line);
+	 
+	  
+	  /* if(list_has_timetable((it->cur->timetable),line)) *\/ */
+	  /*   { *\/ */
+	  /*     puts("Finns"); *\/ */
+	  /* 	} *\/ */
+	  /* else */
+	  /*   { */
+	  /*     puts("vafan"); */
+	  /*   } */
 	}
     }
   iter_free(it);
