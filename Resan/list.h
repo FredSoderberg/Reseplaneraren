@@ -11,6 +11,7 @@
 #include "util.h"
 
 typedef struct _list_t list_t;
+
 typedef struct _iter_t iter_t;
 
 /**
@@ -110,7 +111,12 @@ list_t *list_clone(list_t *);
 /**
 Eget
  */
-void list_add_timetable(list_t *, char* start, int line, char* time);
+void list_add_timetable(void *, list_t *, char* start, int line, char* time);
+
+/**
+Eget
+ */
+void print_timetable(list_t* l);
 
 /**
   Frees all memory that the list allocated.
