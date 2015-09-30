@@ -16,7 +16,7 @@ network.o: graph.o network.c network.h
 graph.o: list.o graph.c graph.h util.o
 	clang $(CCOPTS) -c graph.c
 
-list.o: list.c list.h util.o
+list.o: list.c list.h util.o graph.h
 	clang $(CCOPTS) -c list.c
 
 util.o: util.h util.c

@@ -140,12 +140,15 @@ list_t *graph_find_neighbors(graph_t *, void *node);
 */
 list_t *graph_find_path(graph_t *, void *from, void *to);
 
-
-
 /**
 Egen funktion
  */
 void graph_add_timetable(graph_t *,char* bus_start,int bus_line,char* bus_time);
+
+/**
+Egen funktion
+ */
+char graph_find_duration(graph_t*, char* time, int line, void *node);
 
 
 /**
@@ -156,5 +159,10 @@ void graph_add_timetable(graph_t *,char* bus_start,int bus_line,char* bus_time);
 
 */
 void graph_free(graph_t *);
+
+/**
+Egen funktion
+ */
+void graph_print_timetable(graph_t *g);// EGET!!!
 
 #endif // GRAPH_H

@@ -307,10 +307,22 @@ void graph_add_timetable(graph_t *g,char* start,int line,char* time) //Egen Funk
 {
   if(graph_has_node(g, start))
     {
-      list_add_timetable(g->nodes, start, line, time);
+      list_add_timetable(g, g->nodes, start, line, time);
     }  
 }
 
+void graph_print_timetable(graph_t *g)// Egen Funktion
+{
+  print_timetable(g->nodes); 
+}
+
+char graph_find_duration(graph_t *g, char* time, int line, void *node)
+{
+  //visited;
+  //neighbours;
+  //neighbours = unvisited_neighbours(g, node, visited);
+  return 0;
+}
 
 
 void graph_free(graph_t *g)
