@@ -2,6 +2,8 @@
 #include "stdlib.h"
 #include "assert.h"
 #include <stdio.h>
+#include <time.h>
+#include "graph.h"
 
 typedef struct _list_node_t list_node_t;
 typedef struct _timetable_t timetable_t;
@@ -31,9 +33,11 @@ struct _timetable_t
 {
   int line;
   char *destination;
-  void *departs;
+  char *departs;
   struct _timetable_t *next;
 };
+
+
 
 // PRIVATE ===========================================================
 
@@ -88,7 +92,6 @@ void time_list_add(time_list_t *l) // Egen funktion
         {
             // list is empty
             l->first = l->last = new_last;
-	    puts("Fucking natlagligen ");
         }
 }
 
@@ -101,6 +104,7 @@ void list_add(list_t *l, void *elt)
     list_node_t *new_last = list_node_new();
     new_last->element = elt;
     new_last->timetable = time_list_new(); // Egen Rad!!
+    time_list_add(new_last->timetable);// Egen Rad
 
     if (l->first && l->last)
         {
@@ -217,30 +221,49 @@ list_t *list_clone(list_t *l)
 }
 
 
-bool list_has_timetable(time_list_t *l, int line) //Egen funktion
+char* concat(char *s1, char *s2)
 {
-  if(l->first != NULL)
-    {
-      timetable_t *temp_table;
-      for(temp_table = l->first; temp_table != NULL; temp_table = temp_table->next)
-	{
-	  puts("hej");
-	  int temp_line = temp_table->line;
-	  if(temp_line == line)
-	    {
-	      return true;
-	    }
-	}
-    }
-  return false;
+    char *result = malloc(strlen(s1)+strlen(s2)+1);//+1 for the zero-terminator
+    //in real code you would check for errors in malloc here
+    strcpy(result, s1);
+    strcat(result, s2);
+    return result;
 }
 
 
 
-//TODO Funktion1: Ifall den existerar
-//funktion 2: ifall den inte existerar
+void list_has_timetable(time_list_t *l, int line, char* time) //Egen funktion
+{
+  timetable_t *temp_table;
+  for(temp_table = l->first; temp_table != NULL; temp_table = temp_table->next)
+    {
+      if(temp_table->line == line)
+	{
+	  char* temp= concat(" ",time);
+	  char* s = concat(temp_table->departs,temp);
+	  temp_table->departs = s;
+	  return;
+	}
+      else
+	{
+	  temp_table->line = line;
+	  temp_table->departs = time;
+	  return;
+	}
+    }
+}
 
-void list_add_timetable(list_t *nodes, char* start, int line, char* time) //Egen funktion
+void list_time_adder (void *g, list_node_t *node, int line, char* time)
+{
+  graph_find_duration(g, time, line, node);
+
+
+
+  
+  //list_has_timetable(node->timetable,line,time);
+}
+
+void list_add_timetable(void *g, list_t *nodes, char* start, int line, char* time) //Egen funktion
 {
   assert(nodes);
   iter_t *it;
@@ -248,28 +271,24 @@ void list_add_timetable(list_t *nodes, char* start, int line, char* time) //Egen
     {
       if (strncmp(iter_get(it),start,30) == 0)
 	{
-	  time_list_add(it->cur->timetable);
-	  
 	  assert(it->cur->timetable->first);
-	  
-	  list_has_timetable(it->cur->timetable,line);
-	 
-	  
-	  /* if(list_has_timetable((it->cur->timetable),line)) *\/ */
-	  /*   { *\/ */
-	  /*     puts("Finns"); *\/ */
-	  /* 	} *\/ */
-	  /* else */
-	  /*   { */
-	  /*     puts("vafan"); */
-	  /*   } */
+	  list_has_timetable(it->cur->timetable,line,time);
+	  list_time_adder(g, it->cur,line,time);
 	}
     }
   iter_free(it);
 }
 
-
-
+void print_timetable(list_t *l)
+{
+  iter_t *it;
+  for (it = iter(l); !iter_done(it); iter_next(it))
+    {
+      puts("");
+      puts(it->cur->element);
+      printf("%i - %s\n",it->cur->timetable->first->line,it->cur->timetable->first->departs);
+    }
+}
 
 void list_free(list_t *l)
 {

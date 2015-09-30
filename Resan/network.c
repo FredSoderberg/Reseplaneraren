@@ -61,10 +61,9 @@ void timetable_parse(network_t *netw,FILE *file) // Egen funktion
 	  char *bus_start_dup = strdup(bus_start);
 	  char *bus_time_dup = strdup(bus_time);
 	  
-	  //	  printf("%d - %s - %s\n",bus_line_dup,bus_start_dup,bus_time_dup);
-
 	  graph_add_timetable(netw->g, bus_start_dup, bus_line_dup, bus_time_dup);
 	}
+    graph_print_timetable(netw->g);
 }
 
 
