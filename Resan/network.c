@@ -63,7 +63,7 @@ void timetable_parse(network_t *netw,FILE *file) // Egen funktion
 	  
 	  graph_add_timetable(netw->g, bus_start_dup, bus_line_dup, bus_time_dup);
 	}
-    graph_print_timetable(netw->g);
+    //graph_print_timetable(netw->g);
 }
 
 
@@ -210,6 +210,22 @@ list_t *network_find_travels(network_t *n, char *from, char *to)
     list_foreach(ret, free);
 
     return merged;
+}
+
+bool network_comp_line (void *label, int line) //EGEN!!!
+{
+  edge_t *comp = label;
+  if (comp->line == line)
+    {
+      return true;
+    }
+  return false;
+}
+
+int network_get_dur(void *label)
+{
+  edge_t *temp_dur = label;
+  return temp_dur->duration;
 }
 
 void free_edge_label(void *from, void *to, void *label)

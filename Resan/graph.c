@@ -3,6 +3,7 @@
 #include "stdlib.h"
 #include <assert.h>
 #include <stdio.h>
+#include "network.h"
 
 typedef void node_t;
 typedef struct _graph_edge_t edge_t;
@@ -316,14 +317,25 @@ void graph_print_timetable(graph_t *g)// Egen Funktion
   print_timetable(g->nodes); 
 }
 
-char graph_find_duration(graph_t *g, char* time, int line, void *node)
+int graph_find_duration(graph_t *g, char* time, int line, void *node_el, void *node_next, list_t *visited)
 {
-  //visited;
-  //neighbours;
-  //neighbours = unvisited_neighbours(g, node, visited);
+
+  iter_t *it;
+  for (it = iter(g->edges); !iter_done(it); iter_next(it))
+    {
+      edge_t  *e = iter_get(it);
+      if(g->comp(e->from, node_el) && !list_has(visited,g->comp,e->to) && network_comp_line(e->label,line))
+	{
+	  printf("Träff - Linje:%i tid:%i\n",line,network_get_dur(e->label));
+
+	  node_next = strdup(e->to);
+	 return network_get_dur(e->label);
+	}
+
+      //SLUTASTATIONERNA OCKSÅ!! :D
+    }
   return 0;
 }
-
 
 void graph_free(graph_t *g)
 {
