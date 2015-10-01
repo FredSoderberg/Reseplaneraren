@@ -66,6 +66,16 @@ void travel_print(travel_t *);
 list_t *network_find_travels(network_t *n, char *from, char *to);
 
 /**
+Egen
+ */
+bool network_comp_line (void *, int line);
+
+/**
+Egen
+ */
+int network_get_dur(void *);
+
+/**
   Frees a network and all the data it allocated.
 */
 void network_free(network_t *);

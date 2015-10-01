@@ -148,7 +148,7 @@ void graph_add_timetable(graph_t *,char* bus_start,int bus_line,char* bus_time);
 /**
 Egen funktion
  */
-char graph_find_duration(graph_t*, char* time, int line, void *node);
+int graph_find_duration(graph_t*, char* time, int line, void *, void *, list_t *visited);
 
 
 /**

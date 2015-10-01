@@ -232,7 +232,7 @@ char* concat(char *s1, char *s2)
 
 
 
-void list_has_timetable(time_list_t *l, int line, char* time) //Egen funktion
+void list_add_time(time_list_t *l, int line, char* time) //Egen funktion
 {
   timetable_t *temp_table;
   for(temp_table = l->first; temp_table != NULL; temp_table = temp_table->next)
@@ -255,8 +255,18 @@ void list_has_timetable(time_list_t *l, int line, char* time) //Egen funktion
 
 void list_time_adder (void *g, list_node_t *node, int line, char* time)
 {
-  graph_find_duration(g, time, line, node);
+  list_t *visited = list_new();
+  char *node_next = NULL;
+  
 
+
+  list_add(visited,node);
+  graph_find_duration(g, time, line, node->element, node_next, visited); //Funkar returnerar tiden å adderar på visited samt ändrar noden till "nästa"
+  printf("%s ",node_next);
+
+  //get duration
+  //get next node
+  
 
 
   
@@ -272,7 +282,7 @@ void list_add_timetable(void *g, list_t *nodes, char* start, int line, char* tim
       if (strncmp(iter_get(it),start,30) == 0)
 	{
 	  assert(it->cur->timetable->first);
-	  list_has_timetable(it->cur->timetable,line,time);
+	  list_add_time(it->cur->timetable,line,time);
 	  list_time_adder(g, it->cur,line,time);
 	}
     }
