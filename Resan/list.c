@@ -253,41 +253,59 @@ void list_add_time(time_list_t *l, int line, char* time) //Egen funktion
     }
 }
 
-void list_time_adder (void *g, list_node_t *node, int line, char* time)
-{
-  list_t *visited = list_new();
-  char *node_next = NULL;
-  
 
-
-  list_add(visited,node);
-  graph_find_duration(g, time, line, node->element, node_next, visited); //Funkar returnerar tiden å adderar på visited samt ändrar noden till "nästa"
-  printf("%s ",node_next);
-
-  //get duration
-  //get next node
-  
-
-
-  
-  //list_has_timetable(node->timetable,line,time);
-}
-
-void list_add_timetable(void *g, list_t *nodes, char* start, int line, char* time) //Egen funktion
+list_node_t *list_find_node(list_t *nodes, char* match)
 {
   assert(nodes);
   iter_t *it;
   for (it = iter(nodes); !iter_done(it); iter_next(it))
     {
-      if (strncmp(iter_get(it),start,30) == 0)
+      if (strncmp(iter_get(it),match, 40) == 0)
 	{
-	  assert(it->cur->timetable->first);
-	  list_add_time(it->cur->timetable,line,time);
-	  list_time_adder(g, it->cur,line,time);
+	  return it->cur;
 	}
     }
-  iter_free(it);
+  return NULL;
 }
+
+void list_add_timetable(void *g, list_t *nodes, char* start, int line, char* time) //Egen funktion
+{
+  list_node_t *node =list_find_node(nodes,start);
+  list_t *visited_nodes = list_new();
+  list_t *visited_edges = list_new();
+  bool end_station = false;
+  char *next_node;
+  while(!end_station)
+    {
+      if(visited_nodes->first == visited_nodes->last)
+	{
+	  list_add(visited_nodes,node->element);
+	  list_add_time(node->timetable,line,time);
+	}
+      else
+	{
+	  void *edge = graph_get_edge(g, line, node->element, visited_edges);
+	  if(edge != NULL)
+	    {
+	      int duration = graph_get_duration(edge);
+
+	      next_node = graph_get_edge_name(g,edge,visited_nodes);
+
+	      printf("%i - - %s\n",duration,next_node);
+
+	      list_add_time((list_find_node(nodes,next_node))->timetable,line,"5");
+
+	      list_add(visited_nodes,node->element);
+	      list_add(visited_edges,edge);
+	    }
+	  end_station = graph_check_end_station(g,line,visited_edges,next_node);
+	  //lägga till tiderna i noden framför!
+	  //  list_add(visited,next_node);
+	}
+
+    }
+}
+ 
 
 void print_timetable(list_t *l)
 {
