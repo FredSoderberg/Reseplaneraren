@@ -63,7 +63,7 @@ void timetable_parse(network_t *netw,FILE *file) // Egen funktion
 	  
 	  graph_add_timetable(netw->g, bus_start_dup, bus_line_dup, bus_time_dup);
 	}
-    //graph_print_timetable(netw->g);
+    graph_print_timetable(netw->g);
 }
 
 

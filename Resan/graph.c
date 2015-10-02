@@ -317,27 +317,64 @@ void graph_print_timetable(graph_t *g)// Egen Funktion
   print_timetable(g->nodes); 
 }
 
-int graph_find_duration(graph_t *g, char* time, int line, void *node_el, void *node_next, list_t *visited)
+void *graph_get_edge(graph_t *g,int line, void *node_el, list_t *visited)// Egen Funktion
 {
 
   iter_t *it;
   for (it = iter(g->edges); !iter_done(it); iter_next(it))
     {
       edge_t  *e = iter_get(it);
-      if(g->comp(e->from, node_el) && !list_has(visited,g->comp,e->to) && network_comp_line(e->label,line))
+      if( ((g->comp(e->from, node_el)) || (g->comp(e->to, node_el)))
+	  &&
+	  ((!list_has(visited,g->comp,e->to)) || (!list_has(visited,g->comp,e->from)))
+	  &&
+	  (network_comp_line(e->label,line)))
 	{
-	  printf("Träff - Linje:%i tid:%i\n",line,network_get_dur(e->label));
-
-	  node_next = strdup(e->to);
-	 return network_get_dur(e->label);
+	  void *temp_edge = new_edge();
+	  temp_edge = e;
+	  return temp_edge;
 	}
-
-      //SLUTASTATIONERNA OCKSÅ!! :D
     }
-  return 0;
+
+  return NULL;
 }
 
-void graph_free(graph_t *g)
+char *graph_get_edge_name(graph_t *g, void *edge, list_t *visited)// Egen Funktion
+{
+  edge_t *temp_edge = new_edge();
+  temp_edge = edge;
+  if(list_has(visited,g->comp,temp_edge->from))
+    {
+      return temp_edge->to;
+    }
+  else
+    {
+      return temp_edge->from;
+    }
+}
+
+int graph_get_duration(void *edge)// Egen Funktion
+{
+  edge_t *temp_edge = new_edge();
+  temp_edge = edge;
+  return network_get_dur(temp_edge->label);
+}
+
+bool graph_check_end_station(void *g,int line,list_t *visited, void *next_station)
+{
+  list_t *neigh = unvisited_neighbors(g,next_station,visited);
+  iter_t *it;
+  for(it = iter(neigh); !iter_done(it); iter_next(it))
+    {
+      if(graph_get_edge(g,line,iter_get(it),visited) ==  NULL)
+	{
+	  return true;
+	}
+    }
+  return false;
+}
+
+void graph_free(graph_t *g)// Egen Funktion
 {
     list_free(g->nodes);
     list_free(g->edges);
