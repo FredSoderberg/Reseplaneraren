@@ -43,7 +43,9 @@ void \hyperlink{list_8h_a4a2b61b11b9898d3bf885ab46cfbc39a}{iter\+\_\+free} (\hyp
 \item 
 \hyperlink{struct__list__t}{list\+\_\+t} $\ast$ \hyperlink{list_8h_a237338d77010c94ff48818cab7117277}{list\+\_\+clone} (\hyperlink{struct__list__t}{list\+\_\+t} $\ast$)
 \item 
-void \hyperlink{list_8h_a1ed2b6b82e5b441cd828ae8045063e53}{list\+\_\+add\+\_\+timetable} (\hyperlink{struct__list__t}{list\+\_\+t} $\ast$, char $\ast$start, int line, char $\ast$time)
+void \hyperlink{list_8h_af2d87c7ca50e9e20fd41655af8facae4}{list\+\_\+add\+\_\+timetable} (void $\ast$, \hyperlink{struct__list__t}{list\+\_\+t} $\ast$, char $\ast$start, int line, char $\ast$time)
+\item 
+void \hyperlink{list_8h_aa65783beb5254a9a9fd791307abff47e}{print\+\_\+timetable} (\hyperlink{struct__list__t}{list\+\_\+t} $\ast$l)
 \item 
 void \hyperlink{list_8h_af715c06c704af470136b76093778fe8d}{list\+\_\+free} ()
 \end{DoxyCompactItemize}
@@ -121,16 +123,17 @@ Must only be called if \hyperlink{list_8h_ae87df5ecdcb6f56f562bdae494ca23b8}{ite
 \item[{void $\ast$}]{}
 \end{DoxyParamCaption}
 )}\label{list_8h_a97e5eb115d554d4496fead77273d1e2d}
-Add an item to a list (at the end); \hypertarget{list_8h_a1ed2b6b82e5b441cd828ae8045063e53}{}\index{list.\+h@{list.\+h}!list\+\_\+add\+\_\+timetable@{list\+\_\+add\+\_\+timetable}}
+Add an item to a list (at the end); \hypertarget{list_8h_af2d87c7ca50e9e20fd41655af8facae4}{}\index{list.\+h@{list.\+h}!list\+\_\+add\+\_\+timetable@{list\+\_\+add\+\_\+timetable}}
 \index{list\+\_\+add\+\_\+timetable@{list\+\_\+add\+\_\+timetable}!list.\+h@{list.\+h}}
-\subsubsection[{list\+\_\+add\+\_\+timetable(list\+\_\+t $\ast$, char $\ast$start, int line, char $\ast$time)}]{\setlength{\rightskip}{0pt plus 5cm}void list\+\_\+add\+\_\+timetable (
+\subsubsection[{list\+\_\+add\+\_\+timetable(void $\ast$, list\+\_\+t $\ast$, char $\ast$start, int line, char $\ast$time)}]{\setlength{\rightskip}{0pt plus 5cm}void list\+\_\+add\+\_\+timetable (
 \begin{DoxyParamCaption}
+\item[{void $\ast$}]{, }
 \item[{{\bf list\+\_\+t} $\ast$}]{, }
 \item[{char $\ast$}]{start, }
 \item[{int}]{line, }
 \item[{char $\ast$}]{time}
 \end{DoxyParamCaption}
-)}\label{list_8h_a1ed2b6b82e5b441cd828ae8045063e53}
+)}\label{list_8h_af2d87c7ca50e9e20fd41655af8facae4}
 Eget \hypertarget{list_8h_a237338d77010c94ff48818cab7117277}{}\index{list.\+h@{list.\+h}!list\+\_\+clone@{list\+\_\+clone}}
 \index{list\+\_\+clone@{list\+\_\+clone}!list.\+h@{list.\+h}}
 \subsubsection[{list\+\_\+clone(list\+\_\+t $\ast$)}]{\setlength{\rightskip}{0pt plus 5cm}{\bf list\+\_\+t}$\ast$ list\+\_\+clone (
@@ -218,3 +221,11 @@ Access the nth member of a list. Zero-\/based.
 \begin{DoxyReturn}{Returns}
 {\ttfamily true} if the list is long enough, {\ttfamily false} otherwise. 
 \end{DoxyReturn}
+\hypertarget{list_8h_aa65783beb5254a9a9fd791307abff47e}{}\index{list.\+h@{list.\+h}!print\+\_\+timetable@{print\+\_\+timetable}}
+\index{print\+\_\+timetable@{print\+\_\+timetable}!list.\+h@{list.\+h}}
+\subsubsection[{print\+\_\+timetable(list\+\_\+t $\ast$l)}]{\setlength{\rightskip}{0pt plus 5cm}void print\+\_\+timetable (
+\begin{DoxyParamCaption}
+\item[{{\bf list\+\_\+t} $\ast$}]{l}
+\end{DoxyParamCaption}
+)}\label{list_8h_aa65783beb5254a9a9fd791307abff47e}
+Eget 

@@ -37,7 +37,17 @@ bool \hyperlink{graph_8h_a3cc6fd01db6550738b9354695a4b811a}{graph\+\_\+has\+\_\+
 \item 
 void \hyperlink{graph_8h_aa09ef8967d9b1d1adca36624704f2f67}{graph\+\_\+add\+\_\+timetable} (\hyperlink{struct__graph__t}{graph\+\_\+t} $\ast$, char $\ast$bus\+\_\+start, int bus\+\_\+line, char $\ast$bus\+\_\+time)
 \item 
+void $\ast$ \hyperlink{graph_8h_a8e1b4cb5bf6cb4e20f214d5777b0c11d}{graph\+\_\+get\+\_\+edge} (\hyperlink{struct__graph__t}{graph\+\_\+t} $\ast$, int line, void $\ast$, \hyperlink{struct__list__t}{list\+\_\+t} $\ast$visited)
+\item 
+char $\ast$ \hyperlink{graph_8h_aa72699f72eb875a876634c5774f26c20}{graph\+\_\+get\+\_\+edge\+\_\+name} (\hyperlink{struct__graph__t}{graph\+\_\+t} $\ast$, void $\ast$, \hyperlink{struct__list__t}{list\+\_\+t} $\ast$edge)
+\item 
+int \hyperlink{graph_8h_ad9f0f0351bc6136df79a93d06f8d4606}{graph\+\_\+get\+\_\+duration} (void $\ast$)
+\item 
+bool \hyperlink{graph_8h_a50ed437287bb69da52df62dbbd74f9c8}{graph\+\_\+check\+\_\+end\+\_\+station} (void $\ast$g, int line, \hyperlink{struct__list__t}{list\+\_\+t} $\ast$visited, void $\ast$)
+\item 
 void \hyperlink{graph_8h_a1f6e6ee4af7796685dd29ee54939e868}{graph\+\_\+free} (\hyperlink{struct__graph__t}{graph\+\_\+t} $\ast$)
+\item 
+void \hyperlink{graph_8h_a969dbe402aab536612e52313ae9eb12b}{graph\+\_\+print\+\_\+timetable} (\hyperlink{struct__graph__t}{graph\+\_\+t} $\ast$g)
 \end{DoxyCompactItemize}
 
 
@@ -101,6 +111,16 @@ The graph\+\_\+t $\ast$ will never deallocate a node. You can deallocate all gra
 \item[{char $\ast$}]{bus\+\_\+time}
 \end{DoxyParamCaption}
 )}\label{graph_8h_aa09ef8967d9b1d1adca36624704f2f67}
+Egen funktion \hypertarget{graph_8h_a50ed437287bb69da52df62dbbd74f9c8}{}\index{graph.\+h@{graph.\+h}!graph\+\_\+check\+\_\+end\+\_\+station@{graph\+\_\+check\+\_\+end\+\_\+station}}
+\index{graph\+\_\+check\+\_\+end\+\_\+station@{graph\+\_\+check\+\_\+end\+\_\+station}!graph.\+h@{graph.\+h}}
+\subsubsection[{graph\+\_\+check\+\_\+end\+\_\+station(void $\ast$g, int line, list\+\_\+t $\ast$visited, void $\ast$)}]{\setlength{\rightskip}{0pt plus 5cm}bool graph\+\_\+check\+\_\+end\+\_\+station (
+\begin{DoxyParamCaption}
+\item[{void $\ast$}]{g, }
+\item[{int}]{line, }
+\item[{{\bf list\+\_\+t} $\ast$}]{visited, }
+\item[{void $\ast$}]{}
+\end{DoxyParamCaption}
+)}\label{graph_8h_a50ed437287bb69da52df62dbbd74f9c8}
 Egen funktion \hypertarget{graph_8h_a314e9a9cd6dedf883f3be604e8f73525}{}\index{graph.\+h@{graph.\+h}!graph\+\_\+find\+\_\+neighbors@{graph\+\_\+find\+\_\+neighbors}}
 \index{graph\+\_\+find\+\_\+neighbors@{graph\+\_\+find\+\_\+neighbors}!graph.\+h@{graph.\+h}}
 \subsubsection[{graph\+\_\+find\+\_\+neighbors(graph\+\_\+t $\ast$, void $\ast$node)}]{\setlength{\rightskip}{0pt plus 5cm}{\bf list\+\_\+t}$\ast$ graph\+\_\+find\+\_\+neighbors (
@@ -185,7 +205,33 @@ Run a function with each of the graph\textquotesingle{}s nodes as input.
 )}\label{graph_8h_a1f6e6ee4af7796685dd29ee54939e868}
 Deallocate all memory alloceted by the graph.
 
-Does not cover nodes and edge labels. \hypertarget{graph_8h_a3cc6fd01db6550738b9354695a4b811a}{}\index{graph.\+h@{graph.\+h}!graph\+\_\+has\+\_\+edge@{graph\+\_\+has\+\_\+edge}}
+Does not cover nodes and edge labels. \hypertarget{graph_8h_ad9f0f0351bc6136df79a93d06f8d4606}{}\index{graph.\+h@{graph.\+h}!graph\+\_\+get\+\_\+duration@{graph\+\_\+get\+\_\+duration}}
+\index{graph\+\_\+get\+\_\+duration@{graph\+\_\+get\+\_\+duration}!graph.\+h@{graph.\+h}}
+\subsubsection[{graph\+\_\+get\+\_\+duration(void $\ast$)}]{\setlength{\rightskip}{0pt plus 5cm}int graph\+\_\+get\+\_\+duration (
+\begin{DoxyParamCaption}
+\item[{void $\ast$}]{}
+\end{DoxyParamCaption}
+)}\label{graph_8h_ad9f0f0351bc6136df79a93d06f8d4606}
+Egen funktion \hypertarget{graph_8h_a8e1b4cb5bf6cb4e20f214d5777b0c11d}{}\index{graph.\+h@{graph.\+h}!graph\+\_\+get\+\_\+edge@{graph\+\_\+get\+\_\+edge}}
+\index{graph\+\_\+get\+\_\+edge@{graph\+\_\+get\+\_\+edge}!graph.\+h@{graph.\+h}}
+\subsubsection[{graph\+\_\+get\+\_\+edge(graph\+\_\+t $\ast$, int line, void $\ast$, list\+\_\+t $\ast$visited)}]{\setlength{\rightskip}{0pt plus 5cm}void$\ast$ graph\+\_\+get\+\_\+edge (
+\begin{DoxyParamCaption}
+\item[{{\bf graph\+\_\+t} $\ast$}]{, }
+\item[{int}]{line, }
+\item[{void $\ast$}]{, }
+\item[{{\bf list\+\_\+t} $\ast$}]{visited}
+\end{DoxyParamCaption}
+)}\label{graph_8h_a8e1b4cb5bf6cb4e20f214d5777b0c11d}
+Egen funktion \hypertarget{graph_8h_aa72699f72eb875a876634c5774f26c20}{}\index{graph.\+h@{graph.\+h}!graph\+\_\+get\+\_\+edge\+\_\+name@{graph\+\_\+get\+\_\+edge\+\_\+name}}
+\index{graph\+\_\+get\+\_\+edge\+\_\+name@{graph\+\_\+get\+\_\+edge\+\_\+name}!graph.\+h@{graph.\+h}}
+\subsubsection[{graph\+\_\+get\+\_\+edge\+\_\+name(graph\+\_\+t $\ast$, void $\ast$, list\+\_\+t $\ast$edge)}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ graph\+\_\+get\+\_\+edge\+\_\+name (
+\begin{DoxyParamCaption}
+\item[{{\bf graph\+\_\+t} $\ast$}]{, }
+\item[{void $\ast$}]{, }
+\item[{{\bf list\+\_\+t} $\ast$}]{edge}
+\end{DoxyParamCaption}
+)}\label{graph_8h_aa72699f72eb875a876634c5774f26c20}
+Egen funktion \hypertarget{graph_8h_a3cc6fd01db6550738b9354695a4b811a}{}\index{graph.\+h@{graph.\+h}!graph\+\_\+has\+\_\+edge@{graph\+\_\+has\+\_\+edge}}
 \index{graph\+\_\+has\+\_\+edge@{graph\+\_\+has\+\_\+edge}!graph.\+h@{graph.\+h}}
 \subsubsection[{graph\+\_\+has\+\_\+edge(graph\+\_\+t $\ast$, void $\ast$from, void $\ast$to, void $\ast$$\ast$label)}]{\setlength{\rightskip}{0pt plus 5cm}bool graph\+\_\+has\+\_\+edge (
 \begin{DoxyParamCaption}
@@ -244,3 +290,11 @@ Allocate a new graph.
 \begin{DoxyReturn}{Returns}
 an empty graph 
 \end{DoxyReturn}
+\hypertarget{graph_8h_a969dbe402aab536612e52313ae9eb12b}{}\index{graph.\+h@{graph.\+h}!graph\+\_\+print\+\_\+timetable@{graph\+\_\+print\+\_\+timetable}}
+\index{graph\+\_\+print\+\_\+timetable@{graph\+\_\+print\+\_\+timetable}!graph.\+h@{graph.\+h}}
+\subsubsection[{graph\+\_\+print\+\_\+timetable(graph\+\_\+t $\ast$g)}]{\setlength{\rightskip}{0pt plus 5cm}void graph\+\_\+print\+\_\+timetable (
+\begin{DoxyParamCaption}
+\item[{{\bf graph\+\_\+t} $\ast$}]{g}
+\end{DoxyParamCaption}
+)}\label{graph_8h_a969dbe402aab536612e52313ae9eb12b}
+Egen funktion 

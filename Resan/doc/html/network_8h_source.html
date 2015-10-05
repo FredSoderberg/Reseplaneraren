@@ -117,22 +117,28 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<a class="code" href="struct__list__t.html">list_t</a> *<a class="code" href="network_8h.html#a4e0904506d9a1c14d1649db55e2d2d12">network_find_travels</a>(<a class="code" href="struct__network__t.html">network_t</a> *n, <span class="keywordtype">char</span> *from, <span class="keywordtype">char</span> *to);</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="keywordtype">void</span> <a class="code" href="network_8h.html#afbd5203918d513b9fce3a5c5f80b86b1">network_free</a>(<a class="code" href="struct__network__t.html">network_t</a> *);</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="network_8h.html#aee1d3cc1c414dedfc3443d797d607d89">network_comp_line</a> (<span class="keywordtype">void</span> *, <span class="keywordtype">int</span> line);</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="preprocessor">#endif // NETWORK_H</span></div>
-<div class="ttc" id="network_8h_html_afbd5203918d513b9fce3a5c5f80b86b1"><div class="ttname"><a href="network_8h.html#afbd5203918d513b9fce3a5c5f80b86b1">network_free</a></div><div class="ttdeci">void network_free(network_t *)</div><div class="ttdef"><b>Definition:</b> network.c:221</div></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="keywordtype">int</span> <a class="code" href="network_8h.html#af8f9a857a0b738ef6096798deb267447">network_get_dur</a>(<span class="keywordtype">void</span> *);</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="keywordtype">void</span> <a class="code" href="network_8h.html#afbd5203918d513b9fce3a5c5f80b86b1">network_free</a>(<a class="code" href="struct__network__t.html">network_t</a> *);</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="preprocessor">#endif // NETWORK_H</span></div>
+<div class="ttc" id="network_8h_html_afbd5203918d513b9fce3a5c5f80b86b1"><div class="ttname"><a href="network_8h.html#afbd5203918d513b9fce3a5c5f80b86b1">network_free</a></div><div class="ttdeci">void network_free(network_t *)</div><div class="ttdef"><b>Definition:</b> network.c:236</div></div>
 <div class="ttc" id="struct__network__t_html"><div class="ttname"><a href="struct__network__t.html">_network_t</a></div><div class="ttdef"><b>Definition:</b> network.c:9</div></div>
 <div class="ttc" id="structtravel_html"><div class="ttname"><a href="structtravel.html">travel</a></div><div class="ttdef"><b>Definition:</b> network.h:33</div></div>
 <div class="ttc" id="list_8h_html"><div class="ttname"><a href="list_8h.html">list.h</a></div><div class="ttdoc">A generic linked list implementation. </div></div>
-<div class="ttc" id="network_8h_html_a553c1d411001df9a440af2fffee1e7de"><div class="ttname"><a href="network_8h.html#a553c1d411001df9a440af2fffee1e7de">travel_print</a></div><div class="ttdeci">void travel_print(travel_t *)</div><div class="ttdef"><b>Definition:</b> network.c:133</div></div>
-<div class="ttc" id="network_8h_html_a2d01b71df1fb1d7a813b40cb97df5d2b"><div class="ttname"><a href="network_8h.html#a2d01b71df1fb1d7a813b40cb97df5d2b">network_print</a></div><div class="ttdeci">void network_print(network_t *)</div><div class="ttdef"><b>Definition:</b> network.c:116</div></div>
-<div class="ttc" id="struct__list__t_html"><div class="ttname"><a href="struct__list__t.html">_list_t</a></div><div class="ttdef"><b>Definition:</b> list.c:18</div></div>
-<div class="ttc" id="network_8h_html_a4e0904506d9a1c14d1649db55e2d2d12"><div class="ttname"><a href="network_8h.html#a4e0904506d9a1c14d1649db55e2d2d12">network_find_travels</a></div><div class="ttdeci">list_t * network_find_travels(network_t *n, char *from, char *to)</div><div class="ttdef"><b>Definition:</b> network.c:179</div></div>
-<div class="ttc" id="network_8h_html_a35823fb774216053a7ed143cd3273620"><div class="ttname"><a href="network_8h.html#a35823fb774216053a7ed143cd3273620">network_parse</a></div><div class="ttdeci">network_t * network_parse(FILE *file)</div><div class="ttdef"><b>Definition:</b> network.c:73</div></div>
+<div class="ttc" id="network_8h_html_af8f9a857a0b738ef6096798deb267447"><div class="ttname"><a href="network_8h.html#af8f9a857a0b738ef6096798deb267447">network_get_dur</a></div><div class="ttdeci">int network_get_dur(void *)</div><div class="ttdef"><b>Definition:</b> network.c:225</div></div>
+<div class="ttc" id="network_8h_html_a553c1d411001df9a440af2fffee1e7de"><div class="ttname"><a href="network_8h.html#a553c1d411001df9a440af2fffee1e7de">travel_print</a></div><div class="ttdeci">void travel_print(travel_t *)</div><div class="ttdef"><b>Definition:</b> network.c:132</div></div>
+<div class="ttc" id="network_8h_html_a2d01b71df1fb1d7a813b40cb97df5d2b"><div class="ttname"><a href="network_8h.html#a2d01b71df1fb1d7a813b40cb97df5d2b">network_print</a></div><div class="ttdeci">void network_print(network_t *)</div><div class="ttdef"><b>Definition:</b> network.c:115</div></div>
+<div class="ttc" id="network_8h_html_aee1d3cc1c414dedfc3443d797d607d89"><div class="ttname"><a href="network_8h.html#aee1d3cc1c414dedfc3443d797d607d89">network_comp_line</a></div><div class="ttdeci">bool network_comp_line(void *, int line)</div><div class="ttdef"><b>Definition:</b> network.c:215</div></div>
+<div class="ttc" id="struct__list__t_html"><div class="ttname"><a href="struct__list__t.html">_list_t</a></div><div class="ttdef"><b>Definition:</b> list.c:19</div></div>
+<div class="ttc" id="network_8h_html_a4e0904506d9a1c14d1649db55e2d2d12"><div class="ttname"><a href="network_8h.html#a4e0904506d9a1c14d1649db55e2d2d12">network_find_travels</a></div><div class="ttdeci">list_t * network_find_travels(network_t *n, char *from, char *to)</div><div class="ttdef"><b>Definition:</b> network.c:178</div></div>
+<div class="ttc" id="network_8h_html_a35823fb774216053a7ed143cd3273620"><div class="ttname"><a href="network_8h.html#a35823fb774216053a7ed143cd3273620">network_parse</a></div><div class="ttdeci">network_t * network_parse(FILE *file)</div><div class="ttdef"><b>Definition:</b> network.c:72</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Sep 30 2015 12:15:53 for IOOPM Travel Planner by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Oct 5 2015 11:41:46 for IOOPM Travel Planner by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.10
 </small></address>

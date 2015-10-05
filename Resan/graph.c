@@ -317,19 +317,26 @@ void graph_print_timetable(graph_t *g)// Egen Funktion
   print_timetable(g->nodes); 
 }
 
-void *graph_get_edge(graph_t *g,int line, void *node_el, list_t *visited)// Egen Funktion
+void test1(){}
+void test3(){}
+
+void *graph_get_edge(graph_t *g,int line, void *node_el, list_t *visited_edges)// Egen Funktion
 {
 
   iter_t *it;
   for (it = iter(g->edges); !iter_done(it); iter_next(it))
     {
+      test1();
       edge_t  *e = iter_get(it);
-      if( ((g->comp(e->from, node_el)) || (g->comp(e->to, node_el)))
-	  &&
-	  ((!list_has(visited,g->comp,e->to)) || (!list_has(visited,g->comp,e->from)))
-	  &&
-	  (network_comp_line(e->label,line)))
+      if(
+	 ( (strncmp(node_el,e->from,100) == 0) || (strncmp(node_el,e->to,100) == 0) )
+	 &&
+	 (!list_has(visited_edges,g->comp,e))
+	 &&
+	 (network_comp_line(e->label,line))
+	 )
 	{
+	  test3();
 	  void *temp_edge = new_edge();
 	  temp_edge = e;
 	  return temp_edge;
@@ -339,11 +346,20 @@ void *graph_get_edge(graph_t *g,int line, void *node_el, list_t *visited)// Egen
   return NULL;
 }
 
-char *graph_get_edge_name(graph_t *g, void *edge, list_t *visited)// Egen Funktion
+void print_edge(void *edge)
 {
-  edge_t *temp_edge = new_edge();
+  edge_t *temp_edge = edge;
+  char *from = temp_edge->from;
+  char *to = temp_edge->to;
+  printf("%s",from);
+  printf("%s",to);
+}
+
+char *graph_get_edge_name(graph_t *g, void *edge, list_t *visited_nodes)// Egen Funktion
+{
+  edge_t *temp_edge;
   temp_edge = edge;
-  if(list_has(visited,g->comp,temp_edge->from))
+  if(list_has(visited_nodes,g->comp,temp_edge->from))
     {
       return temp_edge->to;
     }
@@ -360,18 +376,18 @@ int graph_get_duration(void *edge)// Egen Funktion
   return network_get_dur(temp_edge->label);
 }
 
-bool graph_check_end_station(void *g,int line,list_t *visited, void *next_station)
+bool graph_check_end_station(graph_t *g,int line, list_t *visited_edges, list_t *visited_nodes, void *next_station) // Egen Funktion
 {
-  list_t *neigh = unvisited_neighbors(g,next_station,visited);
+  list_t *neigh = unvisited_neighbors(g,next_station,visited_nodes);
   iter_t *it;
   for(it = iter(neigh); !iter_done(it); iter_next(it))
     {
-      if(graph_get_edge(g,line,iter_get(it),visited) ==  NULL)
+      if(graph_get_edge(g,line,iter_get(it),visited_edges) !=  NULL)
 	{
-	  return true;
+	  return false;
 	}
     }
-  return false;
+  return true;
 }
 
 void graph_free(graph_t *g)// Egen Funktion
