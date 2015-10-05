@@ -1,8 +1,7 @@
 #include "list.h"
-#include "stdlib.h"
+#include <stdlib.h>
 #include "assert.h"
 #include <stdio.h>
-#include <time.h>
 #include "graph.h"
 
 typedef struct _list_node_t list_node_t;
@@ -82,6 +81,7 @@ void time_list_add(time_list_t *l) // Egen funktion
   assert(l);
   assert((l->first && l->last) || (!l->first && !l->last));
   timetable_t *new_last = timetable_new();
+
 
     if (l->first && l->last)
         {
@@ -244,11 +244,13 @@ void list_add_time(time_list_t *l, int line, char* time) //Egen funktion
 	  temp_table->departs = s;
 	  return;
 	}
-      else
+      else if (temp_table->next == NULL)
 	{
-	  temp_table->line = line;
-	  temp_table->departs = time;
-	  return;
+	  timetable_t *new_last = timetable_new();
+	  new_last->line = line;
+	  new_last->departs = time;
+	  l->last->next = new_last;
+	  l->last = new_last;
 	}
     }
 }
@@ -260,12 +262,15 @@ list_node_t *list_find_node(list_t *nodes, char* match)
   iter_t *it;
   for (it = iter(nodes); !iter_done(it); iter_next(it))
     {
-      if (strncmp(iter_get(it),match, 40) == 0)
+      if (strncmp(iter_get(it),match, 50) == 0)
 	{
 	  return it->cur;
 	}
     }
   return NULL;
+}
+void test()
+{
 }
 
 void list_add_timetable(void *g, list_t *nodes, char* start, int line, char* time) //Egen funktion
@@ -274,31 +279,39 @@ void list_add_timetable(void *g, list_t *nodes, char* start, int line, char* tim
   list_t *visited_nodes = list_new();
   list_t *visited_edges = list_new();
   bool end_station = false;
+  bool time_empty = true;
   char *next_node;
   while(!end_station)
     {
-      if(visited_nodes->first == visited_nodes->last)
+      if(time_empty)
 	{
 	  list_add(visited_nodes,node->element);
 	  list_add_time(node->timetable,line,time);
+	  time_empty = false;
+	  puts("hej");
 	}
       else
 	{
 	  void *edge = graph_get_edge(g, line, node->element, visited_edges);
 	  if(edge != NULL)
 	    {
+	      
 	      int duration = graph_get_duration(edge);
-
+	      test();
+	      //BAJS!!!
 	      next_node = graph_get_edge_name(g,edge,visited_nodes);
 
-	      printf("%i - - %s\n",duration,next_node);
-
-	      list_add_time((list_find_node(nodes,next_node))->timetable,line,"5");
-
+	      printf("%i - - %s",duration, node->element);
+	      printf(" -- NEXT:%s\n",next_node);
+	     
+	      
+	      list_add_time(list_find_node(nodes,next_node)->timetable,line,"05:00");
+	    
 	      list_add(visited_nodes,node->element);
 	      list_add(visited_edges,edge);
+	      node = list_find_node(nodes,next_node);
 	    }
-	  end_station = graph_check_end_station(g,line,visited_edges,next_node);
+	  end_station = graph_check_end_station(g, line, visited_edges, visited_nodes, next_node);
 	  //lägga till tiderna i noden framför!
 	  //  list_add(visited,next_node);
 	}

@@ -12,7 +12,6 @@ struct _network_t
 };
 
 typedef struct _edge_t edge_t;
-
 struct _edge_t
 {
     int duration;

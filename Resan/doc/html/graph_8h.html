@@ -125,8 +125,18 @@ Functions</h2></td></tr>
 <tr class="separator:a755f2ffd6479fb5e26119bac16825445"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa09ef8967d9b1d1adca36624704f2f67"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="graph_8h.html#aa09ef8967d9b1d1adca36624704f2f67">graph_add_timetable</a> (<a class="el" href="struct__graph__t.html">graph_t</a> *, char *bus_start, int bus_line, char *bus_time)</td></tr>
 <tr class="separator:aa09ef8967d9b1d1adca36624704f2f67"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e1b4cb5bf6cb4e20f214d5777b0c11d"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="graph_8h.html#a8e1b4cb5bf6cb4e20f214d5777b0c11d">graph_get_edge</a> (<a class="el" href="struct__graph__t.html">graph_t</a> *, int line, void *, <a class="el" href="struct__list__t.html">list_t</a> *visited)</td></tr>
+<tr class="separator:a8e1b4cb5bf6cb4e20f214d5777b0c11d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa72699f72eb875a876634c5774f26c20"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="graph_8h.html#aa72699f72eb875a876634c5774f26c20">graph_get_edge_name</a> (<a class="el" href="struct__graph__t.html">graph_t</a> *, void *, <a class="el" href="struct__list__t.html">list_t</a> *edge)</td></tr>
+<tr class="separator:aa72699f72eb875a876634c5774f26c20"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9f0f0351bc6136df79a93d06f8d4606"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="graph_8h.html#ad9f0f0351bc6136df79a93d06f8d4606">graph_get_duration</a> (void *)</td></tr>
+<tr class="separator:ad9f0f0351bc6136df79a93d06f8d4606"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50ed437287bb69da52df62dbbd74f9c8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="graph_8h.html#a50ed437287bb69da52df62dbbd74f9c8">graph_check_end_station</a> (void *g, int line, <a class="el" href="struct__list__t.html">list_t</a> *visited, void *)</td></tr>
+<tr class="separator:a50ed437287bb69da52df62dbbd74f9c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1f6e6ee4af7796685dd29ee54939e868"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="graph_8h.html#a1f6e6ee4af7796685dd29ee54939e868">graph_free</a> (<a class="el" href="struct__graph__t.html">graph_t</a> *)</td></tr>
 <tr class="separator:a1f6e6ee4af7796685dd29ee54939e868"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a969dbe402aab536612e52313ae9eb12b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="graph_8h.html#a969dbe402aab536612e52313ae9eb12b">graph_print_timetable</a> (<a class="el" href="struct__graph__t.html">graph_t</a> *g)</td></tr>
+<tr class="separator:a969dbe402aab536612e52313ae9eb12b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A generic graph implementation. </p>
@@ -242,6 +252,45 @@ Functions</h2></td></tr>
           <td></td>
           <td class="paramtype">char *&#160;</td>
           <td class="paramname"><em>bus_time</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Egen funktion </p>
+
+</div>
+</div>
+<a class="anchor" id="a50ed437287bb69da52df62dbbd74f9c8"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool graph_check_end_station </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>g</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>line</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct__list__t.html">list_t</a> *&#160;</td>
+          <td class="paramname"><em>visited</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname">&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -411,6 +460,95 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="ad9f0f0351bc6136df79a93d06f8d4606"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int graph_get_duration </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Egen funktion </p>
+
+</div>
+</div>
+<a class="anchor" id="a8e1b4cb5bf6cb4e20f214d5777b0c11d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void* graph_get_edge </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct__graph__t.html">graph_t</a> *&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>line</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct__list__t.html">list_t</a> *&#160;</td>
+          <td class="paramname"><em>visited</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Egen funktion </p>
+
+</div>
+</div>
+<a class="anchor" id="aa72699f72eb875a876634c5774f26c20"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char* graph_get_edge_name </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct__graph__t.html">graph_t</a> *&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct__list__t.html">list_t</a> *&#160;</td>
+          <td class="paramname"><em>edge</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Egen funktion </p>
+
+</div>
+</div>
 <a class="anchor" id="a3cc6fd01db6550738b9354695a4b811a"></a>
 <div class="memitem">
 <div class="memproto">
@@ -517,10 +655,27 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a969dbe402aab536612e52313ae9eb12b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void graph_print_timetable </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct__graph__t.html">graph_t</a> *&#160;</td>
+          <td class="paramname"><em>g</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Egen funktion </p>
+
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Sep 30 2015 12:15:53 for IOOPM Travel Planner by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Oct 5 2015 11:41:46 for IOOPM Travel Planner by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.10
 </small></address>
