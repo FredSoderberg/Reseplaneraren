@@ -361,26 +361,17 @@ void *graph_get_edge(graph_t *g,int line, void *node_el, list_t *visited_edges)/
 void print_edge(void *edge)
 {
   edge_t *temp_edge = edge;
-  char *from = temp_edge->from;
-  char *to = temp_edge->to;
-  printf("%s",from);
-  printf("%s",to);
+  printf("From:%s",temp_edge->from);
+  printf(" - To:%s",temp_edge->to);
 }
 
-char *graph_get_edge_name(graph_t *g, void *edge, list_t *visited_nodes)// Egen Funktion
+char *graph_next_node_name(graph_t *g, void *edge, char *node)// Egen Funktion
 {
-  //VARV TVÅ FUNKAR Ej
   assert(edge);
   edge_t *temp_edge = edge;
-  puts("FUG");
-  if(list_has(visited_nodes,g->comp,temp_edge->from))
-    {
-      return temp_edge->to;
-    }
-  else if (list_has(visited_nodes,g->comp,temp_edge->to))
-    {
-      return temp_edge->from;
-    }
+  if(g->comp(node,temp_edge->to)) return temp_edge->from;
+  if(g->comp(node,temp_edge->from)) return temp_edge->to;
+  assert(false);
   return 0;
 }
 
