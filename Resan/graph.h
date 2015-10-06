@@ -153,7 +153,8 @@ void *graph_get_edge(graph_t*, int line, void *, list_t *visited);
 /**
 Egen funktion
  */
-char *graph_get_edge_name(graph_t*, void*,list_t* edge);
+char *graph_next_node_name(graph_t *, void *, char *);
+
 
 /**
 Egen funktion
@@ -164,6 +165,8 @@ int graph_get_duration(void *);
 Egen funktion
  */
 bool graph_check_end_station(graph_t *g,int line, list_t *visited_edges, list_t *visited_nodes, void *);
+
+void print_edge(void *);
 
 /**
 
