@@ -164,7 +164,7 @@ int graph_get_duration(void *);
 /**
 Egen funktion
  */
-bool graph_check_end_station(graph_t *g,int line, list_t *visited_edges, list_t *visited_nodes, void *);
+bool graph_check_end_station(graph_t *g,int line, list_t *visited_edges, void *);
 
 void print_edge(void *);
 
