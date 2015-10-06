@@ -12,7 +12,6 @@ struct _network_t
 };
 
 typedef struct _edge_t edge_t;
-
 struct _edge_t
 {
     int duration;
@@ -214,8 +213,8 @@ list_t *network_find_travels(network_t *n, char *from, char *to)
 
 bool network_comp_line (void *label, int line) //EGEN!!!
 {
-  edge_t *comp = label;
-  if (comp->line == line)
+  edge_t *edge = label;
+  if (edge->line == line)
     {
       return true;
     }

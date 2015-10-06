@@ -317,6 +317,20 @@ void graph_print_timetable(graph_t *g)// Egen Funktion
   print_timetable(g->nodes); 
 }
 
+bool graph_is_edge_visited(list_t *visited_edges, comparator_t comp, edge_t *edge)
+{
+  iter_t *it;
+  for (it = iter(visited_edges); !iter_done(it); iter_next(it))
+    {
+      edge_t *temp_edge = iter_get(it);
+      if (comp(temp_edge, edge))
+	{
+	  return true;
+	}
+    }
+  return false;
+}
+
 void test1(){}
 void test3(){}
 
@@ -329,16 +343,14 @@ void *graph_get_edge(graph_t *g,int line, void *node_el, list_t *visited_edges)/
       test1();
       edge_t  *e = iter_get(it);
       if(
-	 ( (strncmp(node_el,e->from,100) == 0) || (strncmp(node_el,e->to,100) == 0) )
+	 ( (g->comp(node_el,e->from) || g->comp(node_el,e->to) )
 	 &&
-	 (!list_has(visited_edges,g->comp,e))
+	   (!graph_is_edge_visited(visited_edges, g->comp, e))
 	 &&
 	 (network_comp_line(e->label,line))
-	 )
+	   ))
 	{
-	  test3();
-	  void *temp_edge = new_edge();
-	  temp_edge = e;
+	  void *temp_edge = e;
 	  return temp_edge;
 	}
     }
@@ -357,16 +369,19 @@ void print_edge(void *edge)
 
 char *graph_get_edge_name(graph_t *g, void *edge, list_t *visited_nodes)// Egen Funktion
 {
-  edge_t *temp_edge;
-  temp_edge = edge;
+  //VARV TVÅ FUNKAR Ej
+  assert(edge);
+  edge_t *temp_edge = edge;
+  puts("FUG");
   if(list_has(visited_nodes,g->comp,temp_edge->from))
     {
       return temp_edge->to;
     }
-  else
+  else if (list_has(visited_nodes,g->comp,temp_edge->to))
     {
       return temp_edge->from;
     }
+  return 0;
 }
 
 int graph_get_duration(void *edge)// Egen Funktion

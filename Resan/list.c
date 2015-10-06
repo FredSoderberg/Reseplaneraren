@@ -279,43 +279,34 @@ void list_add_timetable(void *g, list_t *nodes, char* start, int line, char* tim
   list_t *visited_nodes = list_new();
   list_t *visited_edges = list_new();
   bool end_station = false;
-  bool time_empty = true;
   char *next_node;
+  
+  list_add(visited_nodes,node->element);
+  list_add_time(node->timetable,line,time);
+  puts("hej");
+
   while(!end_station)
     {
-      if(time_empty)
+      void *edge = graph_get_edge(g, line, node->element, visited_edges);
+      if(edge != NULL)
 	{
+	  int duration = graph_get_duration(edge);
+	  
+	  next_node = graph_get_edge_name(g,edge,visited_nodes);
+	  
+	  printf("%i - - %s",duration, node->element);
+	  printf(" -- NEXT:%s\n",next_node);
+	  
+	  
+	  list_add_time(list_find_node(nodes,next_node)->timetable,line,"05:00");
+	  
 	  list_add(visited_nodes,node->element);
-	  list_add_time(node->timetable,line,time);
-	  time_empty = false;
-	  puts("hej");
+	  list_add(visited_edges,edge);
+	  node = list_find_node(nodes,next_node);
 	}
-      else
-	{
-	  void *edge = graph_get_edge(g, line, node->element, visited_edges);
-	  if(edge != NULL)
-	    {
-	      
-	      int duration = graph_get_duration(edge);
-	      test();
-	      //BAJS!!!
-	      next_node = graph_get_edge_name(g,edge,visited_nodes);
-
-	      printf("%i - - %s",duration, node->element);
-	      printf(" -- NEXT:%s\n",next_node);
-	     
-	      
-	      list_add_time(list_find_node(nodes,next_node)->timetable,line,"05:00");
-	    
-	      list_add(visited_nodes,node->element);
-	      list_add(visited_edges,edge);
-	      node = list_find_node(nodes,next_node);
-	    }
-	  end_station = graph_check_end_station(g, line, visited_edges, visited_nodes, next_node);
-	  //lägga till tiderna i noden framför!
-	  //  list_add(visited,next_node);
-	}
-
+      end_station = graph_check_end_station(g, line, visited_edges, visited_nodes, next_node);
+      //lägga till tiderna i noden framför!
+      //  list_add(visited,next_node);
     }
 }
  
