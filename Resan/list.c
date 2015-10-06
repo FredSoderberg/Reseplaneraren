@@ -239,6 +239,7 @@ void list_add_time(time_list_t *l, int line, char* time) //Egen funktion
   if((l->first == l->last) && (l->first->departs == NULL))
     {
       l->first->line = line;
+      l->first->destination = NULL;
       l->first->departs = time;
       return;
     }
@@ -246,7 +247,7 @@ void list_add_time(time_list_t *l, int line, char* time) //Egen funktion
   timetable_t *temp_table;
   for(temp_table = l->first; temp_table != NULL; temp_table = temp_table->next)
     {
-      if(temp_table->line == line)
+      if((temp_table->line == line) && (temp_table->destination == NULL) )
 	{
 	  char* temp= concat(" ",time);
 	  temp_table->departs = concat(temp_table->departs,temp);
@@ -257,6 +258,7 @@ void list_add_time(time_list_t *l, int line, char* time) //Egen funktion
 	  timetable_t *new_last = timetable_new();
 	  new_last->line = line;
 	  new_last->departs = time;
+	  new_last->destination = NULL;
 	  l->last->next = new_last;
 	  l->last = new_last;
 	  return;
