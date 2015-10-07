@@ -32,6 +32,7 @@ struct _timetable_t
 {
   int line;
   char *destination;
+  char *from;
   char *departs;
   struct _timetable_t *next;
 };
@@ -231,18 +232,21 @@ char* concat(char *s1, char *s2)
 
 
 
-void list_add_time(time_list_t *l, int line, char* time) //Egen funktion
+void list_add_time(time_list_t *l, int line, char* time, char* start) //Egen funktion
 {
   assert(l);
   assert(line);
   assert(time);  
   timetable_t *temp_table;
  
-  if(l->first && l->last) //listan exist
+  if(l->first && l->last) //list exists
     {
       for(temp_table = l->first; temp_table != NULL; temp_table = temp_table->next)
 	{
-	  if(temp_table->line == line)// && (strncmp(temp_table->destination,"Empty",100) == 0) )
+	  if( (temp_table->line == line)
+	      &&
+	      (strncmp(temp_table->from,start,100) == 0)
+	      )
 	    {
 	      char* temp= concat(" ",time);
 	      temp_table->departs = concat(temp_table->departs,temp);
@@ -253,7 +257,7 @@ void list_add_time(time_list_t *l, int line, char* time) //Egen funktion
 	      timetable_t *new_last = timetable_new();
 	      new_last->line = line;
 	      new_last->departs = time;
-	      new_last->destination = "Empty";
+	      new_last->from = start;
 	      l->last->next = new_last;
 	      l->last = new_last;
 	      return;
@@ -264,8 +268,8 @@ void list_add_time(time_list_t *l, int line, char* time) //Egen funktion
     {
       timetable_t *new_last = timetable_new();
       new_last->line = line;
-      new_last->destination = "Empty";
       new_last->departs = time;
+      new_last->from = start;
       l->first = l->last = new_last;
       return;
     }
@@ -313,7 +317,9 @@ void list_add_timetable(void *g, list_t *nodes, char* start, int line, char* tim
   list_t *visited_edges = list_new();
   bool end_station = false;
   char *next_node;
-  list_add_time(node->timetable,line,time);
+
+  //LÄGG TILL FROM (SART) OCH JÄMFÖR MED I  LIST_ADD_TIME
+  list_add_time(node->timetable,line,time,start);
 
   while(!end_station)
     {
@@ -326,7 +332,7 @@ void list_add_timetable(void *g, list_t *nodes, char* start, int line, char* tim
 
     
       //int duration = graph_get_duration(edge);
-      list_add_time(list_find_node(nodes,next_node)->timetable,line,"05:00");
+      list_add_time(list_find_node(nodes,next_node)->timetable,line,"00:00",start);
 	  
       end_station = graph_check_end_station(g, line, visited_edges, next_node);
       if(end_station) list_add_destination(nodes, next_node,visited_nodes);
