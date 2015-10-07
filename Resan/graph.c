@@ -3,6 +3,7 @@
 #include "stdlib.h"
 #include <assert.h>
 #include <stdio.h>
+#include "network.h"
 
 typedef void node_t;
 typedef struct _graph_edge_t edge_t;
@@ -316,16 +317,73 @@ void graph_print_timetable(graph_t *g)// Egen Funktion
   print_timetable(g->nodes); 
 }
 
-char graph_find_duration(graph_t *g, char* time, int line, void *node)
+bool graph_is_edge_visited(list_t *visited_edges, comparator_t comp, edge_t *edge)
 {
-  //visited;
-  //neighbours;
-  //neighbours = unvisited_neighbours(g, node, visited);
+  iter_t *it;
+  for (it = iter(visited_edges); !iter_done(it); iter_next(it))
+    {
+      edge_t *temp_edge = iter_get(it);
+      if (comp(temp_edge, edge))
+	{
+	  return true;
+	}
+    }
+  return false;
+}
+
+void *graph_get_edge(graph_t *g,int line, void *node_el, list_t *visited_edges)// Egen Funktion
+{
+  iter_t *it;
+  for (it = iter(g->edges); !iter_done(it); iter_next(it))
+    {
+      edge_t  *e = iter_get(it);
+      if(
+	 ( (g->comp(node_el,e->from) || g->comp(node_el,e->to) )
+	 &&
+	   (!graph_is_edge_visited(visited_edges, g->comp, e))
+	 &&
+	 (network_comp_line(e->label,line))
+	   ))
+	{
+	  void *temp_edge = e;
+	  return temp_edge;
+	}
+    }
+
+  return NULL;
+}
+
+/* void print_edge(void *edge) */
+/* { */
+/*   edge_t *temp_edge = edge; */
+/*   printf("From:%s",temp_edge->from); */
+/*   printf(" - To:%s",temp_edge->to); */
+/* } */
+
+char *graph_next_node_name(graph_t *g, void *edge, char *node)// Egen Funktion
+{
+  assert(edge);
+  edge_t *temp_edge = edge;
+  if(g->comp(node,temp_edge->to)) return temp_edge->from;
+  if(g->comp(node,temp_edge->from)) return temp_edge->to;
+  assert(false);
   return 0;
 }
 
+int graph_get_duration(void *edge)// Egen Funktion
+{
+  edge_t *temp_edge = new_edge();
+  temp_edge = edge;
+  return network_get_dur(temp_edge->label);
+}
 
-void graph_free(graph_t *g)
+bool graph_check_end_station(graph_t *g,int line, list_t *visited_edges, void *next_node) // Egen Funktion
+{
+  if(graph_get_edge(g,line,next_node,visited_edges) != NULL) return false;
+  return true;
+}
+
+void graph_free(graph_t *g)// Egen Funktion
 {
     list_free(g->nodes);
     list_free(g->edges);

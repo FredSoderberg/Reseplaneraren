@@ -1,9 +1,10 @@
 #include "list.h"
-#include "stdlib.h"
+#include <stdlib.h>
 #include "assert.h"
 #include <stdio.h>
-#include <time.h>
 #include "graph.h"
+#include "time.h"
+
 
 typedef struct _list_node_t list_node_t;
 typedef struct _timetable_t timetable_t;
@@ -224,7 +225,6 @@ list_t *list_clone(list_t *l)
 char* concat(char *s1, char *s2)
 {
     char *result = malloc(strlen(s1)+strlen(s2)+1);//+1 for the zero-terminator
-    //in real code you would check for errors in malloc here
     strcpy(result, s1);
     strcat(result, s2);
     return result;
@@ -232,61 +232,123 @@ char* concat(char *s1, char *s2)
 
 
 
-void list_has_timetable(time_list_t *l, int line, char* time) //Egen funktion
+void list_add_time(time_list_t *l, int line, char* time) //Egen funktion
 {
+  assert(l);
+  assert(line);
+  assert(time);
+
+  if((l->first == l->last) && (l->first->departs == NULL))
+    {
+      l->first->line = line;
+      l->first->departs = time;
+      return;
+    }
+  
   timetable_t *temp_table;
   for(temp_table = l->first; temp_table != NULL; temp_table = temp_table->next)
     {
       if(temp_table->line == line)
 	{
 	  char* temp= concat(" ",time);
-	  char* s = concat(temp_table->departs,temp);
-	  temp_table->departs = s;
+	  temp_table->departs = concat(temp_table->departs,temp);
 	  return;
 	}
-      else
+      else if (temp_table->next == NULL)
 	{
-	  temp_table->line = line;
-	  temp_table->departs = time;
+	  timetable_t *new_last = timetable_new();
+	  new_last->line = line;
+	  new_last->departs = time;
+	  l->last->next = new_last;
+	  l->last = new_last;
 	  return;
 	}
+      
+    }
+  assert(false);
+}
+
+
+list_node_t *list_find_node(list_t *nodes, char* match)
+{
+  assert(nodes);
+  list_node_t *cur = nodes->first;
+  while(cur)
+    {
+      if (strncmp(cur->element,match, 100) == 0)  return cur;
+      cur = cur->next;
+    }
+  assert(false);
+  return NULL;
+}
+
+void print_test(list_t *visited)
+{
+  list_node_t *cur = visited->first;
+  while(cur)
+    {
+      printf("Visited:%s\n",cur->element);
+      cur = cur->next;
     }
 }
 
-void list_time_adder (void *g, list_node_t *node, int line, char* time)
+void list_add_destination(list_t *nodes, char *end_station_el, list_t *visited_nodes)
 {
-  graph_find_duration(g, time, line, node);
-
-
-
-  
-  //list_has_timetable(node->timetable,line,time);
+  list_node_t *temp_node = visited_nodes->first;
+  while (temp_node)
+    {
+      list_find_node(nodes,temp_node->element)->timetable->last->destination = strdup(end_station_el);
+      temp_node = temp_node->next;
+    }
 }
 
 void list_add_timetable(void *g, list_t *nodes, char* start, int line, char* time) //Egen funktion
 {
-  assert(nodes);
-  iter_t *it;
-  for (it = iter(nodes); !iter_done(it); iter_next(it))
+  list_node_t *node =list_find_node(nodes,start);
+  list_t *visited_nodes = list_new();
+  list_t *visited_edges = list_new();
+  bool end_station = false;
+  char *next_node; 
+  list_add_time(node->timetable,line,time);
+
+  while(!end_station)
     {
-      if (strncmp(iter_get(it),start,30) == 0)
-	{
-	  assert(it->cur->timetable->first);
-	  list_has_timetable(it->cur->timetable,line,time);
-	  list_time_adder(g, it->cur,line,time);
-	}
+      void *edge = graph_get_edge(g, line, node->element, visited_edges);
+      assert(edge);
+      next_node = graph_next_node_name(g,edge,node->element);
+      list_add(visited_nodes,node->element);
+      list_add(visited_edges,edge);
+      node = list_find_node(nodes,next_node);
+
+      //int tojm = 5;
+      //int new_duration = print_edge_duration(edge);
+      int duration = graph_get_duration(edge);
+
+      char *newtime = add_duration(time, duration);
+
+      char *lastTime = add_duration(newtime, duration);
+
+
+      list_add_time(list_find_node(nodes,next_node)->timetable,line, lastTime);
+	  
+      end_station = graph_check_end_station(g, line, visited_edges, next_node);
+      if(end_station) list_add_destination(nodes, next_node,visited_nodes);
     }
-  iter_free(it);
 }
+ 
 
 void print_timetable(list_t *l)
 {
   iter_t *it;
   for (it = iter(l); !iter_done(it); iter_next(it))
     {
-      puts("");
-      puts(it->cur->element);
-      printf("%i - %s\n",it->cur->timetable->first->line,it->cur->timetable->first->departs);
+      printf("%s",it->cur->element);
+      timetable_t *cur = it->cur->timetable->first;
+      while(cur)
+	{
+	  printf("\nLinje:%i Mot:%s\nTider:%s\n",cur->line,cur->destination,cur->departs);
+	  cur = cur->next;
+	}
     }
 }
 

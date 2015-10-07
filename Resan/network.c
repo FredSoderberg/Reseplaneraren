@@ -12,7 +12,6 @@ struct _network_t
 };
 
 typedef struct _edge_t edge_t;
-
 struct _edge_t
 {
     int duration;
@@ -20,6 +19,11 @@ struct _edge_t
 };
 
 #define BUFSIZE 1000
+
+int print_edge_duration(void *e) // egen funktion
+{
+  return ((edge_t *)e)->duration; 
+}
 
 void trim_leading_space(char *dest, const char *src)
 {
@@ -210,6 +214,22 @@ list_t *network_find_travels(network_t *n, char *from, char *to)
     list_foreach(ret, free);
 
     return merged;
+}
+
+bool network_comp_line (void *label, int line) //EGEN!!!
+{
+  edge_t *edge = label;
+  if (edge->line == line)
+    {
+      return true;
+    }
+  return false;
+}
+
+int network_get_dur(void *label)
+{
+  edge_t *temp_dur = label;
+  return temp_dur->duration;
 }
 
 void free_edge_label(void *from, void *to, void *label)

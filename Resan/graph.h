@@ -148,8 +148,25 @@ void graph_add_timetable(graph_t *,char* bus_start,int bus_line,char* bus_time);
 /**
 Egen funktion
  */
-char graph_find_duration(graph_t*, char* time, int line, void *node);
+void *graph_get_edge(graph_t*, int line, void *, list_t *visited);
 
+/**
+Egen funktion
+ */
+char *graph_next_node_name(graph_t *, void *, char *);
+
+
+/**
+Egen funktion
+ */
+int graph_get_duration(void *);
+
+/**
+Egen funktion
+ */
+bool graph_check_end_station(graph_t *g,int line, list_t *visited_edges, void *);
+
+void print_edge(void *);
 
 /**
 

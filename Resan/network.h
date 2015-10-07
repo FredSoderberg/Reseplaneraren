@@ -39,6 +39,8 @@ struct travel
     line_no line;
 };
 
+int print_edge_duration(void *e); // egen funktion
+
 /**
  Parse a network from a file. The function expects an open file and
  will not close the file for you.
@@ -64,6 +66,16 @@ void travel_print(travel_t *);
     - A list containing Travels, otherwise
 */
 list_t *network_find_travels(network_t *n, char *from, char *to);
+
+/**
+Egen
+ */
+bool network_comp_line (void *, int line);
+
+/**
+Egen
+ */
+int network_get_dur(void *);
 
 /**
   Frees a network and all the data it allocated.
