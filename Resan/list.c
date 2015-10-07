@@ -34,6 +34,7 @@ struct _timetable_t
 {
   int line;
   char *destination;
+  char *from;
   char *departs;
   struct _timetable_t *next;
 };
@@ -77,13 +78,14 @@ int list_len(list_t *l)
         }
     return ret;
 }
-
+/*
 void time_list_add(time_list_t *l) // Egen funktion
 {
   assert(l);
   assert((l->first && l->last) || (!l->first && !l->last));
   timetable_t *new_last = timetable_new();
-
+  new_last->destination = "Empty";
+  
     if (l->first && l->last)
         {
             l->last->next = new_last;
@@ -94,7 +96,7 @@ void time_list_add(time_list_t *l) // Egen funktion
             // list is empty
             l->first = l->last = new_last;
         }
-}
+}*/
 
 
 void list_add(list_t *l, void *elt)
@@ -105,7 +107,7 @@ void list_add(list_t *l, void *elt)
     list_node_t *new_last = list_node_new();
     new_last->element = elt;
     new_last->timetable = time_list_new(); // Egen Rad!!
-    time_list_add(new_last->timetable);// Egen Rad
+    //time_list_add(new_last->timetable);// Egen Rad
 
     if (l->first && l->last)
         {
@@ -232,42 +234,50 @@ char* concat(char *s1, char *s2)
 
 
 
-void list_add_time(time_list_t *l, int line, char* time) //Egen funktion
+void list_add_time(time_list_t *l, int line, char* time, char* start) //Egen funktion
 {
   assert(l);
   assert(line);
-  assert(time);
-
-  if((l->first == l->last) && (l->first->departs == NULL))
-    {
-      l->first->line = line;
-      l->first->departs = time;
-      return;
-    }
-  
+  assert(time);  
   timetable_t *temp_table;
-  for(temp_table = l->first; temp_table != NULL; temp_table = temp_table->next)
+ 
+  if(l->first && l->last) //list exists
     {
-      if(temp_table->line == line)
-	{
-	  char* temp= concat(" ",time);
-	  temp_table->departs = concat(temp_table->departs,temp);
-	  return;
-	}
-      else if (temp_table->next == NULL)
-	{
-	  timetable_t *new_last = timetable_new();
-	  new_last->line = line;
-	  new_last->departs = time;
-	  l->last->next = new_last;
-	  l->last = new_last;
-	  return;
+      for(temp_table = l->first; temp_table != NULL; temp_table = temp_table->next)
+	  {
+	  if( (temp_table->line == line)
+	      &&
+	      (strncmp(temp_table->from,start,100) == 0)
+	      )
+	    {
+	      char* temp= concat(" ",time);
+	      temp_table->departs = concat(temp_table->departs,temp);
+	      return;
+	    }
+	  else if (temp_table->next == NULL)
+	    {
+	      timetable_t *new_last = timetable_new();
+	      new_last->line = line;
+	      new_last->departs = time;
+	      new_last->from = start;
+	      l->last->next = new_last;
+	      l->last = new_last;
+	      return;
+	    }
 	}
       
     }
+  else //list is empty
+    {
+      timetable_t *new_last = timetable_new();
+      new_last->line = line;
+      new_last->departs = time;
+      new_last->from = start;
+      l->first = l->last = new_last;
+      return;
+    }
   assert(false);
 }
-
 
 list_node_t *list_find_node(list_t *nodes, char* match)
 {
@@ -308,8 +318,10 @@ void list_add_timetable(void *g, list_t *nodes, char* start, int line, char* tim
   list_t *visited_nodes = list_new();
   list_t *visited_edges = list_new();
   bool end_station = false;
-  char *next_node; 
-  list_add_time(node->timetable,line,time);
+  char *next_node;
+
+  //LÄGG TILL FROM (SART) OCH JÄMFÖR MED I  LIST_ADD_TIME
+  list_add_time(node->timetable,line,time,start);
 
   while(!end_station)
     {
@@ -329,7 +341,8 @@ void list_add_timetable(void *g, list_t *nodes, char* start, int line, char* tim
       char *lastTime = add_duration(newtime, duration);
 
 
-      list_add_time(list_find_node(nodes,next_node)->timetable,line, lastTime);
+      list_add_time(list_find_node(nodes,next_node)->timetable,line, lastTime, start);
+
 	  
       end_station = graph_check_end_station(g, line, visited_edges, next_node);
       if(end_station) list_add_destination(nodes, next_node,visited_nodes);

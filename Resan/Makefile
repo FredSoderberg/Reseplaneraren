@@ -17,7 +17,7 @@ network.o: graph.o network.c network.h
 graph.o: graph.c graph.h list.o util.o
 	$(COMPIL) $(CCOPTS) -c graph.c
 
-list.o: list.c list.h util.o graph.h time.o network.h
+list.o: list.c list.h util.o graph.h time.o
 	$(COMPIL) $(CCOPTS) -c list.c
 
 time.o: time.c time.h

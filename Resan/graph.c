@@ -372,8 +372,7 @@ char *graph_next_node_name(graph_t *g, void *edge, char *node)// Egen Funktion
 
 int graph_get_duration(void *edge)// Egen Funktion
 {
-  edge_t *temp_edge = new_edge();
-  temp_edge = edge;
+  edge_t *temp_edge = edge;
   return network_get_dur(temp_edge->label);
 }
 
