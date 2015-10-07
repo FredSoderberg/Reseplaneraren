@@ -39,6 +39,8 @@ struct travel
     line_no line;
 };
 
+int print_edge_duration(void *e); // egen funktion
+
 /**
  Parse a network from a file. The function expects an open file and
  will not close the file for you.

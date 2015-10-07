@@ -3,6 +3,8 @@
 #include "assert.h"
 #include <stdio.h>
 #include "graph.h"
+#include "time.h"
+
 
 typedef struct _list_node_t list_node_t;
 typedef struct _timetable_t timetable_t;
@@ -242,7 +244,7 @@ void list_add_time(time_list_t *l, int line, char* time, char* start) //Egen fun
   if(l->first && l->last) //list exists
     {
       for(temp_table = l->first; temp_table != NULL; temp_table = temp_table->next)
-	{
+	  {
 	  if( (temp_table->line == line)
 	      &&
 	      (strncmp(temp_table->from,start,100) == 0)
@@ -261,8 +263,9 @@ void list_add_time(time_list_t *l, int line, char* time, char* start) //Egen fun
 	      l->last->next = new_last;
 	      l->last = new_last;
 	      return;
-	    }	  
+	    }
 	}
+      
     }
   else //list is empty
     {
@@ -275,7 +278,6 @@ void list_add_time(time_list_t *l, int line, char* time, char* start) //Egen fun
     }
   assert(false);
 }
-  
 
 list_node_t *list_find_node(list_t *nodes, char* match)
 {
@@ -330,9 +332,17 @@ void list_add_timetable(void *g, list_t *nodes, char* start, int line, char* tim
       list_add(visited_edges,edge);
       node = list_find_node(nodes,next_node);
 
-    
-      //int duration = graph_get_duration(edge);
-      list_add_time(list_find_node(nodes,next_node)->timetable,line,"00:00",start);
+      //int tojm = 5;
+      //int new_duration = print_edge_duration(edge);
+      int duration = graph_get_duration(edge);
+
+      char *newtime = add_duration(time, duration);
+
+      char *lastTime = add_duration(newtime, duration);
+
+
+      list_add_time(list_find_node(nodes,next_node)->timetable,line, lastTime, start);
+
 	  
       end_station = graph_check_end_station(g, line, visited_edges, next_node);
       if(end_station) list_add_destination(nodes, next_node,visited_nodes);

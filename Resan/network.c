@@ -20,6 +20,11 @@ struct _edge_t
 
 #define BUFSIZE 1000
 
+int print_edge_duration(void *e) // egen funktion
+{
+  return ((edge_t *)e)->duration; 
+}
+
 void trim_leading_space(char *dest, const char *src)
 {
     assert(dest);

@@ -6,7 +6,7 @@ CODEFILES=$(shell ls *.c *.h)
 all: doc test
 
 main: main.c network.o util.o
-	$(COMPIL) $(CCOPTS) network.o graph.o util.o list.o main.c -o main
+	$(COMPIL) $(CCOPTS) network.o graph.o util.o list.o time.o main.c -o main
 
 doc: $(CODEFILES)
 	doxygen travel_planner.doxy
@@ -17,8 +17,11 @@ network.o: graph.o network.c network.h
 graph.o: graph.c graph.h list.o util.o
 	$(COMPIL) $(CCOPTS) -c graph.c
 
-list.o: list.c list.h util.o graph.h
+list.o: list.c list.h util.o graph.h time.o
 	$(COMPIL) $(CCOPTS) -c list.c
+
+time.o: time.c time.h
+	$(COMPIL) $(CCOPTS) -c time.c
 
 util.o: util.h util.c
 	$(COMPIL) $(CCOPTS) -c util.c
