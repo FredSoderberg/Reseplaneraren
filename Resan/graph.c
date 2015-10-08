@@ -353,13 +353,6 @@ void *graph_get_edge(graph_t *g,int line, void *node_el, list_t *visited_edges)/
   return NULL;
 }
 
-/* void print_edge(void *edge) */
-/* { */
-/*   edge_t *temp_edge = edge; */
-/*   printf("From:%s",temp_edge->from); */
-/*   printf(" - To:%s",temp_edge->to); */
-/* } */
-
 char *graph_next_node_name(graph_t *g, void *edge, char *node)// Egen Funktion
 {
   assert(edge);

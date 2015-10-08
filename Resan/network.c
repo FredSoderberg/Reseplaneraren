@@ -20,11 +20,6 @@ struct _edge_t
 
 #define BUFSIZE 1000
 
-int print_edge_duration(void *e) // egen funktion
-{
-  return ((edge_t *)e)->duration; 
-}
-
 void trim_leading_space(char *dest, const char *src)
 {
     assert(dest);
@@ -67,7 +62,7 @@ void timetable_parse(network_t *netw,FILE *file) // Egen funktion
 	  
 	  graph_add_timetable(netw->g, bus_start_dup, bus_line_dup, bus_time_dup);
 	}
-    graph_print_timetable(netw->g);
+    // graph_print_timetable(netw->g);
 }
 
 
@@ -189,7 +184,7 @@ list_t *network_find_travels(network_t *n, char *from, char *to)
 
     list_t *ret = list_new();
 
-    list_t *path = graph_find_path(n->g, from, to);
+    list_t *path = graph_find_path(n->g, from, to); //RETURNERA EDGES!
     char *last_stop = from;
     iter_t *it;
     for (it = iter(path); !iter_done(it); iter_next(it))
@@ -201,7 +196,7 @@ list_t *network_find_travels(network_t *n, char *from, char *to)
             printf("\nadding duration to travel@%p: %i\n", travel, e->duration);
             travel->duration = e->duration;
             travel->from_stop = last_stop;
-            travel->from_time = -1; // FIXME
+            travel->from_time = 0; // FIXME // TIDEN RESAN BÖRJAR FÖR DEN STATIONENE! LÄGG IN FUNKTION!
             travel->line = e->line;
             travel->to_stop = iter_get(it);
             list_add(ret, travel);
@@ -244,3 +239,71 @@ void network_free(network_t *n)
     graph_free(n->g);
     free(n);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
