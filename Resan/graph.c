@@ -100,11 +100,20 @@ bool graph_has_edge(graph_t *g, void *from, void *to, void **label)
         edge_t  *e = iter_get(it);
         if ((g->comp(from, e->from) && g->comp(to, e->to)) || (g->comp(from, e->to) && g->comp(to, e->from)))
         {
+<<<<<<< HEAD
+=======
+            edge_t  *e = iter_get(it);
+	    if ((g->comp(from, e->from) && g->comp(to, e->to)) || (g->comp(from, e->to) && g->comp(to, e->from)))
+	      {
+>>>>>>> origin/Tom
 		*label = e->label;
 		iter_free(it);
 		return true;
 	      }
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/Tom
         }
     }
     *label = NULL;
@@ -125,7 +134,19 @@ list_t *graph_find_neighbors(graph_t *g, void *node)
         }
         else if (g->comp(e->to, node))
         {
+<<<<<<< HEAD
         list_add(ret, e->from);
+=======
+            edge_t  *e = iter_get(eit);
+            if (g->comp(e->from, node))
+                {
+                    list_add(ret, e->to);
+                }
+	    else if (g->comp(e->to, node))
+	      {
+		list_add(ret, e->from);
+	      }
+>>>>>>> origin/Tom
         }
     }
     iter_free(eit);
@@ -307,6 +328,33 @@ void graph_print(graph_t *g)
         edge_t  *e;
         list_nth(g->edges, i, (void **)&e);
     }
+<<<<<<< HEAD
+=======
+
+  return NULL;
+}
+
+char *graph_next_node_name(graph_t *g, void *edge, char *node)// Egen Funktion
+{
+  assert(edge);
+  edge_t *temp_edge = edge;
+  if(g->comp(node,temp_edge->to)) return temp_edge->from;
+  if(g->comp(node,temp_edge->from)) return temp_edge->to;
+  assert(false);
+  return 0;
+}
+
+int graph_get_duration(void *edge)// Egen Funktion
+{
+  edge_t *temp_edge = edge;
+  return network_get_dur(temp_edge->label);
+}
+
+bool graph_check_end_station(graph_t *g,int line, list_t *visited_edges, void *next_node) // Egen Funktion
+{
+  if(graph_get_edge(g,line,next_node,visited_edges) != NULL) return false;
+  return true;
+>>>>>>> origin/Tom
 }
 
 void graph_free(graph_t *g)
