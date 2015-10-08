@@ -263,7 +263,10 @@ edge_t *graph_opt_edge(list_t *edges, distance_label_t current_dl)
 	  opt_edge = iter_get(it);
 	  first = false;
 	}
-
+      else
+	{
+	  
+	}
     }
   return opt_edge;
 }
