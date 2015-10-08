@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
@@ -69,7 +70,7 @@ char* add_duration(char* depart, int duration)
   if(matches != 2) { //error handling av timestamp
     }
 
-  printf("The old time is %02d:%02d\n", hour, min);
+  //  printf("The old time is %02d:%02d\n", hour, min);
  //%02d = minst 2 siffror, varav fyller ut med nollor om det inte är två siffror.  
   char* dep = add_min(hour, min, duration);
 
@@ -77,7 +78,7 @@ char* add_duration(char* depart, int duration)
 
   // printf("Time compare: %d \n", cmp_time);
 
-  printf("The new time is %s\n", dep);
+  // printf("The new time is %s\n", dep);
 
   return dep;
 }
