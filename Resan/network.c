@@ -221,6 +221,12 @@ bool network_comp_line (void *label, int line) //EGEN!!!
   return false;
 }
 
+int network_get_line (void *label)
+{
+  edge_t *edge = label;
+  return edge->line;
+}
+
 int network_get_dur(void *label)
 {
   edge_t *temp_dur = label;

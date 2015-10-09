@@ -15,6 +15,8 @@ char *new_time_list();
 
 */
 
+int time_diff(char *time1, char *time2);
+
 int time_compare(char *time1, char *time2);
 
 /**

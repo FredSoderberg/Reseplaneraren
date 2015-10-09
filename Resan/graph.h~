@@ -17,7 +17,6 @@
 */
 typedef struct _graph_t graph_t;
 
-
 /**
 
   Allocate a new graph.
@@ -184,4 +183,3 @@ Egen funktion
 void graph_print_timetable(graph_t *g);// EGET!!!
 
 #endif // GRAPH_H
-
