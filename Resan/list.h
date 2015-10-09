@@ -133,6 +133,10 @@ Eget
  */
 int list_quickest_line(list_t *,char *,char *, char *);
 
+/**
+Eget
+ */
+bool list_is_edge_visited(list_t *, comparator_t, void *);
 
 
 /**
