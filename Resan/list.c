@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include "graph.h"
 #include "time.h"
-
+#define BUFSIZE 1000
 
 typedef struct _list_node_t list_node_t;
 typedef struct _timetable_t timetable_t;
@@ -79,26 +79,6 @@ int list_len(list_t *l)
         }
     return ret;
 }
-/*
-void time_list_add(time_list_t *l) // Egen funktion
-{
-  assert(l);
-  assert((l->first && l->last) || (!l->first && !l->last));
-  timetable_t *new_last = timetable_new();
-  new_last->destination = "Empty";
-  
-    if (l->first && l->last)
-        {
-            l->last->next = new_last;
-            l->last = new_last;
-        }
-    else
-        {
-            // list is empty
-            l->first = l->last = new_last;
-        }
-}*/
-
 
 void list_add(list_t *l, void *elt)
 {
@@ -363,6 +343,28 @@ void print_timetable(list_t *l)
     }
 }
 
+void *list_last_element (list_t *l)
+{
+  return l->last->element;
+}
+/*
+char *list_read_timetable(node_t *node, char *start_time)
+{
+    assert(node);
+    assert(start_time);
+    
+    char buffer[BUFSIZE];
+    while (fgets(buffer, BUFSIZE, ))
+        {
+	  char bus_start[BUFSIZE];
+	  int bus_line;
+	  char bus_time[BUFSIZE];
+	  
+	  sscanf(strtok(buffer, ","), "%i", &(bus_line));
+	  trim_leading_space(bus_start, strtok(NULL, ","));
+	  sscanf(strtok(NULL, ","), "%s", (bus_time));  
+}
+*/
 void list_free(list_t *l)
 {
     assert(l);

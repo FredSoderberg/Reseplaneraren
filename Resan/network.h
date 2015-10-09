@@ -78,6 +78,11 @@ Egen
 int network_get_dur(void *);
 
 /**
+Egen
+ */
+int network_get_line (void *);
+
+/**
   Frees a network and all the data it allocated.
 */
 void network_free(network_t *);

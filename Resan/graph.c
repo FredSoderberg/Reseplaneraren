@@ -25,9 +25,11 @@ struct _graph_t
 
 struct _distance_label_t
 {
-    void *label;
-    list_t *path;
-    int dist;
+  void *label;
+  list_t *path;
+  list_t *path_edges;
+  char *arrival_time;
+  int dist;
 };
 
 
@@ -226,6 +228,70 @@ list_t *unvisited_neighbors(graph_t *g, void *current, list_t *visited)
     list_free(neighs);
     return unvisited_neighs;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+bool graph_compare_edge (edge_t *opt_edge, edge_t *curr_edge, distance_label_t *dl){
+  int line = network_get_line ( list_last_element ( dl->path_edges ));
+  printf("%i",line);
+  if(network_get_line(curr_edge) == line)
+    {
+      if(network_get_dur(curr_edge) < network_get_dur(opt_edge)) return true;
+    }
+  //JÄMFÖR AVGÅNGSTIDERNA(?)
+  
+  //Funktion som kan läsa av tidtabeller given en node och en start tid att söka ifrån å returnera närmaste tiden över.
+  
+  //Funktion för att ta in en starttid å plocka ut antalet minuter till sluttiden
+
+  //addera det på existerande duration
+
+  //gör detta för båda bågar å jämför vilken som går fortast
+  
+  return false;
+}
+
+
+
+edge_t *graph_get_opt_edge(list_t *edges, distance_label_t *current_dl)
+{
+  edge_t *opt_edge;
+  iter_t *it;
+  bool first = true;
+  for (it = iter(edges); !iter_done(it); iter_next(it))
+    {
+      if(first)
+	{
+	  opt_edge = iter_get(it);
+	  first = false;
+	}
+      else if (graph_compare_edge(opt_edge, iter_get(it), current_dl))
+	{
+	  opt_edge = iter_get(it);
+	}
+      
+    }
+  return opt_edge;
+}
+
+
+
+
 
 void dijkstra(graph_t *g, void *current, void *to, list_t *visited,
               list_t *distanceLabels)

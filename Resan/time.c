@@ -21,15 +21,15 @@ int time_compare(char *time1, char *time2)
 
   if(hour1 == hour2 && min1 == min2)
     {
-      return 1;
+      return 0;
     }
   if(hour1 > hour2 || (hour1 == hour2 && min1 > min2))
     {
-      return 2;
+      return 1;
     }
   if (hour1 < hour2 || (hour1 == hour2 && min1 < min2))
     {
-      return 3;
+      return 2;
     }
 
   return 0;

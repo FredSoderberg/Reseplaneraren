@@ -111,12 +111,18 @@ list_t *list_clone(list_t *);
 /**
 Eget
  */
-void list_add_timetable(void *, list_t *, char* start, int line, char* time);
+void list_add_timetable(void *, list_t *, char *, int, char *);
 
 /**
 Eget
  */
-void print_timetable(list_t* l);
+void print_timetable(list_t *);
+
+/**
+Eget
+ */
+void *list_last_element (list_t *);
+
 
 /**
   Frees all memory that the list allocated.
