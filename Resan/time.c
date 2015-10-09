@@ -11,6 +11,36 @@ char *new_time_list()
   return calloc(1, sizeof(char)*5);
 }
 
+int time_diff(char *time1, char *time2)
+{
+  assert(time1);
+  assert(time2);
+  int hour1, min1, hour2, min2;
+  sscanf(time1, "%d:%d", &hour1, &min1);
+  sscanf(time2, "%d:%d", &hour2, &min2);
+
+  if(hour1 == hour2 && min1 > min2)
+    {
+      int diff =  min1 - min2;
+      return diff;
+    }
+  if(hour1 > hour2)
+    {
+      int diff = (min1 + 60) - min2;
+      return diff;
+    }
+  if(hour1 == hour2 && min1 < min2)
+    {
+      int diff = min2 - min1;
+      return diff;
+    }
+  
+  int diff = (min2 + 60) - min1;
+  return diff;
+}
+
+  
+
 int time_compare(char *time1, char *time2)
 {
   assert(time1);

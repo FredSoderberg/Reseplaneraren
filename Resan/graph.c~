@@ -4,12 +4,10 @@
 #include <assert.h>
 #include <stdio.h>
 #include "network.h"
-#include "time.h"
 
 typedef void node_t;
 typedef struct _graph_edge_t edge_t;
 typedef struct _distance_label_t distance_label_t;
-
 
 struct _graph_edge_t
 {
@@ -188,9 +186,8 @@ void *get_min_distance_node(list_t *distanceLabels, comparator_t comp,
 }
 
 void update_distance(list_t *distanceLabels, void *lbl, comparator_t comp,
-                     int tentativeDist, list_t *tentativePath, char* new_arrival_time)//la till new_arrival_time
+                     int tentativeDist, list_t *tentativePath)
 {
-  // lägg till path_edges och arrival_time.
     assert(distanceLabels);
     assert(lbl);
     assert(comp);
@@ -205,7 +202,6 @@ void update_distance(list_t *distanceLabels, void *lbl, comparator_t comp,
                     list_free(dl->path);
                 }
             dl->path = tentativePath;
-	    dl->arrival_time = new_arrival_time;  // egen rad
         }
     else
         {
@@ -232,6 +228,70 @@ list_t *unvisited_neighbors(graph_t *g, void *current, list_t *visited)
     return unvisited_neighs;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+bool graph_compare_edge (edge_t *opt_edge, edge_t *curr_edge, distance_label_t *dl){
+  int line = network_get_line ( list_last_element ( dl->path_edges ));
+  printf("%i",line);
+  if(network_get_line(curr_edge) == line)
+    {
+      if(network_get_dur(curr_edge) < network_get_dur(opt_edge)) return true;
+    }
+  //JÄMFÖR AVGÅNGSTIDERNA(?)
+  
+  //Funktion som kan läsa av tidtabeller given en node och en start tid att söka ifrån å returnera närmaste tiden över.
+  
+  //Funktion för att ta in en starttid å plocka ut antalet minuter till sluttiden
+
+  //addera det på existerande duration
+
+  //gör detta för båda bågar å jämför vilken som går fortast
+  
+  return false;
+}
+
+
+
+edge_t *graph_get_opt_edge(list_t *edges, distance_label_t *current_dl)
+{
+  edge_t *opt_edge;
+  iter_t *it;
+  bool first = true;
+  for (it = iter(edges); !iter_done(it); iter_next(it))
+    {
+      if(first)
+	{
+	  opt_edge = iter_get(it);
+	  first = false;
+	}
+      else if (graph_compare_edge(opt_edge, iter_get(it), current_dl))
+	{
+	  opt_edge = iter_get(it);
+	}
+      
+    }
+  return opt_edge;
+}
+
+
+
+
+
 void dijkstra(graph_t *g, void *current, void *to, list_t *visited,
               list_t *distanceLabels)
 {
@@ -251,19 +311,11 @@ void dijkstra(graph_t *g, void *current, void *to, list_t *visited,
 	    iter_t *it;
 	    for (it = iter(unvisited_neighs); !iter_done(it); iter_next(it))
 	      {
-		
 		void *neigh = iter_get(it);
 		list_t *tentativePath = list_clone(here->path);
 		list_add(tentativePath, neigh);
-		
-		void *edge; // kommer en funktion
-		char *bussDepart = "15:00"; //kommer en funktion
-		
-		int total_distance = graph_add_penalty(edge, here, bussDepart);// egen rad
-		char *new_arrival_time = add_duration(bussDepart, total_distance); //egen rad
-						  
 		update_distance(distanceLabels, neigh, g->comp, here->dist + 1,
-				tentativePath, new_arrival_time); //la till new_arrival_tim. ost-bågen borde gå in här!!
+				tentativePath); //ost-bågen borde gå in här!!
 	      }
 	    iter_free(it);
 	  }
@@ -397,16 +449,4 @@ void graph_free(graph_t *g)// Egen Funktion
 {
     list_free(g->nodes);
     list_free(g->edges);
-}
-
-int graph_add_penalty(edge_t *e, distance_label_t *distanceLabel, char* bussDepart) // Egen funktion
-{
-  edge_t *temp_edge = e;
-  int penalty = time_diff(distanceLabel->arrival_time, bussDepart);
-
-  int total_penalty = network_get_dur(temp_edge->label) + penalty;
-
-  return total_penalty; 
-
-  // bussen avgår - arrival time + duration = penalty
 }
