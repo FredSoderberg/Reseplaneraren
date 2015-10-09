@@ -4,7 +4,6 @@
 #include <stdio.h>
 #include "graph.h"
 #include "time.h"
-#define BUFSIZE 1000
 
 typedef struct _list_node_t list_node_t;
 typedef struct _timetable_t timetable_t;
@@ -327,7 +326,6 @@ void list_add_timetable(void *g, list_t *nodes, char* start, int line, char* tim
     }
 }
  
-
 void print_timetable(list_t *l)
 {
   iter_t *it;
@@ -343,28 +341,87 @@ void print_timetable(list_t *l)
     }
 }
 
-void *list_last_element (list_t *l)
+char *list_read_timetable(timetable_t *timetable, char *start_time)
 {
-  return l->last->element;
+  assert(start_time);
+  char *comp_time = strtok(timetable->departs, " ");
+  while(true)
+    {
+      switch (time_compare(start_time,comp_time))
+	{
+	case 0:
+	  return start_time;
+	case 1:
+	  comp_time = strtok(NULL," ");
+	  break;
+	case 2:
+	  return comp_time;
+	}
+    }
+  assert(false);
+  return 0;
 }
 
-/*char *list_read_timetable(node_t *node, char *start_time)
+char *list_next_dep_time(list_t *nodes, char *from_node_el,char *to_node_el, int line, char *start_time)
 {
-    assert(node);
-    assert(start_time);
-    
-    char buffer[BUFSIZE];
-    while (fgets(buffer, BUFSIZE, ))
-        {
-	  char bus_start[BUFSIZE];
-	  int bus_line;
-	  char bus_time[BUFSIZE];
-	  
-	  sscanf(strtok(buffer, ","), "%i", &(bus_line));
-	  trim_leading_space(bus_start, strtok(NULL, ","));
-	  sscanf(strtok(NULL, ","), "%s", (bus_time));  
+  list_node_t *from_node = list_find_node(nodes,from_node_el);
+  timetable_t *temp_timetable = from_node->timetable->first;
+  while(temp_timetable)
+    {
+      if( (temp_timetable->line == line)
+	  &&
+	  (strncmp(temp_timetable->next_stop,to_node_el,100) == 0))
+	{
+	  return list_read_timetable(temp_timetable,start_time);
+	}
+      temp_timetable = temp_timetable->next;
+    }
+      return 0;
 }
-*/
+
+int list_quickest_line(list_t *nodes,char *from_node_el,char *to_node_el, char *start_time)
+{
+  list_node_t *from_node = list_find_node(nodes,from_node_el);
+  timetable_t *temp_tb = from_node->timetable->first;
+  int quickest_line = 0;
+  char *next_time;
+  char *curr_time;
+    bool start = true;
+  while(temp_tb)
+    {
+      if(strncmp(temp_tb->next_stop,to_node_el,100) == 0)
+	{
+	  if(start)
+	    {
+	      curr_time = list_read_timetable(temp_tb,start_time);
+	      start = false;
+	      quickest_line = temp_tb->line;
+	    }
+	  else
+	    {
+	      next_time = list_read_timetable(temp_tb,start_time);
+	      switch (time_compare(curr_time,next_time))
+				   {
+				   case 0:
+				     break;
+				   case 1:
+				     curr_time = next_time;
+				     quickest_line = temp_tb->line;
+				     break;
+				   case 2:
+				     temp_tb = temp_tb->next;
+				     break;
+				   }
+	    }
+	}
+      else
+	{
+	  temp_tb = temp_tb->next;
+	}
+    }
+   return quickest_line;
+}
+
 void list_free(list_t *l)
 {
     assert(l);

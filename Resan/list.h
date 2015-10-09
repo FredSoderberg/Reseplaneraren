@@ -123,6 +123,17 @@ Eget
  */
 void *list_last_element (list_t *);
 
+/**
+Eget
+ */
+char *list_next_dep_time(list_t *, char *,char *, int, char *);
+
+/**
+Eget
+ */
+int list_quickest_line(list_t *,char *,char *, char *);
+
+
 
 /**
   Frees all memory that the list allocated.
