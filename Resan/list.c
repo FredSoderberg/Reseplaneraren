@@ -396,6 +396,7 @@ int list_quickest_line(list_t *nodes,char *from_node_el,char *to_node_el, char *
 	      curr_time = list_read_timetable(temp_tb,start_time);
 	      start = false;
 	      quickest_line = temp_tb->line;
+	      temp_tb = temp_tb->next;	  
 	    }
 	  else
 	    {
