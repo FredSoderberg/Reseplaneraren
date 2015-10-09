@@ -24,8 +24,8 @@ int time_compare(char *time1, char *time2);
   \returns given time with given minutes added
 
 */
-char *add_min(int hour, int min);
+char *add_min(int hour, int min, int duration);
 
-char *add_duration(char * depart);
+char *add_duration(char * depart, int duration);
 
   
