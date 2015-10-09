@@ -347,7 +347,7 @@ void *list_last_element (list_t *l)
 {
   return l->last->element;
 }
-/*
+
 char *list_read_timetable(node_t *node, char *start_time)
 {
     assert(node);
@@ -364,7 +364,7 @@ char *list_read_timetable(node_t *node, char *start_time)
 	  trim_leading_space(bus_start, strtok(NULL, ","));
 	  sscanf(strtok(NULL, ","), "%s", (bus_time));  
 }
-*/
+
 void list_free(list_t *l)
 {
     assert(l);
