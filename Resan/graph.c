@@ -188,7 +188,7 @@ void *get_min_distance_node(list_t *distanceLabels, comparator_t comp,
 }
 
 void update_distance(list_t *distanceLabels, void *lbl, comparator_t comp,
-                     int tentativeDist, list_t *tentativePath, char* new_arrival_time)//la till new_arrival_time
+                     int tentativeDist, list_t *tentativePath, list_t *tentativeEdgePath, char* new_arrival_time)//la till new_arrival_time
 {
   // lägg till path_edges och arrival_time.
     assert(distanceLabels);
@@ -204,12 +204,19 @@ void update_distance(list_t *distanceLabels, void *lbl, comparator_t comp,
                 {
                     list_free(dl->path);
                 }
+            if (dl->path_edges)
+                {
+                    list_free(dl->path_edges);
+                }
             dl->path = tentativePath;
+	    dl->path_edges = tentativeEdgePath;
 	    dl->arrival_time = new_arrival_time;  // egen rad
         }
     else
         {
             list_free(tentativePath);
+	    list_free(tentativeEdgePath);
+	    
         }
 }
 
@@ -232,6 +239,19 @@ list_t *unvisited_neighbors(graph_t *g, void *current, list_t *visited)
     return unvisited_neighs;
 }
 
+int graph_add_penalty(edge_t *e, distance_label_t *distanceLabel, char* bussDepart) // Egen funktion
+{
+  edge_t *temp_edge = e;
+  int penalty = time_diff(distanceLabel->arrival_time, bussDepart);
+
+  int total_penalty = network_get_dur(temp_edge->label) + penalty;
+
+  return total_penalty; 
+
+  // bussen avgår - arrival time + duration = penalty
+}
+
+
 void dijkstra(graph_t *g, void *current, void *to, list_t *visited,
               list_t *distanceLabels)
 {
@@ -251,19 +271,24 @@ void dijkstra(graph_t *g, void *current, void *to, list_t *visited,
 	    iter_t *it;
 	    for (it = iter(unvisited_neighs); !iter_done(it); iter_next(it))
 	      {
-		
 		void *neigh = iter_get(it);
-		list_t *tentativePath = list_clone(here->path);
-		list_add(tentativePath, neigh);
 		
-		void *edge; // kommer en funktion
-		char *bussDepart = "15:00"; //kommer en funktion
+		int line = list_quickest_line(g->nodes, current, neigh, here->arrival_time);
+		edge_t *edge = graph_get_edge(g,line,current,here->path_edges);
+		
+		list_t *tentativePath = list_clone(here->path);
+		list_t *tentativeEdgePath = list_clone(here->path_edges);
+		list_add(tentativePath, neigh);
+		list_add(tentativeEdgePath, edge);
+		
+
+		char *bussDepart = list_next_dep_time(g->nodes,current,neigh,line,here->arrival_time);
 		
 		int total_distance = graph_add_penalty(edge, here, bussDepart);// egen rad
 		char *new_arrival_time = add_duration(bussDepart, total_distance); //egen rad
 						  
-		update_distance(distanceLabels, neigh, g->comp, here->dist + 1,
-				tentativePath, new_arrival_time); //la till new_arrival_tim. ost-bågen borde gå in här!!
+		update_distance(distanceLabels, neigh, g->comp, here->dist + total_distance,
+				tentativePath, tentativeEdgePath, new_arrival_time); //la till new_arrival_tim. ost-bågen borde gå in här!!
 	      }
 	    iter_free(it);
 	  }
@@ -291,10 +316,13 @@ list_t *graph_find_path(graph_t *g, void *from, void *to)
             dl->dist = -1;
             dl->label = iter_get(it);
             dl->path = NULL;
+	    dl->path_edges = NULL;
+	    dl->arrival_time = "00:00";
             list_add(distanceLabels, dl);
         }
     iter_free(it);
     get_distance_label(distanceLabels, from, g->comp)->path = list_new();
+    get_distance_label(distanceLabels, from, g->comp)->path_edges = list_new();
     dijkstra(g, from, to, visited, distanceLabels);
     list_t *best = get_distance_label(distanceLabels, to, g->comp)->path;
     assert(best);
@@ -399,14 +427,3 @@ void graph_free(graph_t *g)// Egen Funktion
     list_free(g->edges);
 }
 
-int graph_add_penalty(edge_t *e, distance_label_t *distanceLabel, char* bussDepart) // Egen funktion
-{
-  edge_t *temp_edge = e;
-  int penalty = time_diff(distanceLabel->arrival_time, bussDepart);
-
-  int total_penalty = network_get_dur(temp_edge->label) + penalty;
-
-  return total_penalty; 
-
-  // bussen avgår - arrival time + duration = penalty
-}
