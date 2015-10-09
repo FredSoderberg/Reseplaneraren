@@ -34,9 +34,13 @@ int time_diff(char *time1, char *time2)
       int diff = min2 - min1;
       return diff;
     }
-  
+  if(hour1 < hour2)
+    {
   int diff = (min2 + 60) - min1;
   return diff;
+    }
+ 
+  return 0;
 }
 
   
