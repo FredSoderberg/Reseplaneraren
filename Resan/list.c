@@ -336,9 +336,7 @@ void print_timetable(list_t *l)
       timetable_t *cur = it->cur->timetable->first;
       while(cur)
 	{
-	  if(cur->line == 111){
 	  printf("\nLinje:%i Mot:%s Next Node:%s\nTider:%s\n",cur->line,cur->destination,cur->next_stop,cur->departs);
-	  }
 	  cur = cur->next;
 	}
     }
@@ -346,11 +344,9 @@ void print_timetable(list_t *l)
 
 char *list_read_timetable(timetable_t *timetable, char *start_time)
 {
-  //  printf("%s - HELA TIDEN SKITEN SAKEN!!\n\n\n\n\n\n\n\n\n\n\n\n\n",timetable->departs);
   assert(start_time);
   char *temp_timetable = strdup(timetable->departs);
   char *comp_time = strtok(temp_timetable," ");
-  
   while(true)
     {
       switch (time_compare(start_time,comp_time))
@@ -412,6 +408,7 @@ int list_quickest_line(list_t *nodes,char *from_node_el,char *to_node_el, char *
 	      switch (time_compare(curr_time,next_time))
 				   {
 				   case 0:
+				     temp_tb = temp_tb->next;
 				     break;
 				   case 1:
 				     curr_time = next_time;
