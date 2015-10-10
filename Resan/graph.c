@@ -243,14 +243,13 @@ int graph_add_penalty(edge_t *e, distance_label_t *distanceLabel, char* bussDepa
 {
   edge_t *temp_edge = e;
   int penalty = time_diff(distanceLabel->arrival_time, bussDepart);
-
+ 
   int total_penalty = network_get_dur(temp_edge->label) + penalty;
-
+   
   return total_penalty; 
 
   // bussen avgår - arrival time + duration = penalty
 }
-
 
 void dijkstra(graph_t *g, void *current, void *to, list_t *visited,
               list_t *distanceLabels)
@@ -281,7 +280,6 @@ void dijkstra(graph_t *g, void *current, void *to, list_t *visited,
 		list_add(tentativePath, neigh);
 		list_add(tentativeEdgePath, edge);
 		
-
 		char *bussDepart = list_next_dep_time(g->nodes,current,neigh,line,here->arrival_time);
 		
 		int total_distance = graph_add_penalty(edge, here, bussDepart);// egen rad
@@ -317,7 +315,7 @@ list_t *graph_find_path(graph_t *g, void *from, void *to)
             dl->label = iter_get(it);
             dl->path = NULL;
 	    dl->path_edges = NULL;
-	    dl->arrival_time = "07:00";
+	    dl->arrival_time = "23:59";
             list_add(distanceLabels, dl);
         }
     iter_free(it);
