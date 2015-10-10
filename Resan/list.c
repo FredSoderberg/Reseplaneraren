@@ -301,6 +301,7 @@ void list_add_timetable(void *g, list_t *nodes, char* start, int line, char* tim
   list_t *visited_edges = list_new();
   bool end_station = false;
   char *next_node;
+  time = add_duration(time,0);
   list_add_time(node->timetable,line,time,start,"Temp");
   while(!end_station)
     {
@@ -335,7 +336,9 @@ void print_timetable(list_t *l)
       timetable_t *cur = it->cur->timetable->first;
       while(cur)
 	{
+	  if(cur->line == 111){
 	  printf("\nLinje:%i Mot:%s Next Node:%s\nTider:%s\n",cur->line,cur->destination,cur->next_stop,cur->departs);
+	  }
 	  cur = cur->next;
 	}
     }
@@ -343,8 +346,11 @@ void print_timetable(list_t *l)
 
 char *list_read_timetable(timetable_t *timetable, char *start_time)
 {
+  //  printf("%s - HELA TIDEN SKITEN SAKEN!!\n\n\n\n\n\n\n\n\n\n\n\n\n",timetable->departs);
   assert(start_time);
-  char *comp_time = strtok(timetable->departs, " ");
+  char *temp_timetable = strdup(timetable->departs);
+  char *comp_time = strtok(temp_timetable," ");
+  
   while(true)
     {
       switch (time_compare(start_time,comp_time))
@@ -353,6 +359,7 @@ char *list_read_timetable(timetable_t *timetable, char *start_time)
 	  return start_time;
 	case 1:
 	  comp_time = strtok(NULL," ");
+	  if(comp_time == NULL)return(strtok(strdup(timetable->departs)," "));
 	  break;
 	case 2:
 	  return comp_time;
@@ -360,6 +367,7 @@ char *list_read_timetable(timetable_t *timetable, char *start_time)
     }
   assert(false);
   return 0;
+ 
 }
 
 char *list_next_dep_time(list_t *nodes, char *from_node_el,char *to_node_el, int line, char *start_time)

@@ -317,7 +317,7 @@ list_t *graph_find_path(graph_t *g, void *from, void *to)
             dl->label = iter_get(it);
             dl->path = NULL;
 	    dl->path_edges = NULL;
-	    dl->arrival_time = "06:00";
+	    dl->arrival_time = "07:00";
             list_add(distanceLabels, dl);
         }
     iter_free(it);
