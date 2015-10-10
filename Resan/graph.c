@@ -251,6 +251,8 @@ int graph_add_penalty(edge_t *e, distance_label_t *distanceLabel, char* bussDepa
   // bussen avgår - arrival time + duration = penalty
 }
 
+void test(){}
+
 void dijkstra(graph_t *g, void *current, void *to, list_t *visited,
               list_t *distanceLabels)
 {
@@ -279,7 +281,7 @@ void dijkstra(graph_t *g, void *current, void *to, list_t *visited,
 		list_t *tentativeEdgePath = list_clone(here->path_edges);
 		list_add(tentativePath, neigh);
 		list_add(tentativeEdgePath, edge);
-		
+		if(strncmp("Liljefors Torg", to,100) == 0)test();
 		char *bussDepart = list_next_dep_time(g->nodes,current,neigh,line,here->arrival_time);
 		
 		int total_distance = graph_add_penalty(edge, here, bussDepart);// egen rad
