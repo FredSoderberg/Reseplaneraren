@@ -11,14 +11,29 @@ char *new_time_list()
   return calloc(1, sizeof(char)*5);
 }
 
-int time_diff(char *time1, char *time2)
+int time_diff(char *start_time, char *end_time)
 {
-  assert(time1);
-  assert(time2);
-  int hour1, min1, hour2, min2, calc_time1, calc_time2;
-  sscanf(time1, "%d:%d", &hour1, &min1);
-  sscanf(time2, "%d:%d", &hour2, &min2);
+  assert(start_time);
+  assert(end_time);
+  int hour1, min1, hour2, min2;
+  sscanf(start_time, "%d:%d", &hour1, &min1);
+  sscanf(end_time, "%d:%d", &hour2, &min2);
 
+  int calc_start_time = hour1 * 60 + min1;
+  int calc_end_time = hour2 * 60 + min2;
+
+  if(calc_start_time >= calc_end_time)
+    {
+      int diff = (1440 - calc_start_time) + calc_end_time;
+      return diff;
+    }
+  
+  if(calc_start_time < calc_end_time)
+    {
+      int diff = calc_end_time - calc_start_time;
+      return diff;
+    }
+  /*			      
   if(hour1 == hour2 && min1 > min2)
     {
       int diff =  min1 - min2;
@@ -28,7 +43,7 @@ int time_diff(char *time1, char *time2)
     {
       calc_time1 = hour1 * 60 + min1;
       calc_time2 = hour2 * 60 + min2;
-      int diff = hour1 - hour2;
+      int diff = calc_time1 - calc_time2;
       return diff;
     }
   if(hour1 == hour2 && min1 < min2)
@@ -43,7 +58,7 @@ int time_diff(char *time1, char *time2)
       int diff = hour2 - hour1;
       return diff;
     }
-  
+  */
   return 0;
 }
 
