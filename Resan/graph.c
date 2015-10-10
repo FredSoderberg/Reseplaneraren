@@ -285,8 +285,8 @@ void dijkstra(graph_t *g, void *current, void *to, list_t *visited,
 		char *bussDepart = list_next_dep_time(g->nodes,current,neigh,line,here->arrival_time);
 		
 		int total_distance = graph_add_penalty(edge, here, bussDepart);// egen rad
-		char *new_arrival_time = add_duration(bussDepart, total_distance); //egen rad
-						  
+		char *new_arrival_time = add_duration(bussDepart, network_get_dur(edge->label)); //egen rad
+		printf("From:%s-%s - %i - To:%s-%s ",current,bussDepart,total_distance,neigh,new_arrival_time);				  
 		update_distance(distanceLabels, neigh, g->comp, here->dist + total_distance,
 				tentativePath, tentativeEdgePath, new_arrival_time); //la till new_arrival_tim. ost-bågen borde gå in här!!
 	      }
@@ -317,7 +317,7 @@ list_t *graph_find_path(graph_t *g, void *from, void *to)
             dl->label = iter_get(it);
             dl->path = NULL;
 	    dl->path_edges = NULL;
-	    dl->arrival_time = "00:00";
+	    dl->arrival_time = "06:00";
             list_add(distanceLabels, dl);
         }
     iter_free(it);
