@@ -36,9 +36,10 @@ int time_diff(char *start_time, char *end_time)
   return 0;
 }
 
+  
+
 int time_compare(char *time1, char *time2)
 {
-
   assert(time1);
   assert(time2);
   int hour1, min1, hour2, min2;
