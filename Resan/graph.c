@@ -147,13 +147,13 @@ distance_label_t *get_distance_label(list_t *distanceLabels, void *lbl,
             distance_label_t *dl = iter_get(dliter);
             if (comp(dl->label, lbl))
                 {
-		  printf("Did find distance label for %s: path is: %p\n", lbl, dl->path);
+		  //printf("Did find distance label for %s: path is: %p\n", lbl, dl->path);
 
                     iter_free(dliter);
                     return dl;
                 }
         }
-       printf("did not find distance label for %s\n", lbl);
+    //       printf("did not find distance label for %s\n", lbl);
     iter_free(dliter);
     return NULL;
 }
@@ -242,6 +242,8 @@ list_t *unvisited_neighbors(graph_t *g, void *current, list_t *visited)
 int graph_add_penalty(edge_t *e, distance_label_t *distanceLabel, char* bussDepart) // Egen funktion
 {
   edge_t *temp_edge = e;
+  assert(distanceLabel);
+  assert(bussDepart);
   int penalty = time_diff(distanceLabel->arrival_time, bussDepart);
  
   int total_penalty = network_get_dur(temp_edge->label) + penalty;
@@ -250,8 +252,6 @@ int graph_add_penalty(edge_t *e, distance_label_t *distanceLabel, char* bussDepa
 
   // bussen avgår - arrival time + duration = penalty
 }
-
-void test(){}
 
 void dijkstra(graph_t *g, void *current, void *to, list_t *visited,
               list_t *distanceLabels)
@@ -275,18 +275,19 @@ void dijkstra(graph_t *g, void *current, void *to, list_t *visited,
 		void *neigh = iter_get(it);
 		
 		int line = list_quickest_line(g->nodes, current, neigh, here->arrival_time);
+		assert(line);
 		edge_t *edge = graph_get_edge(g,line,current,here->path_edges);
 		
 		list_t *tentativePath = list_clone(here->path);
 		list_t *tentativeEdgePath = list_clone(here->path_edges);
 		list_add(tentativePath, neigh);
 		list_add(tentativeEdgePath, edge);
-		if(strncmp("Liljefors Torg", to,100) == 0)test();
+
 		char *bussDepart = list_next_dep_time(g->nodes,current,neigh,line,here->arrival_time);
-		
+		assert(bussDepart);
 		int total_distance = graph_add_penalty(edge, here, bussDepart);// egen rad
 		char *new_arrival_time = add_duration(bussDepart, network_get_dur(edge->label)); //egen rad
-		printf("From:%s-%s - %i - To:%s-%s ",current,bussDepart,total_distance,neigh,new_arrival_time);				  
+		//printf("From:%s-%s - %i - To:%s-%s \n",current,bussDepart,total_distance,neigh,new_arrival_time);				  
 		update_distance(distanceLabels, neigh, g->comp, here->dist + total_distance,
 				tentativePath, tentativeEdgePath, new_arrival_time); //la till new_arrival_tim. ost-bågen borde gå in här!!
 	      }
@@ -317,7 +318,7 @@ list_t *graph_find_path(graph_t *g, void *from, void *to)
             dl->label = iter_get(it);
             dl->path = NULL;
 	    dl->path_edges = NULL;
-	    dl->arrival_time = "23:59";
+	    dl->arrival_time = "08:00";
             list_add(distanceLabels, dl);
         }
     iter_free(it);
@@ -360,7 +361,10 @@ void graph_add_timetable(graph_t *g,char* start,int line,char* time) //Egen Funk
 
 void graph_print_timetable(graph_t *g)// Egen Funktion
 {
-  print_timetable(g->nodes); 
+  print_timetable(g->nodes);
+  edge_t *e;
+  bool has = graph_has_edge(g,"Centralstationen","Grindstugan", (void **)&e);
+  if(has)puts("FINNS EN EDGE!!!!!");
 }
 
 bool graph_is_edge_visited(list_t *visited_edges, comparator_t comp, edge_t *edge)
