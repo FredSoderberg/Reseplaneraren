@@ -1,4 +1,4 @@
-CCOPTS=-g -ggdb -Wall -Werror
+CCOPTS=-g -std=c11 -ggdb -Wall -Werror
 COMPIL= clang
 
 CODEFILES=$(shell ls *.c *.h)

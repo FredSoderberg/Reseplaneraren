@@ -200,6 +200,7 @@ list_t *list_clone(list_t *l)
         {
             list_add(ret, iter_get(it));
         }
+    iter_free(it);
     return ret;
 }
 
@@ -209,6 +210,8 @@ char* concat(char *s1, char *s2)
     char *result = malloc(strlen(s1)+strlen(s2)+1);//+1 for the zero-terminator
     strcpy(result, s1);
     strcat(result, s2);
+    free(s1);
+    free(s2);
     return result;
 }
 
@@ -230,7 +233,9 @@ void list_add_time(time_list_t *l, int line, char* time, char* start, char* next
 	      (strncmp(temp_table->from,start,100) == 0)
 	      )
 	    {
-	      char* temp= concat(" ",time);
+	      char *space = malloc(strlen(" ") + 1);
+	      strcpy(space, " ");
+	      char* temp = concat(space,time);
 	      temp_table->departs = concat(temp_table->departs,temp);
 	      return;
 	    }
@@ -296,6 +301,11 @@ void list_add_destination(list_t *nodes, char *end_station_el, list_t *visited_n
 
 void list_add_timetable(void *g, list_t *nodes, char* start, int line, char* time) //Egen funktion
 {
+  assert(g);
+  assert(nodes);
+  assert(start);
+  assert(line);
+  assert(time);
   list_node_t *node =list_find_node(nodes,start);
   list_t *visited_nodes = list_new();
   list_t *visited_edges = list_new();
@@ -325,6 +335,8 @@ void list_add_timetable(void *g, list_t *nodes, char* start, int line, char* tim
 	  time = new_time;
 	}
     }
+  list_free(visited_nodes);
+  list_free(visited_edges);    
 }
  
 void print_timetable(list_t *l)
@@ -348,6 +360,7 @@ void print_timetable(list_t *l)
 	    }
 	}
     }
+  iter_free(it);
 }
 
 char *list_read_timetable(timetable_t *timetable, char *start_time)
@@ -398,7 +411,6 @@ char *list_next_dep_time(list_t *nodes, char *from_node_el,char *to_node_el, int
 	}
       temp_timetable = temp_timetable->next;
     }
-  
   assert(false);
   return 0;
 }
@@ -415,13 +427,8 @@ int list_quickest_line(list_t *nodes,char *from_node_el,char *to_node_el, char *
   int ql = 0;
   char *c_time;
   char *n_time;
-  printf("\n fran:%s till:%s Sista Tabell:%i - %s\n",from_node_el,to_node_el,from_node->timetable->last->line,from_node->timetable->last->next_stop);
   for(temp_tb = from_node->timetable->first; temp_tb != NULL; temp_tb = temp_tb->next)
     {
-      //printf("\nFrom:%s To_node:-%s- To_time:-%s-\n",from_node_el,to_node_el,temp_tb->next_stop);
-      printf("Kollar:%i - %s mot:%s\n",temp_tb->line,temp_tb->next_stop,temp_tb->destination);
-      puts(temp_tb->departs);
-
       if(strncmp(temp_tb->next_stop,to_node_el,1000) == 0)
 	{
 	  assert(temp_tb);
@@ -436,23 +443,22 @@ int list_quickest_line(list_t *nodes,char *from_node_el,char *to_node_el, char *
 	  assert(c_time);
 	  assert(ql);
 	}
-
-
-      if((temp_tb->next == NULL) && (ql == 0))
-	{
-	  puts(start_time);
-	  puts(from_node_el);
-	  puts(to_node_el);
-	  puts(temp_tb->next_stop);
-	  puts(temp_tb->departs);
-	}
-
-
-
     }
-    printf ("Linje:%i C-Time:%s N-TIme:%s\n",ql,c_time,n_time);
   assert(ql);
   return ql;
+}
+
+void list_timetable_free(time_list_t *l)
+{
+    assert(l);
+    timetable_t *cur = l->first;
+    while (cur)
+        {
+            timetable_t *to_delete = cur;
+            cur = cur->next;
+            free(to_delete);
+        }
+    free(l);
 }
 
 void list_free(list_t *l)
@@ -463,8 +469,8 @@ void list_free(list_t *l)
         {
             list_node_t *to_delete = cur;
             cur = cur->next;
+	    list_timetable_free(to_delete->timetable);
             free(to_delete);
         }
-
     free(l);
 }
