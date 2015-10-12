@@ -17,6 +17,18 @@
 */
 typedef struct _graph_t graph_t;
 
+typedef struct _distance_label_t distance_label_t;
+
+struct _distance_label_t
+{
+  void *label;
+  list_t *path;
+  list_t *path_edges;
+  char *arrival_time;
+  int dist;
+};
+
+
 
 /**
 

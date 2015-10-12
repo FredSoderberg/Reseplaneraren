@@ -19,7 +19,7 @@
 */
 typedef struct _network_t network_t;
 
-typedef int time;
+typedef char *time;
 
 typedef int line_no;
 

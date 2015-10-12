@@ -8,8 +8,6 @@
 
 typedef void node_t;
 typedef struct _graph_edge_t edge_t;
-typedef struct _distance_label_t distance_label_t;
-
 
 struct _graph_edge_t
 {
@@ -25,15 +23,6 @@ struct _graph_t
     comparator_t comp;
 };
 
-
-struct _distance_label_t
-{
-  void *label;
-  list_t *path;
-  list_t *path_edges;
-  char *arrival_time;
-  int dist;
-};
 
 
 edge_t  *new_edge()
@@ -355,6 +344,10 @@ void graph_add_timetable(graph_t *g,char* start,int line,char* time) //Egen Funk
 {
   if(graph_has_node(g, start))
     {
+      assert(g);
+      assert(start);
+      assert(line);
+      assert(time);
       list_add_timetable(g, g->nodes, start, line, time);
     }  
 }
@@ -375,9 +368,11 @@ bool graph_is_edge_visited(list_t *visited_edges, comparator_t comp, edge_t *edg
       edge_t *temp_edge = iter_get(it);
       if (comp(temp_edge, edge))
 	{
+	  iter_free(it);
 	  return true;
 	}
     }
+  iter_free(it);
   return false;
 }
 
@@ -396,10 +391,11 @@ void *graph_get_edge(graph_t *g,int line, void *node_el, list_t *visited_edges)/
 	   ))
 	{
 	  void *temp_edge = e;
+	  iter_free(it);
 	  return temp_edge;
 	}
     }
-
+  iter_free(it);
   return NULL;
 }
 
