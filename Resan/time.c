@@ -8,7 +8,7 @@
 
 char *new_time_list()
 {
-  return calloc(1, sizeof(char)*5);
+  return calloc(1, (sizeof(char)*5) + 1);
 }
 
 int time_diff(char *start_time, char *end_time)
@@ -77,7 +77,7 @@ char *add_min(int hour, int min, int duration)
   int new_hour = total_hour / 60;
 
   sprintf(dep, "%02d:%02d", new_hour, new_min);
-
+  
   return dep;
   
   /*

@@ -33,6 +33,7 @@ int main(int argc, char const *argv[])
             readline(to, BUFFER_SIZE, stdin);
             list_t *travels = network_find_travels(n, from, to);
             list_foreach(travels, (void_fun_t)travel_print);
+	    list_foreach(travels,free);
         }
     puts("Good bye!");
 //  network_print(n);

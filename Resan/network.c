@@ -59,7 +59,12 @@ void timetable_parse(network_t *netw,FILE *file) // Egen funktion
 	  int bus_line_dup = bus_line;
 	  char *bus_start_dup = strdup(bus_start);
 	  char *bus_time_dup = strdup(bus_time);
-	  
+
+	  assert(bus_start_dup);
+	  assert(bus_line_dup);
+	  assert(bus_time_dup);
+	  //printf("%s-%i-%s\n",bus_start_dup,bus_line_dup,bus_time_dup);
+
 	  graph_add_timetable(netw->g, bus_start_dup, bus_line_dup, bus_time_dup);
 	}
     //graph_print_timetable(netw->g);
@@ -100,7 +105,7 @@ network_t *network_parse(FILE *file)
             graph_add_node(netw->g, bus_from_dup);
             graph_add_node(netw->g, bus_to_dup);
             graph_add_edge(netw->g, bus_from_dup, bus_to_dup, e);
-        }
+	}
 
     timetable_parse(netw,fopen("start.txt","r"));
     
@@ -130,7 +135,7 @@ travel_t *travel_clone(travel_t *orig)
 
 void travel_print(travel_t *travel)
 {
-    printf("@ %i: #%i %s --(%i)--> %s\n", travel->from_time, travel->line,
+    printf("@ %s: #%i %s --(%i)--> %s\n", travel->from_time, travel->line,
            travel->from_stop, travel->duration, travel->to_stop);
 }
 
@@ -193,10 +198,10 @@ list_t *network_find_travels(network_t *n, char *from, char *to)
             edge_t *e;
             bool has = graph_has_edge(n->g, last_stop, iter_get(it), (void **)&e);
             assert(has);
-            printf("\nadding duration to travel@%p: %i\n", travel, e->duration);
+            //printf("\nadding duration to travel@%p: %i\n", travel, e->duration);
             travel->duration = e->duration;
             travel->from_stop = last_stop;
-            travel->from_time = 0; // FIXME // TIDEN RESAN BÖRJAR FÖR DEN STATIONENE! LÄGG IN FUNKTION!
+            travel->from_time = "08:00"; // FIXME // TIDEN RESAN BÖRJAR FÖR DEN STATIONENE! LÄGG IN FUNKTION!
             travel->line = e->line;
             travel->to_stop = iter_get(it);
             list_add(ret, travel);
