@@ -295,22 +295,47 @@ void dijkstra(graph_t *g, void *current, void *to, list_t *visited,
 }
 
 
-void graph_print_trip (graph_t *g, char *time, distance_label_t *dl)
+void graph_print_trip (graph_t *g, char *time,char *from, distance_label_t *dl)
 {
 
   printf("\nTrip start:%s\n",time);
   char *temp_t = time;
   iter_t *it;
-    for (it = iter(dl->path_edges); !iter_done(it); iter_next(it))
+  char*tmp_fr;
+  char*tmp_to;
+
+  for (it = iter(dl->path_edges); !iter_done(it); iter_next(it))
     {
-      void *temp_v = iter_get(it);
-      edge_t *temp_e = temp_v;
-      int line = network_get_line(temp_e->label);
-      char *buss_dep = list_next_dep_time(g->nodes,temp_e->from,temp_e->to,line,time);
-      char *arr_time = add_duration(buss_dep, network_get_dur(temp_e->label));
-      int durr = network_get_dur(temp_e->label);
+      void *tmp_v = iter_get(it);
+      edge_t *tmp_e = tmp_v;
+      int line = network_get_line(tmp_e->label);
+
+
+      if(!tmp_fr) tmp_fr = from;
+      if(g->comp(tmp_fr,tmp_e->from)) tmp_to = tmp_e->to;
+      else{tmp_to = tmp_e->from;}
       
-      printf("@ %s: #%i %s --(%i)--> %s\n",buss_dep ,line ,temp_e->from ,durr ,temp_e->to );
+
+      
+      
+      char *buss_dep = list_next_dep_time(g->nodes,tmp_e->from,tmp_e->to,line,time);
+      char *arr_time = add_duration(buss_dep, network_get_dur(tmp_e->label));
+      int durr = network_get_dur(tmp_e->label);
+
+      
+
+
+
+
+
+
+
+      
+      printf("@ %s: #%i %s --(%i)--> %s\n",buss_dep ,line ,tmp_e->from ,durr ,tmp_e->to );
+
+
+
+      tmp_fr = tmp_to;
       temp_t = arr_time;
 	}
     puts("_____________________________________________________________");
@@ -343,7 +368,7 @@ distance_label_t *graph_find_path(graph_t *g,char *time, void *from, void *to)
     free_distancelabels(g->comp,distanceLabels,best);
     list_free(visited);
 
-    graph_print_trip(g,time,best);
+    graph_print_trip(g,time,from,best);
     
     return best;
 }
