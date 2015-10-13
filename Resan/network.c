@@ -125,6 +125,63 @@ void network_print(network_t *n)
     graph_foreach_edge(n->g, printEdge);
 }
 
+travel_t *travel_clone(travel_t *orig)
+{
+    travel_t *clone = malloc(sizeof(travel_t));
+    clone->from_stop = orig->from_stop;
+    clone->from_time = orig->from_time;
+    clone->line = orig->line;
+    clone->to_stop = orig->to_stop;
+    clone->duration = orig->duration;
+    return clone;
+}
+
+void travel_print(travel_t *travel)
+{
+    printf("@ %s: #%i %s --(%i)--> %s\n", travel->from_time, travel->line,
+           travel->from_stop, travel->duration, travel->to_stop);
+}
+
+list_t *merge_rides(list_t *route)
+{
+    list_t *ret = list_new();
+    if (list_len(route) == 1)
+        {
+            travel_t *travel;
+            list_nth(route, 0, (void **)&travel);
+            list_add(ret, travel_clone(travel));
+        }
+    else if (list_len(route) != 0)
+        {
+            travel_t *travel;
+            list_nth(route, 0, (void **)&travel);
+
+            travel_t *merged = travel_clone(travel);
+
+            iter_t *it = iter(route);
+            iter_next(it); // we already took care of the first
+            for (; !iter_done(it); iter_next(it))
+                {
+                    travel = iter_get(it);
+
+                    if (travel->line == merged->line)
+                        {
+                            merged->duration += travel->duration;
+                            merged->to_stop = travel->to_stop;
+                        }
+                    else
+                        {
+                            list_add(ret, merged);
+                            merged = travel_clone(travel);
+                        }
+                }
+            iter_free(it);
+            list_add(ret, merged);
+        }
+
+    return ret;
+}
+
 distance_label_t *network_find_travels(network_t *n, char *time, char *from, char *to)
 {
     assert(n && from && to);

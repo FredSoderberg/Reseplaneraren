@@ -24,6 +24,24 @@ typedef char *time;
 
 typedef int line_no;
 
+typedef struct travel travel_t;
+
+/**
+  One leg of a travel.
+
+  \sa The ::network_find_travels function returns a list of such travels.
+*/
+struct travel
+{
+    char *from_stop;
+    time from_time;
+    char *to_stop;
+    int duration;
+    line_no line;
+};
+
+int print_edge_duration(void *e); // egen funktion
+
 /**
  Parse a network from a file. The function expects an open file and
  will not close the file for you.
@@ -35,6 +53,11 @@ network_t *network_parse(FILE *file);
   only.
 */
 void network_print(network_t *);
+
+/**
+  Takes a travel and prints it to stdout. For debugging purposes only.
+*/
+void travel_print(travel_t *);
 
 /**
   Finds a travel from one stop to another.
@@ -59,11 +82,6 @@ int network_get_dur(void *);
 Egen
  */
 int network_get_line (void *);
-
-/**
-Egen
- */
-int print_edge_duration(void *e);
 
 /**
   Frees a network and all the data it allocated.
