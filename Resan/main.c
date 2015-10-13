@@ -14,8 +14,8 @@ void readline(char buffer[], size_t n, FILE *stream)
 }
 
 int main(int argc, char *argv[])
-{
-    network_t *n = network_parse(fopen("data.txt", "r"));
+{  
+  network_t *n = network_parse(fopen("data.txt", "r"));
     char from[BUFFER_SIZE];
     char to[BUFFER_SIZE];
     puts("================================");
@@ -24,10 +24,47 @@ int main(int argc, char *argv[])
     puts("");
     if(argc > 1)
       {
-	distance_label_t *travels = network_find_travels(n, argv[1], argv[2], argv[3]);
-	assert(travels);
-	puts("FUCK YEEE!!!!");
-	free_dl(travels);
+	char *from;
+	char *to;
+	char *start;
+	char *arg;
+	
+	for(int i = 1; i < argc; i++) //behöver inte veta filnamnet därför i = 1
+	  {
+	    arg = argv[i];
+	    
+	    if(arg[0] == '-' && arg [1] == '-')
+	      {
+		char *value = argv[++i];
+		
+		arg += 2;
+		
+		if(strcmp(arg, "from") == 0)
+		  {
+		    from = strdup(value);
+		  }
+		
+		else if(strcmp(arg, "to") == 0)
+		  {
+		    to = strdup(value);
+		  }
+		else if(strcmp(arg, "start") == 0)
+		  {
+		    start = strdup(value);
+		  }
+		else 
+		  {
+		    printf("wrong input");
+		    break;
+		  }
+	      }
+	  }
+	if(start && from && to)
+	  {
+	    distance_label_t *travels = network_find_travels(n, start, from, to);
+	    assert(travels);
+	    free_dl(travels);
+	  }
       }
     else
       {
@@ -44,11 +81,12 @@ int main(int argc, char *argv[])
             distance_label_t *travels = network_find_travels(n,"06:00",from, to);
 	    assert(travels);
 	    free_dl(travels);
-            //list_foreach(travels, (void_fun_t)travel_print);
-	    //list_foreach(travels,free);
 	  }
+	
       }
     puts("Good bye!");
     //  network_print(n);
     return 0;
 }
+
+
