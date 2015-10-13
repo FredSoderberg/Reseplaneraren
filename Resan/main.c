@@ -26,6 +26,9 @@ int main(int argc, char *argv[])
   puts("");
   if(argc > 1)
     {
+      char test[] = "TOLOWER";
+      strlwr(test);
+      printf("TEST: %s\n", test);
       char *from;
       char *to;
       char *start;
@@ -63,6 +66,9 @@ int main(int argc, char *argv[])
 	}
       if(start && from && to)
 	  {
+	    strlwr(from);
+	    strlwr(to);
+	    printf("FROM: %s. TO: %s\n", from, to); 
 	    distance_label_t *travels = network_find_travels(n, start, from, to);
 	    assert(travels);
 	    free_dl(travels);
