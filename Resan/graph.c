@@ -179,7 +179,6 @@ void *get_min_distance_node(list_t *distanceLabels, comparator_t comp,
 void update_distance(list_t *distanceLabels, void *lbl, comparator_t comp,
                      int tentativeDist, list_t *tentativePath, list_t *tentativeEdgePath, char* new_arrival_time)//la till new_arrival_time
 {
-  // lägg till path_edges och arrival_time.
     assert(distanceLabels);
     assert(lbl);
     assert(comp);
@@ -294,12 +293,11 @@ void dijkstra(graph_t *g, void *current, void *to, list_t *visited,
       }
 }
 
-
 void graph_print_trip (graph_t *g, char *time,char *from, distance_label_t *dl)
 {
 
   printf("\nTrip start:%s\n",time);
-  char *temp_t = time;
+  char *tmp_t = time;
   iter_t *it;
   char*tmp_fr;
   char*tmp_to;
@@ -309,37 +307,18 @@ void graph_print_trip (graph_t *g, char *time,char *from, distance_label_t *dl)
       void *tmp_v = iter_get(it);
       edge_t *tmp_e = tmp_v;
       int line = network_get_line(tmp_e->label);
-
-
       if(!tmp_fr) tmp_fr = from;
-      if(g->comp(tmp_fr,tmp_e->from)) tmp_to = tmp_e->to;
+      if(g->comp(tmp_fr,tmp_e->from))tmp_to = tmp_e->to;
       else{tmp_to = tmp_e->from;}
-      
-
-      
-      
-      char *buss_dep = list_next_dep_time(g->nodes,tmp_e->from,tmp_e->to,line,time);
+      char *buss_dep = list_next_dep_time(g->nodes,tmp_fr,tmp_to,line,tmp_t);
       char *arr_time = add_duration(buss_dep, network_get_dur(tmp_e->label));
       int durr = network_get_dur(tmp_e->label);
-
-      
-
-
-
-
-
-
-
-      
-      printf("@ %s: #%i %s --(%i)--> %s\n",buss_dep ,line ,tmp_e->from ,durr ,tmp_e->to );
-
-
-
+      printf("@ %s: #%i %s --(%i)--> %s\n",buss_dep ,line ,tmp_fr ,durr ,tmp_to );
       tmp_fr = tmp_to;
-      temp_t = arr_time;
+      tmp_t = arr_time;
 	}
     puts("_____________________________________________________________");
-    printf("this trip took from:%s to:%s and %i minutes to complete.\n",time,dl->arrival_time,dl->dist);
+    printf("this trip took from:%s to:%s and %i minutes to complete.\n",time,dl->arrival_time,dl->dist+1);
 }
 
 
