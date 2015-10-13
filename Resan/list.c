@@ -210,8 +210,6 @@ char* concat(char *s1, char *s2)
     char *result = malloc(strlen(s1)+strlen(s2)+1);//+1 for the zero-terminator
     strcpy(result, s1);
     strcat(result, s2);
-    free(s1);
-    free(s2);
     return result;
 }
 
@@ -233,10 +231,12 @@ void list_add_time(time_list_t *l, int line, char* time, char* start, char* next
 	      (strncmp(temp_table->from,start,100) == 0)
 	      )
 	    {
-	      char *space = malloc(strlen(" ") + 1);
-	      strcpy(space, " ");
-	      char* temp = concat(space,time);
-	      temp_table->departs = concat(temp_table->departs,temp);
+	      char* tmp1 = concat(" ",time);
+	      char* tmp2 = concat(temp_table->departs,tmp1);
+	      free(temp_table->departs);
+	      free(tmp1);
+	      temp_table->departs = tmp2;
+	      
 	      return;
 	    }
 	  else if (temp_table->next == NULL)
@@ -294,6 +294,7 @@ void list_add_destination(list_t *nodes, char *end_station_el, list_t *visited_n
   list_node_t *temp_node = visited_nodes->first;
   while (temp_node)
     {
+      free(list_find_node(nodes,temp_node->element)->timetable->last->destination);
       list_find_node(nodes,temp_node->element)->timetable->last->destination = strdup(end_station_el);
       temp_node = temp_node->next;
     }
@@ -448,6 +449,15 @@ int list_quickest_line(list_t *nodes,char *from_node_el,char *to_node_el, char *
   return ql;
 }
 
+
+void free_dl(distance_label_t *to_free)
+{
+
+  if (to_free->path != NULL) list_free(to_free->path);
+  if (to_free->path_edges != NULL) list_free(to_free->path_edges);
+  free(to_free);
+}
+
 void list_timetable_free(time_list_t *l)
 {
     assert(l);
@@ -459,6 +469,23 @@ void list_timetable_free(time_list_t *l)
             free(to_delete);
         }
     free(l);
+}
+
+void free_distancelabels(comparator_t comp,list_t *dl_list, distance_label_t *dl)
+{
+  list_node_t *temp_dl = dl_list->first;
+  while(temp_dl)
+    {
+      if(temp_dl->timetable !=NULL)list_timetable_free(temp_dl->timetable);
+      if(temp_dl->element == dl)
+	{
+	  temp_dl = temp_dl->next;
+	  continue;
+	}
+      distance_label_t *to_free = temp_dl->element;
+      temp_dl = temp_dl->next;
+      free_dl(to_free);
+    }
 }
 
 void list_free(list_t *l)

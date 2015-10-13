@@ -13,6 +13,7 @@
 
 #include <stdio.h>
 #include "list.h"
+#include "graph.h"
 
 /**
    An opaque type for a transportation network.
@@ -65,7 +66,7 @@ void travel_print(travel_t *);
     - NULL or an empty list if there is no such travel.
     - A list containing Travels, otherwise
 */
-list_t *network_find_travels(network_t *n, char *from, char *to);
+distance_label_t *network_find_travels(network_t *n, char *time, char *from, char *to);
 
 /**
 Egen

@@ -179,17 +179,24 @@ list_t *merge_rides(list_t *route)
     return ret;
 }
 
-list_t *network_find_travels(network_t *n, char *from, char *to)
+distance_label_t *network_find_travels(network_t *n, char *time, char *from, char *to)
 {
     assert(n && from && to);
     if (streq(from, to))
         {
-            return list_new();
+	  distance_label_t *dl = calloc(1, sizeof(distance_label_t));
+            return dl;
         }
+    distance_label_t *path = graph_find_path(n->g, time, from, to);
+    
 
-    list_t *ret = list_new();
 
-    list_t *path = graph_find_path(n->g, from, to); //RETURNERA EDGES!
+
+
+
+
+    /*
+    list_t *path = graph_find_path(n->g, from, to); //RETURNERA Distancelabeles!
     char *last_stop = from;
     iter_t *it;
     for (it = iter(path); !iter_done(it); iter_next(it))
@@ -209,11 +216,11 @@ list_t *network_find_travels(network_t *n, char *from, char *to)
             last_stop = iter_get(it);
         }
     iter_free(it);
-
     list_t *merged = merge_rides(ret);
     list_foreach(ret, free);
-
-    return merged;
+   */
+ 
+    return path;
 }
 
 bool network_comp_line (void *label, int line) //EGEN!!!

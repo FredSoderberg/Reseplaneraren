@@ -8,7 +8,7 @@
 
 char *new_time_list()
 {
-  return calloc(1, (sizeof(char)*5) + 1);
+  return calloc(1, (sizeof(char)*6));
 }
 
 int time_diff(char *start_time, char *end_time)
