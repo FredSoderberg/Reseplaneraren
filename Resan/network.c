@@ -179,41 +179,16 @@ list_t *merge_rides(list_t *route)
     return ret;
 }
 
-list_t *network_find_travels(network_t *n, char *from, char *to)
+distance_label_t *network_find_travels(network_t *n, char *time, char *from, char *to)
 {
     assert(n && from && to);
     if (streq(from, to))
         {
-            return list_new();
+	  distance_label_t *dl = calloc(1, sizeof(distance_label_t));
+            return dl;
         }
-
-    list_t *ret = list_new();
-
-    list_t *path = graph_find_path(n->g, from, to); //RETURNERA EDGES!
-    char *last_stop = from;
-    iter_t *it;
-    for (it = iter(path); !iter_done(it); iter_next(it))
-        {
-            travel_t *travel = calloc(1, sizeof(travel_t));
-            edge_t *e;
-            bool has = graph_has_edge(n->g, last_stop, iter_get(it), (void **)&e);
-            assert(has);
-            //printf("\nadding duration to travel@%p: %i\n", travel, e->duration);
-            travel->duration = e->duration;
-            travel->from_stop = last_stop;
-            travel->from_time = "08:00"; // FIXME // TIDEN RESAN BÖRJAR FÖR DEN STATIONENE! LÄGG IN FUNKTION!
-            travel->line = e->line;
-            travel->to_stop = iter_get(it);
-            list_add(ret, travel);
-
-            last_stop = iter_get(it);
-        }
-    iter_free(it);
-
-    list_t *merged = merge_rides(ret);
-    list_foreach(ret, free);
-
-    return merged;
+    distance_label_t *path = graph_find_path(n->g, time, from, to);
+    return path;
 }
 
 bool network_comp_line (void *label, int line) //EGEN!!!
