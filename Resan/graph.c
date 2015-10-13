@@ -179,6 +179,7 @@ void *get_min_distance_node(list_t *distanceLabels, comparator_t comp,
 void update_distance(list_t *distanceLabels, void *lbl, comparator_t comp,
                      int tentativeDist, list_t *tentativePath, list_t *tentativeEdgePath, char* new_arrival_time)//la till new_arrival_time
 {
+  // lägg till path_edges och arrival_time.
     assert(distanceLabels);
     assert(lbl);
     assert(comp);
