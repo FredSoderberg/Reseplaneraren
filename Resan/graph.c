@@ -228,12 +228,12 @@ list_t *unvisited_neighbors(graph_t *g, void *current, list_t *visited)
     return unvisited_neighs;
 }
 
-int graph_add_penalty(edge_t *e, distance_label_t *distanceLabel, char* bussDepart) // Egen funktion
+int graph_add_penalty(edge_t *e, char *arrival_time, char* bussDepart) // Egen funktion
 {
   edge_t *temp_edge = e;
-  assert(distanceLabel);
+  assert(arrival_time);
   assert(bussDepart);
-  int penalty = time_diff(distanceLabel->arrival_time, bussDepart);
+  int penalty = time_diff(arrival_time, bussDepart);
  
   int total_penalty = network_get_dur(temp_edge->label) + penalty;
    
@@ -274,7 +274,7 @@ void dijkstra(graph_t *g, void *current, void *to, list_t *visited,
 
 		char *bussDepart = list_next_dep_time(g->nodes,current,neigh,line,here->arrival_time);
 		assert(bussDepart);
-		int total_distance = graph_add_penalty(edge, here, bussDepart);// egen rad
+		int total_distance = graph_add_penalty(edge, here->arrival_time, bussDepart);// egen rad
 		char *new_arrival_time = add_duration(bussDepart, network_get_dur(edge->label)); //egen rad
 		//printf("From:%s-%s - %i - To:%s-%s \n",current,bussDepart,total_distance,neigh,new_arrival_time);				  
 		update_distance(distanceLabels, neigh, g->comp, here->dist + total_distance,
@@ -294,7 +294,31 @@ void dijkstra(graph_t *g, void *current, void *to, list_t *visited,
       }
 }
 
-list_t *graph_find_path(graph_t *g, void *from, void *to)
+
+void graph_print_trip (graph_t *g, char *time, distance_label_t *dl)
+{
+
+  printf("\nTrip start:%s\n",time);
+  char *temp_t = time;
+  iter_t *it;
+    for (it = iter(dl->path_edges); !iter_done(it); iter_next(it))
+    {
+      void *temp_v = iter_get(it);
+      edge_t *temp_e = temp_v;
+      int line = network_get_line(temp_e->label);
+      char *buss_dep = list_next_dep_time(g->nodes,temp_e->from,temp_e->to,line,time);
+      char *arr_time = add_duration(buss_dep, network_get_dur(temp_e->label));
+      int durr = network_get_dur(temp_e->label);
+      
+      printf("@ %s: #%i %s --(%i)--> %s\n",buss_dep ,line ,temp_e->from ,durr ,temp_e->to );
+      temp_t = arr_time;
+	}
+    puts("_____________________________________________________________");
+    printf("this trip took from:%s to:%s and %i minutes to complete.\n",time,dl->arrival_time,dl->dist);
+}
+
+
+distance_label_t *graph_find_path(graph_t *g,char *time, void *from, void *to)
 {
     assert(graph_has_node(g, from) && graph_has_node(g, to));
     list_t *visited = list_new();
@@ -307,18 +331,20 @@ list_t *graph_find_path(graph_t *g, void *from, void *to)
             dl->label = iter_get(it);
             dl->path = NULL;
 	    dl->path_edges = NULL;
-	    dl->arrival_time = "08:00";
+	    dl->arrival_time = time;
             list_add(distanceLabels, dl);
         }
     iter_free(it);
     get_distance_label(distanceLabels, from, g->comp)->path = list_new();
     get_distance_label(distanceLabels, from, g->comp)->path_edges = list_new();
     dijkstra(g, from, to, visited, distanceLabels);
-    list_t *best = get_distance_label(distanceLabels, to, g->comp)->path;
+    distance_label_t *best = get_distance_label(distanceLabels, to, g->comp);
     assert(best);
-    list_foreach(distanceLabels, free);
-    list_free(distanceLabels);
+    free_distancelabels(g->comp,distanceLabels,best);
     list_free(visited);
+
+    graph_print_trip(g,time,best);
+    
     return best;
 }
 
@@ -395,7 +421,7 @@ void *graph_get_edge(graph_t *g,int line, void *node_el, list_t *visited_edges)/
 	  return temp_edge;
 	}
     }
-  iter_free(it);
+	  iter_free(it);
   return NULL;
 }
 

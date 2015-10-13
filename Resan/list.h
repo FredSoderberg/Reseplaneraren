@@ -10,9 +10,21 @@
 #include <stdbool.h>
 #include "util.h"
 
+
 typedef struct _list_t list_t;
 
 typedef struct _iter_t iter_t;
+
+typedef struct _distance_label_t distance_label_t;
+
+struct _distance_label_t
+{
+  void *label;
+  list_t *path;
+  list_t *path_edges;
+  char *arrival_time;
+  int dist;
+};
 
 /**
   Create an empty list.
@@ -138,6 +150,15 @@ Eget
  */
 bool list_is_edge_visited(list_t *, comparator_t, void *);
 
+/**
+Eget
+ */
+void free_distancelabels(comparator_t,list_t *, distance_label_t *);
+
+/**
+Eget
+ */
+void free_dl(distance_label_t *);
 
 /**
   Frees all memory that the list allocated.

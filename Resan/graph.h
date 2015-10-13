@@ -17,16 +17,7 @@
 */
 typedef struct _graph_t graph_t;
 
-typedef struct _distance_label_t distance_label_t;
 
-struct _distance_label_t
-{
-  void *label;
-  list_t *path;
-  list_t *path_edges;
-  char *arrival_time;
-  int dist;
-};
 
 
 
@@ -151,7 +142,7 @@ list_t *graph_find_neighbors(graph_t *, void *node);
   including the goal node) if a path exists; `NULL` otherwise.
 
 */
-list_t *graph_find_path(graph_t *, void *from, void *to);
+distance_label_t *graph_find_path(graph_t *,char *time, void *from, void *to);
 
 /**
 Egen funktion
