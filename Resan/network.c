@@ -101,6 +101,9 @@ network_t *network_parse(FILE *file)
 
             char *bus_from_dup = strdup(bus_from);
             char *bus_to_dup = strdup(bus_to);
+
+	    strlwr(bus_from_dup);
+	    strlwr(bus_to_dup);
             	    
             graph_add_node(netw->g, bus_from_dup);
             graph_add_node(netw->g, bus_to_dup);
