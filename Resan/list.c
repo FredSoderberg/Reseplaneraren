@@ -206,7 +206,7 @@ list_t *list_clone(list_t *l)
 
 char* concat(char *s1, char *s2)
 {
-    char *result = malloc(strlen(s1)+strlen(s2)+1);//+1 for the zero-terminator
+  char *result = calloc( 1 , (strlen(s1)+strlen(s2)+1));//+1 for the zero-terminator
     strcpy(result, s1);
     strcat(result, s2);
     return result;
@@ -373,6 +373,7 @@ char *list_read_timetable(timetable_t *timetable, char *start_time)
   assert(start_time);
   char *temp_timetable = strdup(timetable->departs);
   char *comp_time = strtok(temp_timetable," ");
+  char *r_time;
   while(true)
     {
       switch (time_compare(start_time,comp_time))
@@ -388,14 +389,16 @@ char *list_read_timetable(timetable_t *timetable, char *start_time)
 	    {
 	      comp_time = strtok(strdup(timetable->departs)," ");
 	      assert(comp_time);
+	      r_time = strdup(comp_time);
 	      free(temp_timetable);
-	      return comp_time;
+	      return r_time;
 	    }
 	  break;
 	  
 	case 2:
+	  r_time = strdup(comp_time);
 	  free(temp_timetable);
-	  return comp_time;
+	  return r_time;
 	}
     }
   assert(false);

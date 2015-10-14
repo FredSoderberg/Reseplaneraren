@@ -72,9 +72,7 @@ void timetable_parse(network_t *netw,FILE *file) // Egen funktion
 	  int bus_line_dup = bus_line;
 	  char *bus_start_dup = strdup(bus_start);
 	  char *bus_time_dup = strdup(bus_time);
-
-
-
+	 
 	  graph_add_timetable(netw->g, bus_start_dup, bus_line_dup, bus_time_dup);
 	}
     fclose(file);

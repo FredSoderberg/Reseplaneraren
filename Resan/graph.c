@@ -320,12 +320,15 @@ void graph_print_trip (graph_t *g, char *time,char *from, distance_label_t *dl)
       if(!tmp_fr) tmp_fr = from;
       if(g->comp(tmp_fr,tmp_e->from))tmp_to = tmp_e->to;
       else{tmp_to = tmp_e->from;}
+      
       char *buss_dep = list_next_dep_time(g->nodes,tmp_fr,tmp_to,line,tmp_t);
       char *arr_time = add_duration(buss_dep, network_get_dur(tmp_e->label));
       int durr = network_get_dur(tmp_e->label);
       printf("@ %s: #%i %s --(%i)--> %s\n",buss_dep ,line ,tmp_fr ,durr ,tmp_to );
       tmp_fr = tmp_to;
       tmp_t = arr_time;
+      assert(tmp_fr);
+      assert(tmp_t);
 	}
     puts("_____________________________________________________________");
     printf("this trip took from:%s to:%s and %i minutes to complete.\n",time,dl->arrival_time,dl->dist+1);
