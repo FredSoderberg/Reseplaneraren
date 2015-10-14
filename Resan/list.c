@@ -402,6 +402,9 @@ char *list_next_dep_time(list_t *nodes, char *from_node_el,char *to_node_el, int
   assert(start_time);
   list_node_t *from_node = list_find_node(nodes,from_node_el);
   timetable_t *temp_timetable = from_node->timetable->first;
+  assert(from_node);
+  assert(temp_timetable);
+ 
   while(temp_timetable)
     {
       if( (temp_timetable->line == line)

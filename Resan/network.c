@@ -20,6 +20,13 @@ struct _edge_t
 
 #define BUFSIZE 1000
 
+bool graph_check_exist(network_t *n, char* from, char* to) // Egen funktion
+{
+  if(graph_check_node_exist(n->g, from, to))return true;
+
+  else return false; 
+}
+
 void trim_leading_space(char *dest, const char *src)
 {
     assert(dest);
@@ -82,29 +89,32 @@ network_t *network_parse(FILE *file)
     char buffer[BUFSIZE];
     while (fgets(buffer, BUFSIZE, file))
         {
-            char bus_from[BUFSIZE];
-            char bus_to[BUFSIZE];
+	  char bus_from[BUFSIZE];
+	  char bus_to[BUFSIZE];
+	  
 
             edge_t *e = malloc(sizeof(struct _edge_t));
-
+	    /*
             sscanf(strtok(buffer, ","), "%i", &(e->line));
             trim_leading_space(bus_from, strtok(NULL, ","));
             trim_leading_space(bus_to, strtok(NULL, ","));
             sscanf(strtok(NULL, ","), "%i", &(e->duration));
-
+	    */
 	    //            puts("adding edge...");
 	    // printEdge(bus_from, bus_to, &(e->duration));
 
+	  int matches = sscanf(buffer, "%i, %32[^,], %32[^,], %i", &(e->line), bus_from, bus_to, &(e->duration));
 
-	    
-            assert(e->duration > 0 && e->duration < 100);
+	  if(matches == 4)
+	    {
+	      printf("LINE: %i BUS_FROM: %s BUS_TO: %s DURATION: %i\n", e->line, bus_from, bus_to, e->duration); 
+	    }
+	  else continue; 
+            //assert(e->duration > 0 && e->duration < 100);
 
             char *bus_from_dup = strdup(bus_from);
             char *bus_to_dup = strdup(bus_to);
-
-	    strlwr(bus_from_dup);
-	    strlwr(bus_to_dup);
-            	    
+	   
             graph_add_node(netw->g, bus_from_dup);
             graph_add_node(netw->g, bus_to_dup);
             graph_add_edge(netw->g, bus_from_dup, bus_to_dup, e);

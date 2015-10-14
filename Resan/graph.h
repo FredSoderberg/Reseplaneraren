@@ -18,7 +18,7 @@
 typedef struct _graph_t graph_t;
 
 
-
+bool graph_check_node_exist(graph_t *g, char *from, char *to); //EGEN FUNKTION
 
 
 /**

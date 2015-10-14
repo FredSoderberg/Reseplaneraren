@@ -54,6 +54,13 @@ bool graph_add_node(graph_t *g, void *label)
         }
 }
 
+bool graph_check_node_exist(graph_t *g, char *from, char *to) //EGEN FUNKTION
+{
+  if(list_has(g->nodes, g->comp, from) && list_has(g->nodes, g->comp, to)) return true;
+  else return false;
+   
+}
+
 bool graph_has_node(graph_t *g, void *label)
 {
     return list_has(g->nodes, g->comp, label);
@@ -293,12 +300,11 @@ void dijkstra(graph_t *g, void *current, void *to, list_t *visited,
       }
 }
 
-
 void graph_print_trip (graph_t *g, char *time,char *from, distance_label_t *dl)
 {
 
   printf("\nTrip start:%s\n",time);
-  char *temp_t = time;
+  char *tmp_t = time;
   iter_t *it;
   char*tmp_fr;
   char*tmp_to;
@@ -308,37 +314,18 @@ void graph_print_trip (graph_t *g, char *time,char *from, distance_label_t *dl)
       void *tmp_v = iter_get(it);
       edge_t *tmp_e = tmp_v;
       int line = network_get_line(tmp_e->label);
-
-
       if(!tmp_fr) tmp_fr = from;
-      if(g->comp(tmp_fr,tmp_e->from)) tmp_to = tmp_e->to;
+      if(g->comp(tmp_fr,tmp_e->from))tmp_to = tmp_e->to;
       else{tmp_to = tmp_e->from;}
-      
-
-      
-      
-      char *buss_dep = list_next_dep_time(g->nodes,tmp_e->from,tmp_e->to,line,time);
+      char *buss_dep = list_next_dep_time(g->nodes,tmp_fr,tmp_to,line,tmp_t);
       char *arr_time = add_duration(buss_dep, network_get_dur(tmp_e->label));
       int durr = network_get_dur(tmp_e->label);
-
-      
-
-
-
-
-
-
-
-      
-      printf("@ %s: #%i %s --(%i)--> %s\n",buss_dep ,line ,tmp_e->from ,durr ,tmp_e->to );
-
-
-
+      printf("@ %s: #%i %s --(%i)--> %s\n",buss_dep ,line ,tmp_fr ,durr ,tmp_to );
       tmp_fr = tmp_to;
-      temp_t = arr_time;
+      tmp_t = arr_time;
 	}
     puts("_____________________________________________________________");
-    printf("this trip took from:%s to:%s and %i minutes to complete.\n",time,dl->arrival_time,dl->dist);
+    printf("this trip took from:%s to:%s and %i minutes to complete.\n",time,dl->arrival_time,dl->dist+1);
 }
 
 
