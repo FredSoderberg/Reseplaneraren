@@ -54,13 +54,6 @@ bool graph_add_node(graph_t *g, void *label)
         }
 }
 
-bool graph_check_node_exist(graph_t *g, char *from, char *to) //EGEN FUNKTION
-{
-  if(list_has(g->nodes, g->comp, from) && list_has(g->nodes, g->comp, to)) return true;
-  else return false;
-   
-}
-
 bool graph_has_node(graph_t *g, void *label)
 {
     return list_has(g->nodes, g->comp, label);
@@ -285,7 +278,24 @@ void dijkstra(graph_t *g, void *current, void *to, list_t *visited,
 		char *new_arrival_time = add_duration(bussDepart, network_get_dur(edge->label)); //egen rad
 	        				  
 		update_distance(distanceLabels, neigh, g->comp, here->dist + total_distance,
-				tentativePath, tentativeEdgePath, new_arrival_time); //la till new_arrival_tim. ost-bågen borde gå in här!!
+				tentativePath, tentativeEdgePath, new_arrival_time); /*la till new_arrival_tim. ost-bågen borde gå in här!! det här sög......vill du gå?.....nej men det kan vi inte göra :O moooooooooooooouuuuuuuuuuuuuuu... #ko ..... #apa oohahahhahoooohahahahahah #HmmJagVillHaEnApa.... #VIllDuHaEnCirkusApa? en gorilla? en orangutang på 500kg..... neeeeej så klart inte...... vill ha en liten söt apa som man kan gå med i koppel.... typ en babian som sliter ansiktet av en?.... neeeeeej en miniapa, typ herr nilsson i pippi! :D 
+Alltså man kan ju ha en hund i koppell..... men man kan också ha en hyena i koppel...
+..... du kan vara i koppel....
+jaaa fast det är ju som hund å babian exemplet......
+kommer inte bli bra helt enkelt tror jag ;)
+eller du kanske gillar det? ;) Hahahahha skulle garva som fan!!! Fredrik krypandes på alla 4 med ett koppel runt halsen :') 
+häll i mig tillräckligt med öl så får du ju en av två där iaf....+fast var 2an som var det viktigaste 
+vad vill du göra med min tvåa?.... -.-
+=.= du vet precis vad jag menar.................. fast vill hellre ha en söt apa i koppel än dig i koppel............ 
+varför det..... tar du en apa över mig alltså? shiiieeetttt!... ;) i koppel på stan ja, alla dar i veckan ;)
+hmm.... inte helt hundra på dina prioriteringar då ;)
+miniapor <3
+finns nog små babianer :D
+men jag vill inte ha någon babian -.-
+babianer är häftiga!! å fet agressiva.... som typ chimpanser... kanske? du kan vara en babian!
+
+
+*/
 		
 	      }
 	    iter_free(it);

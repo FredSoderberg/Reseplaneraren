@@ -116,7 +116,8 @@ char* add_duration(char* depart, int duration)
     }
 
   //  printf("The old time is %02d:%02d\n", hour, min);
- //%02d = minst 2 siffror, varav fyller ut med nollor om det inte är två siffror.  
+ //%02d = minst 2 siffror, varav fyller ut med nollor om det inte är två siffror.
+
   char* dep = add_min(calc_hour, min, duration);
 
   //int cmp_time = time_compare(time1, time2);
