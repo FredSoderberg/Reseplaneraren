@@ -17,10 +17,6 @@
 */
 typedef struct _graph_t graph_t;
 
-
-
-
-
 /**
 
   Allocate a new graph.

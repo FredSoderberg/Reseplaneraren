@@ -20,7 +20,7 @@ struct _edge_t
 
 #define BUFSIZE 1000
 
-void trim_leading_space(char *dest, const char *src)
+bool trim_leading_space(char *dest, char *src)
 {
     assert(dest);
     assert(src);
@@ -28,7 +28,9 @@ void trim_leading_space(char *dest, const char *src)
         {
             ++src;
         }
+    if(strlen(src) == 0)return false;
     strcpy(dest, src);
+    return true;
 }
 
 void printEdge(void *from, void *to, void *label)
@@ -39,7 +41,14 @@ void printEdge(void *from, void *to, void *label)
     // assert(false);
 }
 
+void test(){}
 
+bool check_time(char *time)
+{
+  int hour,min;
+  if(sscanf(time, "%d:%d", &hour, &min))return true;
+  return false;
+}
 
 void timetable_parse(network_t *netw,FILE *file) // Egen funktion
 {
@@ -49,25 +58,31 @@ void timetable_parse(network_t *netw,FILE *file) // Egen funktion
     while (fgets(buffer, BUFSIZE, file))
         {
 	  char bus_start[BUFSIZE];
+	  
 	  int bus_line;
 	  char bus_time[BUFSIZE];
 	  
-	  sscanf(strtok(buffer, ","), "%i", &(bus_line));
-	  trim_leading_space(bus_start, strtok(NULL, ","));
-	  sscanf(strtok(NULL, ","), "%s", (bus_time));
+	  if( !(sscanf(strtok(buffer, ","), "%i", &(bus_line)))) continue;
+
+	  char *tmp_bs = strtok(NULL, ",");
+	  if( !trim_leading_space(bus_start,tmp_bs)) continue;
+	  
+
+	  char *tmp_time = strtok(NULL, ",");
+	  if( !trim_leading_space(bus_time,tmp_time)) continue;
+	  if( !check_time(tmp_time))continue;
 	  
 	  int bus_line_dup = bus_line;
 	  char *bus_start_dup = strdup(bus_start);
 	  char *bus_time_dup = strdup(bus_time);
 
-	  assert(bus_start_dup);
-	  assert(bus_line_dup);
-	  assert(bus_time_dup);
-	  //printf("%s-%i-%s\n",bus_start_dup,bus_line_dup,bus_time_dup);
-
+	  
+	  
 	  graph_add_timetable(netw->g, bus_start_dup, bus_line_dup, bus_time_dup);
 	}
-    //graph_print_timetable(netw->g);
+    fclose(file);
+    //STÄNG FILEN
+    // graph_print_timetable(netw->g);
 }
 
 
@@ -101,15 +116,14 @@ network_t *network_parse(FILE *file)
 
             char *bus_from_dup = strdup(bus_from);
             char *bus_to_dup = strdup(bus_to);
-
-	    strlwr(bus_from_dup);
-	    strlwr(bus_to_dup);
             	    
             graph_add_node(netw->g, bus_from_dup);
             graph_add_node(netw->g, bus_to_dup);
             graph_add_edge(netw->g, bus_from_dup, bus_to_dup, e);
 	}
 
+    fclose(file);
+    //STÄNG FILEN
     timetable_parse(netw,fopen("start.txt","r"));
     
     return netw;
