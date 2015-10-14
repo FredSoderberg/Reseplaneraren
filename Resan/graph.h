@@ -17,10 +17,6 @@
 */
 typedef struct _graph_t graph_t;
 
-
-bool graph_check_node_exist(graph_t *g, char *from, char *to); //EGEN FUNKTION
-
-
 /**
 
   Allocate a new graph.
@@ -184,7 +180,11 @@ void graph_free(graph_t *);
 /**
 Egen funktion
  */
+bool graph_check_node_exist(graph_t *g, char *from, char *to); //EGEN FUNKTION
+
+/**
+Egen funktion
+ */
 void graph_print_timetable(graph_t *g);// EGET!!!
 
 #endif // GRAPH_H
-

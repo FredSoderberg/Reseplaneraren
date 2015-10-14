@@ -45,6 +45,4 @@ bool streq(const void *a, const void *b);
 */
 void printstr(void *);
 
-void strlwr(char *str); // EGEN FUNKTION
-
 #endif // UTIL_H

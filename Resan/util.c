@@ -1,7 +1,6 @@
 #include "stdbool.h"
 #include <string.h>
 #include <stdio.h>
-#include <ctype.h>
 
 bool streq(const void *a, const void *b)
 {
@@ -11,15 +10,4 @@ bool streq(const void *a, const void *b)
 void printstr(void *str)
 {
     puts((char *)str);
-}
-
-void strlwr(char *str) // EGEN FUNKTION
-{
-  int i = 0;
-
-  while(str[i])
-    {
-      str[i] = tolower(str[i]);
-      i++;
-    }
 }
