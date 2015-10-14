@@ -54,6 +54,13 @@ bool graph_add_node(graph_t *g, void *label)
         }
 }
 
+bool graph_check_node_exist(graph_t *g, char *from, char *to) //EGEN FUNKTION
+{
+  if(list_has(g->nodes, g->comp, from) && list_has(g->nodes, g->comp, to)) return true;
+  else return false;
+   
+}
+
 bool graph_has_node(graph_t *g, void *label)
 {
     return list_has(g->nodes, g->comp, label);

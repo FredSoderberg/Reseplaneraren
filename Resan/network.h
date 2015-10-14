@@ -28,6 +28,10 @@ typedef int line_no;
  Parse a network from a file. The function expects an open file and
  will not close the file for you.
 */
+
+bool graph_check_exist(network_t *n, char* from, char* to); //Egen funktion
+
+
 network_t *network_parse(FILE *file);
 
 /**
