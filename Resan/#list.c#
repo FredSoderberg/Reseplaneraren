@@ -87,6 +87,7 @@ void list_add(list_t *l, void *elt)
     list_node_t *new_last = list_node_new();
     new_last->element = elt;
     new_last->timetable = time_list_new(); // Egen Rad!!
+    //time_list_add(new_last->timetable);// Egen Rad
 
     if (l->first && l->last)
         {
@@ -311,12 +312,9 @@ void list_add_timetable(void *g, list_t *nodes, char* start, int line, char* tim
   list_t *visited_edges = list_new();
   bool end_station = false;
   char *next_node;
-  
   char *tmp_time = add_duration(time,0);
   free(time);
   time=tmp_time;
-  
-  
   list_add_time(node->timetable,line,time,start,"Temp");
   while(!end_station)
     {
@@ -330,8 +328,6 @@ void list_add_timetable(void *g, list_t *nodes, char* start, int line, char* tim
       int duration = graph_get_duration(edge);
 
 
-
-
       char *new_time = add_duration(time,duration);
 
       
@@ -339,13 +335,12 @@ void list_add_timetable(void *g, list_t *nodes, char* start, int line, char* tim
       if(end_station)
 	{
 	  list_add_destination(nodes, next_node,visited_nodes);
-	  
 	}
       else
 	{
 	  list_add_time(node->timetable,line, new_time, start, next_node);
+	  free(time);
 	  time = new_time;
-	  
 	}
     }
   list_free(visited_nodes);
