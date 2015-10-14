@@ -80,22 +80,6 @@ char *add_min(int hour, int min, int duration)
   
   return dep;
   
-  /*
-  int new_min = min + duration;
-
-  char *dep = new_time_list();;
-
-  if(new_min > 59)
-    {
-      int last_min = new_min - 60;
-      int new_hour = hour +1;
-      sprintf(dep, "%02d:%02d", new_hour, last_min);
-
-      return dep;
-    }
-  
-  sprintf(dep, "%02d:%02d", hour, new_min);
-  */
  
 }
 
