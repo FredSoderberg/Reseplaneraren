@@ -313,7 +313,7 @@ void graph_print_trip (graph_t *g, char *time,char *from, distance_label_t *dl)
   
   char *tmp_t = time;
   iter_t *it;
-  char*tmp_fr;
+  char*tmp_fr = 0;
   char*tmp_to;
 
   /*iter_t *it2;
@@ -334,7 +334,7 @@ void graph_print_trip (graph_t *g, char *time,char *from, distance_label_t *dl)
 
       // printf("\n\n\n%s\n",tmp_e->to);
 
-      if(!tmp_fr) tmp_fr = from;
+      if(tmp_fr == 0) tmp_fr = from;
 
       // printf("linje:%i !%s!",line,tmp_fr);
       

@@ -67,6 +67,9 @@ int main(int argc, char *argv[])
 		return 0;
 	      }
 	    distance_label_t *travels = network_find_travels(n, start, from, to);
+	    free(from);
+	    free(start);
+	    free(to);
 	    assert(travels);
 	    free_dl(travels);
 	  }

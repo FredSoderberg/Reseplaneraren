@@ -16,7 +16,7 @@
    \returns returns the total time difference in integer form.
    
 */
-Int time_diff(char *time1, char *time2);
+int time_diff(char *time1, char *time2);
 
 /**
 

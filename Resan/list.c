@@ -311,6 +311,7 @@ void list_add_timetable(void *g, list_t *nodes, char* start, int line, char* tim
   list_t *visited_edges = list_new();
   bool end_station = false;
   char *next_node;
+  char *new_time;
   
   char *tmp_time = add_duration(time,0);
   free(time);
@@ -328,20 +329,23 @@ void list_add_timetable(void *g, list_t *nodes, char* start, int line, char* tim
       list_add(visited_edges,edge);
       node = list_find_node(nodes,next_node);
       int duration = graph_get_duration(edge);
-      char *new_time = add_duration(time,duration);
-      
+      new_time = add_duration(time,duration);
       end_station = graph_check_end_station(g, line, visited_edges, next_node);
       if(end_station)
 	{
-	  free(new_time);
+	 
 	  list_add_destination(nodes, next_node,visited_nodes);
 	}
       else
 	{
 	  list_add_time(node->timetable,line, new_time, start, next_node);
+
 	  time = new_time;
+
+	  
 	}
     }
+  free(new_time);
   list_free(visited_nodes);
   list_free(visited_edges);    
 }
@@ -430,8 +434,6 @@ int list_quickest_line(list_t *nodes,char *from_node_el,char *to_node_el, char *
   int ql = 0;
   char *c_time;
   char *n_time;
-
-  //puts(to_node_el);
 
   for(temp_tb = from_node->timetable->first; temp_tb != NULL; temp_tb = temp_tb->next)
     {
