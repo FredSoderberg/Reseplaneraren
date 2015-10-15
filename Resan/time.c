@@ -27,7 +27,7 @@ int time_diff(char *start_time, char *end_time)
       int diff = (1440 - calc_start_time) + calc_end_time;
       return diff;
     }
-  
+
   if(calc_start_time <= calc_end_time)
     {
       int diff = calc_end_time - calc_start_time;
@@ -36,7 +36,7 @@ int time_diff(char *start_time, char *end_time)
   return 0;
 }
 
-  
+
 
 int time_compare(char *time1, char *time2)
 {
@@ -61,15 +61,15 @@ char *add_min(int hour, int min, int duration)
   int new_hour = total_hour / 60;
   sprintf(dep, "%02d:%02d", new_hour, new_min);
   return dep;
-  
- 
+
+
 }
 
 char* add_duration(char* depart, int duration)
 {
   int hour, min;
   sscanf(depart, "%d:%d", &hour, &min);
-  int calc_hour = hour * 60;
+  int calc_hour = hour * 60; //Makes hours into minutes
   char* dep = add_min(calc_hour, min, duration);
   return dep;
 }
