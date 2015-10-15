@@ -125,6 +125,7 @@ Eget
  */
 void list_add_timetable(void *, list_t *, char *, int, char *);
 
+
 /**
 Eget
  */
@@ -151,9 +152,14 @@ Eget
 bool list_is_edge_visited(list_t *, comparator_t, void *);
 
 /**
-Eget
+A function to free memory allocated in the struct distancelabels. Frees all the distancelabels in the list_t except the supplied distancelabel.
+
+\param comp \ref comparator_t to search with.
+
+\param dl supplied distancelabel
+
  */
-void free_distancelabels(comparator_t,list_t *, distance_label_t *);
+void free_distancelabels(comparator_t comp, list_t *, distance_label_t *dl);
 
 /**
 Eget

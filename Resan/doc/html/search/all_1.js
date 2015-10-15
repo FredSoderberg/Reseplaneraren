@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['comparator_5ft',['comparator_t',['../util_8h.html#a49b4e67d12d0b82395b75063127fff0b',1,'util.h']]]
+  ['add_5fmin',['add_min',['../time_8h.html#a442d88e356fdc4d6e72d2f6f44332761',1,'time.c']]]
 ];

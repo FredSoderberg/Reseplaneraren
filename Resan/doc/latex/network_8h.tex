@@ -7,39 +7,37 @@ Functions for route planning.
 
 {\ttfamily \#include $<$stdio.\+h$>$}\\*
 {\ttfamily \#include \char`\"{}list.\+h\char`\"{}}\\*
-\subsection*{Data Structures}
-\begin{DoxyCompactItemize}
-\item 
-struct \hyperlink{structtravel}{travel}
-\end{DoxyCompactItemize}
+{\ttfamily \#include \char`\"{}graph.\+h\char`\"{}}\\*
 \subsection*{Typedefs}
 \begin{DoxyCompactItemize}
 \item 
 typedef struct \hyperlink{struct__network__t}{\+\_\+network\+\_\+t} \hyperlink{network_8h_ab61975163f799e1386b19a6505f9b421}{network\+\_\+t}
 \item 
-\hypertarget{network_8h_a64c4974a81ff384af8a1b7f5fb2acbac}{}typedef int {\bfseries time}\label{network_8h_a64c4974a81ff384af8a1b7f5fb2acbac}
+\hypertarget{network_8h_aa851995e6471bd6ccfb7c96f00a75c51}{}typedef char $\ast$ {\bfseries time}\label{network_8h_aa851995e6471bd6ccfb7c96f00a75c51}
 
 \item 
 \hypertarget{network_8h_a730415c26be71005d3d9f07c404fe657}{}typedef int {\bfseries line\+\_\+no}\label{network_8h_a730415c26be71005d3d9f07c404fe657}
-
-\item 
-\hypertarget{network_8h_a04a692b48d88903c275e9ba06d09615f}{}typedef struct \hyperlink{structtravel}{travel} {\bfseries travel\+\_\+t}\label{network_8h_a04a692b48d88903c275e9ba06d09615f}
 
 \end{DoxyCompactItemize}
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{network_8h_ab61975163f799e1386b19a6505f9b421}{network\+\_\+t} $\ast$ \hyperlink{network_8h_a35823fb774216053a7ed143cd3273620}{network\+\_\+parse} (F\+I\+L\+E $\ast$file)
+bool \hyperlink{network_8h_a49aaa5b9fa4a41f8128093f14019255e}{graph\+\_\+check\+\_\+exist} (\hyperlink{network_8h_ab61975163f799e1386b19a6505f9b421}{network\+\_\+t} $\ast$n, char $\ast$from, char $\ast$to)
+\item 
+\hypertarget{network_8h_a35823fb774216053a7ed143cd3273620}{}\hyperlink{network_8h_ab61975163f799e1386b19a6505f9b421}{network\+\_\+t} $\ast$ {\bfseries network\+\_\+parse} (F\+I\+L\+E $\ast$file)\label{network_8h_a35823fb774216053a7ed143cd3273620}
+
 \item 
 void \hyperlink{network_8h_a2d01b71df1fb1d7a813b40cb97df5d2b}{network\+\_\+print} (\hyperlink{network_8h_ab61975163f799e1386b19a6505f9b421}{network\+\_\+t} $\ast$)
 \item 
-void \hyperlink{network_8h_a553c1d411001df9a440af2fffee1e7de}{travel\+\_\+print} (\hyperlink{structtravel}{travel\+\_\+t} $\ast$)
-\item 
-\hyperlink{struct__list__t}{list\+\_\+t} $\ast$ \hyperlink{network_8h_a4e0904506d9a1c14d1649db55e2d2d12}{network\+\_\+find\+\_\+travels} (\hyperlink{network_8h_ab61975163f799e1386b19a6505f9b421}{network\+\_\+t} $\ast$n, char $\ast$from, char $\ast$to)
+\hyperlink{struct__distance__label__t}{distance\+\_\+label\+\_\+t} $\ast$ \hyperlink{network_8h_afcc7e8cf0d207963b021e445132ea253}{network\+\_\+find\+\_\+travels} (\hyperlink{network_8h_ab61975163f799e1386b19a6505f9b421}{network\+\_\+t} $\ast$n, char $\ast$time, char $\ast$from, char $\ast$to)
 \item 
 bool \hyperlink{network_8h_aee1d3cc1c414dedfc3443d797d607d89}{network\+\_\+comp\+\_\+line} (void $\ast$, int line)
 \item 
 int \hyperlink{network_8h_af8f9a857a0b738ef6096798deb267447}{network\+\_\+get\+\_\+dur} (void $\ast$)
+\item 
+int \hyperlink{network_8h_a528b24bcd0f110c3a32b1406bb807031}{network\+\_\+get\+\_\+line} (void $\ast$)
+\item 
+int \hyperlink{network_8h_abd0a2fa00d44aa1ecab1420e479aa4b8}{print\+\_\+edge\+\_\+duration} (void $\ast$e)
 \item 
 void \hyperlink{network_8h_afbd5203918d513b9fce3a5c5f80b86b1}{network\+\_\+free} (\hyperlink{network_8h_ab61975163f799e1386b19a6505f9b421}{network\+\_\+t} $\ast$)
 \end{DoxyCompactItemize}
@@ -57,7 +55,16 @@ This module is a thin wrapper around a generic graph implementation. It adds the
 An opaque type for a transportation network. 
 
 \subsection{Function Documentation}
-\hypertarget{network_8h_aee1d3cc1c414dedfc3443d797d607d89}{}\index{network.\+h@{network.\+h}!network\+\_\+comp\+\_\+line@{network\+\_\+comp\+\_\+line}}
+\hypertarget{network_8h_a49aaa5b9fa4a41f8128093f14019255e}{}\index{network.\+h@{network.\+h}!graph\+\_\+check\+\_\+exist@{graph\+\_\+check\+\_\+exist}}
+\index{graph\+\_\+check\+\_\+exist@{graph\+\_\+check\+\_\+exist}!network.\+h@{network.\+h}}
+\subsubsection[{graph\+\_\+check\+\_\+exist(network\+\_\+t $\ast$n, char $\ast$from, char $\ast$to)}]{\setlength{\rightskip}{0pt plus 5cm}bool graph\+\_\+check\+\_\+exist (
+\begin{DoxyParamCaption}
+\item[{{\bf network\+\_\+t} $\ast$}]{n, }
+\item[{char $\ast$}]{from, }
+\item[{char $\ast$}]{to}
+\end{DoxyParamCaption}
+)}\label{network_8h_a49aaa5b9fa4a41f8128093f14019255e}
+Parse a network from a file. The function expects an open file and will not close the file for you. \hypertarget{network_8h_aee1d3cc1c414dedfc3443d797d607d89}{}\index{network.\+h@{network.\+h}!network\+\_\+comp\+\_\+line@{network\+\_\+comp\+\_\+line}}
 \index{network\+\_\+comp\+\_\+line@{network\+\_\+comp\+\_\+line}!network.\+h@{network.\+h}}
 \subsubsection[{network\+\_\+comp\+\_\+line(void $\ast$, int line)}]{\setlength{\rightskip}{0pt plus 5cm}bool network\+\_\+comp\+\_\+line (
 \begin{DoxyParamCaption}
@@ -65,15 +72,16 @@ An opaque type for a transportation network.
 \item[{int}]{line}
 \end{DoxyParamCaption}
 )}\label{network_8h_aee1d3cc1c414dedfc3443d797d607d89}
-Egen \hypertarget{network_8h_a4e0904506d9a1c14d1649db55e2d2d12}{}\index{network.\+h@{network.\+h}!network\+\_\+find\+\_\+travels@{network\+\_\+find\+\_\+travels}}
+Egen \hypertarget{network_8h_afcc7e8cf0d207963b021e445132ea253}{}\index{network.\+h@{network.\+h}!network\+\_\+find\+\_\+travels@{network\+\_\+find\+\_\+travels}}
 \index{network\+\_\+find\+\_\+travels@{network\+\_\+find\+\_\+travels}!network.\+h@{network.\+h}}
-\subsubsection[{network\+\_\+find\+\_\+travels(network\+\_\+t $\ast$n, char $\ast$from, char $\ast$to)}]{\setlength{\rightskip}{0pt plus 5cm}{\bf list\+\_\+t}$\ast$ network\+\_\+find\+\_\+travels (
+\subsubsection[{network\+\_\+find\+\_\+travels(network\+\_\+t $\ast$n, char $\ast$time, char $\ast$from, char $\ast$to)}]{\setlength{\rightskip}{0pt plus 5cm}{\bf distance\+\_\+label\+\_\+t}$\ast$ network\+\_\+find\+\_\+travels (
 \begin{DoxyParamCaption}
 \item[{{\bf network\+\_\+t} $\ast$}]{n, }
+\item[{char $\ast$}]{time, }
 \item[{char $\ast$}]{from, }
 \item[{char $\ast$}]{to}
 \end{DoxyParamCaption}
-)}\label{network_8h_a4e0904506d9a1c14d1649db55e2d2d12}
+)}\label{network_8h_afcc7e8cf0d207963b021e445132ea253}
 Finds a travel from one stop to another.
 
 \begin{DoxyReturn}{Returns}
@@ -97,25 +105,25 @@ Frees a network and all the data it allocated. \hypertarget{network_8h_af8f9a857
 \item[{void $\ast$}]{}
 \end{DoxyParamCaption}
 )}\label{network_8h_af8f9a857a0b738ef6096798deb267447}
-Egen \hypertarget{network_8h_a35823fb774216053a7ed143cd3273620}{}\index{network.\+h@{network.\+h}!network\+\_\+parse@{network\+\_\+parse}}
-\index{network\+\_\+parse@{network\+\_\+parse}!network.\+h@{network.\+h}}
-\subsubsection[{network\+\_\+parse(\+F\+I\+L\+E $\ast$file)}]{\setlength{\rightskip}{0pt plus 5cm}{\bf network\+\_\+t}$\ast$ network\+\_\+parse (
+Egen \hypertarget{network_8h_a528b24bcd0f110c3a32b1406bb807031}{}\index{network.\+h@{network.\+h}!network\+\_\+get\+\_\+line@{network\+\_\+get\+\_\+line}}
+\index{network\+\_\+get\+\_\+line@{network\+\_\+get\+\_\+line}!network.\+h@{network.\+h}}
+\subsubsection[{network\+\_\+get\+\_\+line(void $\ast$)}]{\setlength{\rightskip}{0pt plus 5cm}int network\+\_\+get\+\_\+line (
 \begin{DoxyParamCaption}
-\item[{F\+I\+L\+E $\ast$}]{file}
+\item[{void $\ast$}]{}
 \end{DoxyParamCaption}
-)}\label{network_8h_a35823fb774216053a7ed143cd3273620}
-Parse a network from a file. The function expects an open file and will not close the file for you. \hypertarget{network_8h_a2d01b71df1fb1d7a813b40cb97df5d2b}{}\index{network.\+h@{network.\+h}!network\+\_\+print@{network\+\_\+print}}
+)}\label{network_8h_a528b24bcd0f110c3a32b1406bb807031}
+Egen \hypertarget{network_8h_a2d01b71df1fb1d7a813b40cb97df5d2b}{}\index{network.\+h@{network.\+h}!network\+\_\+print@{network\+\_\+print}}
 \index{network\+\_\+print@{network\+\_\+print}!network.\+h@{network.\+h}}
 \subsubsection[{network\+\_\+print(network\+\_\+t $\ast$)}]{\setlength{\rightskip}{0pt plus 5cm}void network\+\_\+print (
 \begin{DoxyParamCaption}
 \item[{{\bf network\+\_\+t} $\ast$}]{}
 \end{DoxyParamCaption}
 )}\label{network_8h_a2d01b71df1fb1d7a813b40cb97df5d2b}
-Prints a version of the network to stdout. For debugging purposes only. \hypertarget{network_8h_a553c1d411001df9a440af2fffee1e7de}{}\index{network.\+h@{network.\+h}!travel\+\_\+print@{travel\+\_\+print}}
-\index{travel\+\_\+print@{travel\+\_\+print}!network.\+h@{network.\+h}}
-\subsubsection[{travel\+\_\+print(travel\+\_\+t $\ast$)}]{\setlength{\rightskip}{0pt plus 5cm}void travel\+\_\+print (
+Prints a version of the network to stdout. For debugging purposes only. \hypertarget{network_8h_abd0a2fa00d44aa1ecab1420e479aa4b8}{}\index{network.\+h@{network.\+h}!print\+\_\+edge\+\_\+duration@{print\+\_\+edge\+\_\+duration}}
+\index{print\+\_\+edge\+\_\+duration@{print\+\_\+edge\+\_\+duration}!network.\+h@{network.\+h}}
+\subsubsection[{print\+\_\+edge\+\_\+duration(void $\ast$e)}]{\setlength{\rightskip}{0pt plus 5cm}int print\+\_\+edge\+\_\+duration (
 \begin{DoxyParamCaption}
-\item[{{\bf travel\+\_\+t} $\ast$}]{}
+\item[{void $\ast$}]{e}
 \end{DoxyParamCaption}
-)}\label{network_8h_a553c1d411001df9a440af2fffee1e7de}
-Takes a travel and prints it to stdout. For debugging purposes only. 
+)}\label{network_8h_abd0a2fa00d44aa1ecab1420e479aa4b8}
+Egen 

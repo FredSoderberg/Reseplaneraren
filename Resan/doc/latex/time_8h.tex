@@ -1,0 +1,58 @@
+\hypertarget{time_8h}{}\section{time.\+h File Reference}
+\label{time_8h}\index{time.\+h@{time.\+h}}
+
+
+Functions for time calculations.  
+
+
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{time_8h_abb5d87035691ffeb5d605c93ddb417f6}{}char $\ast$ {\bfseries new\+\_\+time\+\_\+list} ()\label{time_8h_abb5d87035691ffeb5d605c93ddb417f6}
+
+\item 
+int \hyperlink{time_8h_ab448e218c67164fe1d03e35ab47e8c6e}{time\+\_\+diff} (char $\ast$time1, char $\ast$time2)
+\item 
+\hypertarget{time_8h_a1e4e18a498e4a39e82b7e03475dc4e85}{}int {\bfseries time\+\_\+compare} (char $\ast$time1, char $\ast$time2)\label{time_8h_a1e4e18a498e4a39e82b7e03475dc4e85}
+
+\item 
+char $\ast$ \hyperlink{time_8h_a442d88e356fdc4d6e72d2f6f44332761}{add\+\_\+min} (int hour, int min, int duration)
+\item 
+\hypertarget{time_8h_a1f40022b80b5413e058403fb557cdd91}{}char $\ast$ {\bfseries add\+\_\+duration} (char $\ast$depart, int duration)\label{time_8h_a1f40022b80b5413e058403fb557cdd91}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Functions for time calculations. 
+
+For such time calculations as adding minutes to a given time and comparing different times against each other. 
+
+\subsection{Function Documentation}
+\hypertarget{time_8h_a442d88e356fdc4d6e72d2f6f44332761}{}\index{time.\+h@{time.\+h}!add\+\_\+min@{add\+\_\+min}}
+\index{add\+\_\+min@{add\+\_\+min}!time.\+h@{time.\+h}}
+\subsubsection[{add\+\_\+min(int hour, int min, int duration)}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ add\+\_\+min (
+\begin{DoxyParamCaption}
+\item[{int}]{hour, }
+\item[{int}]{min, }
+\item[{int}]{duration}
+\end{DoxyParamCaption}
+)}\label{time_8h_a442d88e356fdc4d6e72d2f6f44332761}
+Add minutes to a given time.
+
+\begin{DoxyReturn}{Returns}
+given time with given minutes added 
+\end{DoxyReturn}
+\hypertarget{time_8h_ab448e218c67164fe1d03e35ab47e8c6e}{}\index{time.\+h@{time.\+h}!time\+\_\+diff@{time\+\_\+diff}}
+\index{time\+\_\+diff@{time\+\_\+diff}!time.\+h@{time.\+h}}
+\subsubsection[{time\+\_\+diff(char $\ast$time1, char $\ast$time2)}]{\setlength{\rightskip}{0pt plus 5cm}int time\+\_\+diff (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{time1, }
+\item[{char $\ast$}]{time2}
+\end{DoxyParamCaption}
+)}\label{time_8h_ab448e218c67164fe1d03e35ab47e8c6e}
+Compares two given times.
+
+\begin{DoxyReturn}{Returns}
+an int depending on the outcome 
+\end{DoxyReturn}

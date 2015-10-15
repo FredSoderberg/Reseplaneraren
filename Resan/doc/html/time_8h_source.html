@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.10"/>
-<title>IOOPM Travel Planner: _list_t Struct Reference</title>
+<title>IOOPM Travel Planner: time.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -39,8 +39,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
-      <li class="current"><a href="annotated.html"><span>Data&#160;Structures</span></a></li>
-      <li><a href="files.html"><span>Files</span></a></li>
+      <li><a href="annotated.html"><span>Data&#160;Structures</span></a></li>
+      <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li>
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -61,10 +61,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
-      <li><a href="annotated.html"><span>Data&#160;Structures</span></a></li>
-      <li><a href="classes.html"><span>Data&#160;Structure&#160;Index</span></a></li>
+      <li><a href="files.html"><span>File&#160;List</span></a></li>
+      <li><a href="globals.html"><span>Globals</span></a></li>
     </ul>
   </div>
+</div><!-- top -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -79,28 +80,25 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-</div><!-- top -->
 <div class="header">
-  <div class="summary">
-<a href="#pub-attribs">Data Fields</a>  </div>
   <div class="headertitle">
-<div class="title">_list_t Struct Reference</div>  </div>
+<div class="title">time.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
-Data Fields</h2></td></tr>
-<tr class="memitem:a64543055715413fed92b2aa85c20df87"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a64543055715413fed92b2aa85c20df87"></a>
-<a class="el" href="struct__list__node__t.html">list_node_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>first</b></td></tr>
-<tr class="separator:a64543055715413fed92b2aa85c20df87"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeb1aebaf3e9a25f4a7edee76f3965324"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aeb1aebaf3e9a25f4a7edee76f3965324"></a>
-<a class="el" href="struct__list__node__t.html">list_node_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>last</b></td></tr>
-<tr class="separator:aeb1aebaf3e9a25f4a7edee76f3965324"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
-<hr/>The documentation for this struct was generated from the following file:<ul>
-<li>list.c</li>
-</ul>
-</div><!-- contents -->
+<a href="time_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keywordtype">char</span> *new_time_list();</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keywordtype">int</span> <a class="code" href="time_8h.html#ab448e218c67164fe1d03e35ab47e8c6e">time_diff</a>(<span class="keywordtype">char</span> *time1, <span class="keywordtype">char</span> *time2);</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keywordtype">int</span> time_compare(<span class="keywordtype">char</span> *time1, <span class="keywordtype">char</span> *time2);</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keywordtype">char</span> *<a class="code" href="time_8h.html#a442d88e356fdc4d6e72d2f6f44332761">add_min</a>(<span class="keywordtype">int</span> hour, <span class="keywordtype">int</span> min, <span class="keywordtype">int</span> duration);</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keywordtype">char</span> *add_duration(<span class="keywordtype">char</span> * depart, <span class="keywordtype">int</span> duration);</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;  </div>
+<div class="ttc" id="time_8h_html_a442d88e356fdc4d6e72d2f6f44332761"><div class="ttname"><a href="time_8h.html#a442d88e356fdc4d6e72d2f6f44332761">add_min</a></div><div class="ttdeci">char * add_min(int hour, int min, int duration)</div><div class="ttdef"><b>Definition:</b> time.c:65</div></div>
+<div class="ttc" id="time_8h_html_ab448e218c67164fe1d03e35ab47e8c6e"><div class="ttname"><a href="time_8h.html#ab448e218c67164fe1d03e35ab47e8c6e">time_diff</a></div><div class="ttdeci">int time_diff(char *time1, char *time2)</div><div class="ttdef"><b>Definition:</b> time.c:14</div></div>
+</div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated on Thu Oct 15 2015 15:05:05 for IOOPM Travel Planner by &#160;<a href="http://www.doxygen.org/index.html">
