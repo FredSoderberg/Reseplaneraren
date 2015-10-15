@@ -8,6 +8,7 @@ Functions for time calculations.
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
+<<<<<<< HEAD
 \hypertarget{time_8h_abb5d87035691ffeb5d605c93ddb417f6}{}char $\ast$ {\bfseries new\+\_\+time\+\_\+list} ()\label{time_8h_abb5d87035691ffeb5d605c93ddb417f6}
 
 \item 
@@ -20,12 +21,22 @@ char $\ast$ \hyperlink{time_8h_a442d88e356fdc4d6e72d2f6f44332761}{add\+\_\+min} 
 \item 
 \hypertarget{time_8h_a1f40022b80b5413e058403fb557cdd91}{}char $\ast$ {\bfseries add\+\_\+duration} (char $\ast$depart, int duration)\label{time_8h_a1f40022b80b5413e058403fb557cdd91}
 
+=======
+Int \hyperlink{time_8h_accf76de127a4e774027250ce8d126e52}{time\+\_\+diff} (char $\ast$time1, char $\ast$time2)
+\item 
+int \hyperlink{time_8h_a1e4e18a498e4a39e82b7e03475dc4e85}{time\+\_\+compare} (char $\ast$time1, char $\ast$time2)
+\item 
+char $\ast$ \hyperlink{time_8h_ab45120750f09b0b3e310d383f408b3b7}{add\+\_\+min} (int hour, int min, int dur)
+\item 
+char $\ast$ \hyperlink{time_8h_afafdeccd4287e9ed807d4307d95ba3d0}{add\+\_\+duration} (char $\ast$time, int dur)
+>>>>>>> master
 \end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
 Functions for time calculations. 
 
+<<<<<<< HEAD
 For such time calculations as adding minutes to a given time and comparing different times against each other. 
 
 \subsection{Function Documentation}
@@ -46,13 +57,99 @@ given time with given minutes added
 \hypertarget{time_8h_ab448e218c67164fe1d03e35ab47e8c6e}{}\index{time.\+h@{time.\+h}!time\+\_\+diff@{time\+\_\+diff}}
 \index{time\+\_\+diff@{time\+\_\+diff}!time.\+h@{time.\+h}}
 \subsubsection[{time\+\_\+diff(char $\ast$time1, char $\ast$time2)}]{\setlength{\rightskip}{0pt plus 5cm}int time\+\_\+diff (
+=======
+This module adds the abilty to takes strings in the form of H\+O\+U\+R\+:M\+I\+N (24 hr time format) and apply time related operations to them. 
+
+\subsection{Function Documentation}
+\hypertarget{time_8h_afafdeccd4287e9ed807d4307d95ba3d0}{}\index{time.\+h@{time.\+h}!add\+\_\+duration@{add\+\_\+duration}}
+\index{add\+\_\+duration@{add\+\_\+duration}!time.\+h@{time.\+h}}
+\subsubsection[{add\+\_\+duration(char $\ast$time, int dur)}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ add\+\_\+duration (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{time, }
+\item[{int}]{dur}
+\end{DoxyParamCaption}
+)}\label{time_8h_afafdeccd4287e9ed807d4307d95ba3d0}
+Combines the value of dur and the string time.
+
+
+\begin{DoxyParams}{Parameters}
+{\em time} & on format H\+H\+:M\+M.\\
+\hline
+{\em dur} & minutes to be added.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A newly heap-\/allocated string. 
+\end{DoxyReturn}
+\hypertarget{time_8h_ab45120750f09b0b3e310d383f408b3b7}{}\index{time.\+h@{time.\+h}!add\+\_\+min@{add\+\_\+min}}
+\index{add\+\_\+min@{add\+\_\+min}!time.\+h@{time.\+h}}
+\subsubsection[{add\+\_\+min(int hour, int min, int dur)}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ add\+\_\+min (
+\begin{DoxyParamCaption}
+\item[{int}]{hour, }
+\item[{int}]{min, }
+\item[{int}]{dur}
+\end{DoxyParamCaption}
+)}\label{time_8h_ab45120750f09b0b3e310d383f408b3b7}
+Combines hour min and dur to a new time.
+
+
+\begin{DoxyParams}{Parameters}
+{\em hour} & base hour to use.\\
+\hline
+{\em min} & base minute to use.\\
+\hline
+{\em dur} & the duration in minutes to be added to hour and min\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A newly heap-\/allocated string on the format H\+H\+:M\+M. 
+\end{DoxyReturn}
+\hypertarget{time_8h_a1e4e18a498e4a39e82b7e03475dc4e85}{}\index{time.\+h@{time.\+h}!time\+\_\+compare@{time\+\_\+compare}}
+\index{time\+\_\+compare@{time\+\_\+compare}!time.\+h@{time.\+h}}
+\subsubsection[{time\+\_\+compare(char $\ast$time1, char $\ast$time2)}]{\setlength{\rightskip}{0pt plus 5cm}int time\+\_\+compare (
 \begin{DoxyParamCaption}
 \item[{char $\ast$}]{time1, }
 \item[{char $\ast$}]{time2}
 \end{DoxyParamCaption}
+)}\label{time_8h_a1e4e18a498e4a39e82b7e03475dc4e85}
+Takes two strings, converts them to integers. We then compare the two integers.
+
+
+\begin{DoxyParams}{Parameters}
+{\em time1.} & string that represent a value on format H\+H\+:M\+M.\\
+\hline
+{\em time1.} & string that represent a value on format H\+H\+:M\+M.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the int 0 if the both times are equal. Returns the int 1 if time1 is larger then time 2. Returns the int 2 if time2 is larger then time1. 
+\end{DoxyReturn}
+\hypertarget{time_8h_accf76de127a4e774027250ce8d126e52}{}\index{time.\+h@{time.\+h}!time\+\_\+diff@{time\+\_\+diff}}
+\index{time\+\_\+diff@{time\+\_\+diff}!time.\+h@{time.\+h}}
+\subsubsection[{time\+\_\+diff(char $\ast$time1, char $\ast$time2)}]{\setlength{\rightskip}{0pt plus 5cm}Int time\+\_\+diff (
+>>>>>>> master
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{time1, }
+\item[{char $\ast$}]{time2}
+\end{DoxyParamCaption}
+<<<<<<< HEAD
 )}\label{time_8h_ab448e218c67164fe1d03e35ab47e8c6e}
 Compares two given times.
 
 \begin{DoxyReturn}{Returns}
 an int depending on the outcome 
+=======
+)}\label{time_8h_accf76de127a4e774027250ce8d126e52}
+Takes two strings, converts them to integers and calculates the time difference of the two integers.
+
+
+\begin{DoxyParams}{Parameters}
+{\em time1.} & string that represent a value on format H\+H\+:M\+M.\\
+\hline
+{\em time1.} & string that represent a value on format H\+H\+:M\+M.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+returns the total time difference in integer form. 
+>>>>>>> master
 \end{DoxyReturn}

@@ -58,12 +58,21 @@ void \hyperlink{list_8h_a55c8dfb6d652c964441609e93dd5558a}{print\+\_\+timetable}
 void $\ast$ \hyperlink{list_8h_a0a828cd7eacdea4de0be89e32af75a61}{list\+\_\+last\+\_\+element} (\hyperlink{struct__list__t}{list\+\_\+t} $\ast$)
 \item 
 char $\ast$ \hyperlink{list_8h_a8998c1a08ea7d5292baa3ad1aa18410e}{list\+\_\+next\+\_\+dep\+\_\+time} (\hyperlink{struct__list__t}{list\+\_\+t} $\ast$, char $\ast$, char $\ast$, int, char $\ast$)
+<<<<<<< HEAD
 \item 
 int \hyperlink{list_8h_a6e57d125133011456a4489bcc9961d77}{list\+\_\+quickest\+\_\+line} (\hyperlink{struct__list__t}{list\+\_\+t} $\ast$, char $\ast$, char $\ast$, char $\ast$)
 \item 
 bool \hyperlink{list_8h_a9fe1cd732c620d089eaa8a9aef3cd18d}{list\+\_\+is\+\_\+edge\+\_\+visited} (\hyperlink{struct__list__t}{list\+\_\+t} $\ast$, \hyperlink{util_8h_a49b4e67d12d0b82395b75063127fff0b}{comparator\+\_\+t}, void $\ast$)
 \item 
 void \hyperlink{list_8h_acded950b6f64a3ad9f481fb79c449bf9}{free\+\_\+distancelabels} (\hyperlink{util_8h_a49b4e67d12d0b82395b75063127fff0b}{comparator\+\_\+t} comp, \hyperlink{struct__list__t}{list\+\_\+t} $\ast$, \hyperlink{struct__distance__label__t}{distance\+\_\+label\+\_\+t} $\ast$dl)
+=======
+\item 
+int \hyperlink{list_8h_a6e57d125133011456a4489bcc9961d77}{list\+\_\+quickest\+\_\+line} (\hyperlink{struct__list__t}{list\+\_\+t} $\ast$, char $\ast$, char $\ast$, char $\ast$)
+\item 
+bool \hyperlink{list_8h_a9fe1cd732c620d089eaa8a9aef3cd18d}{list\+\_\+is\+\_\+edge\+\_\+visited} (\hyperlink{struct__list__t}{list\+\_\+t} $\ast$, \hyperlink{util_8h_a49b4e67d12d0b82395b75063127fff0b}{comparator\+\_\+t}, void $\ast$)
+\item 
+void \hyperlink{list_8h_aca463c586fb5226f5a1fec7f26d9efcb}{free\+\_\+distancelabels} (\hyperlink{util_8h_a49b4e67d12d0b82395b75063127fff0b}{comparator\+\_\+t}, \hyperlink{struct__list__t}{list\+\_\+t} $\ast$, \hyperlink{struct__distance__label__t}{distance\+\_\+label\+\_\+t} $\ast$)
+>>>>>>> master
 \item 
 void \hyperlink{list_8h_adc91981c2b7f21bb628923e3f90a27a3}{free\+\_\+dl} (\hyperlink{struct__distance__label__t}{distance\+\_\+label\+\_\+t} $\ast$)
 \item 
@@ -77,6 +86,7 @@ A generic linked list implementation.
 
 
 \subsection{Function Documentation}
+<<<<<<< HEAD
 \hypertarget{list_8h_acded950b6f64a3ad9f481fb79c449bf9}{}\index{list.\+h@{list.\+h}!free\+\_\+distancelabels@{free\+\_\+distancelabels}}
 \index{free\+\_\+distancelabels@{free\+\_\+distancelabels}!list.\+h@{list.\+h}}
 \subsubsection[{free\+\_\+distancelabels(comparator\+\_\+t comp, list\+\_\+t $\ast$, distance\+\_\+label\+\_\+t $\ast$dl)}]{\setlength{\rightskip}{0pt plus 5cm}void free\+\_\+distancelabels (
@@ -96,6 +106,18 @@ A function to free memory allocated in the struct distancelabels. Frees all the 
 \hline
 \end{DoxyParams}
 \hypertarget{list_8h_adc91981c2b7f21bb628923e3f90a27a3}{}\index{list.\+h@{list.\+h}!free\+\_\+dl@{free\+\_\+dl}}
+=======
+\hypertarget{list_8h_aca463c586fb5226f5a1fec7f26d9efcb}{}\index{list.\+h@{list.\+h}!free\+\_\+distancelabels@{free\+\_\+distancelabels}}
+\index{free\+\_\+distancelabels@{free\+\_\+distancelabels}!list.\+h@{list.\+h}}
+\subsubsection[{free\+\_\+distancelabels(comparator\+\_\+t, list\+\_\+t $\ast$, distance\+\_\+label\+\_\+t $\ast$)}]{\setlength{\rightskip}{0pt plus 5cm}void free\+\_\+distancelabels (
+\begin{DoxyParamCaption}
+\item[{{\bf comparator\+\_\+t}}]{, }
+\item[{{\bf list\+\_\+t} $\ast$}]{, }
+\item[{{\bf distance\+\_\+label\+\_\+t} $\ast$}]{}
+\end{DoxyParamCaption}
+)}\label{list_8h_aca463c586fb5226f5a1fec7f26d9efcb}
+Eget \hypertarget{list_8h_adc91981c2b7f21bb628923e3f90a27a3}{}\index{list.\+h@{list.\+h}!free\+\_\+dl@{free\+\_\+dl}}
+>>>>>>> master
 \index{free\+\_\+dl@{free\+\_\+dl}!list.\+h@{list.\+h}}
 \subsubsection[{free\+\_\+dl(distance\+\_\+label\+\_\+t $\ast$)}]{\setlength{\rightskip}{0pt plus 5cm}void free\+\_\+dl (
 \begin{DoxyParamCaption}
