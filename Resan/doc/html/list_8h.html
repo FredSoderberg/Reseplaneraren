@@ -82,6 +82,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Data Structures</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
@@ -96,6 +97,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <p><a href="list_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Data Structures</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct__distance__label__t.html">_distance_label_t</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
 <tr class="memitem:a12ad5afee26e79d11d5b06e4c8663ab0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a12ad5afee26e79d11d5b06e4c8663ab0"></a>
@@ -104,6 +110,9 @@ typedef struct <a class="el" href="struct__list__t.html">_list_t</a>&#160;</td><
 <tr class="memitem:acaf69c5c30c617e8adb6727a76ada487"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acaf69c5c30c617e8adb6727a76ada487"></a>
 typedef struct <a class="el" href="struct__iter__t.html">_iter_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>iter_t</b></td></tr>
 <tr class="separator:acaf69c5c30c617e8adb6727a76ada487"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9aa5dbfe3359cd6cb5d2497026cc09b0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9aa5dbfe3359cd6cb5d2497026cc09b0"></a>
+typedef struct <a class="el" href="struct__distance__label__t.html">_distance_label_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>distance_label_t</b></td></tr>
+<tr class="separator:a9aa5dbfe3359cd6cb5d2497026cc09b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
@@ -131,16 +140,78 @@ Functions</h2></td></tr>
 <tr class="separator:a4a2b61b11b9898d3bf885ab46cfbc39a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a237338d77010c94ff48818cab7117277"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct__list__t.html">list_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="list_8h.html#a237338d77010c94ff48818cab7117277">list_clone</a> (<a class="el" href="struct__list__t.html">list_t</a> *)</td></tr>
 <tr class="separator:a237338d77010c94ff48818cab7117277"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af2d87c7ca50e9e20fd41655af8facae4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="list_8h.html#af2d87c7ca50e9e20fd41655af8facae4">list_add_timetable</a> (void *, <a class="el" href="struct__list__t.html">list_t</a> *, char *start, int line, char *time)</td></tr>
-<tr class="separator:af2d87c7ca50e9e20fd41655af8facae4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa65783beb5254a9a9fd791307abff47e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="list_8h.html#aa65783beb5254a9a9fd791307abff47e">print_timetable</a> (<a class="el" href="struct__list__t.html">list_t</a> *l)</td></tr>
-<tr class="separator:aa65783beb5254a9a9fd791307abff47e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7b7f59c12489b690b46a8807dbb8c2a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="list_8h.html#ab7b7f59c12489b690b46a8807dbb8c2a">list_add_timetable</a> (void *, <a class="el" href="struct__list__t.html">list_t</a> *, char *, int, char *)</td></tr>
+<tr class="separator:ab7b7f59c12489b690b46a8807dbb8c2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55c8dfb6d652c964441609e93dd5558a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="list_8h.html#a55c8dfb6d652c964441609e93dd5558a">print_timetable</a> (<a class="el" href="struct__list__t.html">list_t</a> *)</td></tr>
+<tr class="separator:a55c8dfb6d652c964441609e93dd5558a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a828cd7eacdea4de0be89e32af75a61"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="list_8h.html#a0a828cd7eacdea4de0be89e32af75a61">list_last_element</a> (<a class="el" href="struct__list__t.html">list_t</a> *)</td></tr>
+<tr class="separator:a0a828cd7eacdea4de0be89e32af75a61"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8998c1a08ea7d5292baa3ad1aa18410e"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="list_8h.html#a8998c1a08ea7d5292baa3ad1aa18410e">list_next_dep_time</a> (<a class="el" href="struct__list__t.html">list_t</a> *, char *, char *, int, char *)</td></tr>
+<tr class="separator:a8998c1a08ea7d5292baa3ad1aa18410e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e57d125133011456a4489bcc9961d77"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="list_8h.html#a6e57d125133011456a4489bcc9961d77">list_quickest_line</a> (<a class="el" href="struct__list__t.html">list_t</a> *, char *, char *, char *)</td></tr>
+<tr class="separator:a6e57d125133011456a4489bcc9961d77"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9fe1cd732c620d089eaa8a9aef3cd18d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="list_8h.html#a9fe1cd732c620d089eaa8a9aef3cd18d">list_is_edge_visited</a> (<a class="el" href="struct__list__t.html">list_t</a> *, <a class="el" href="util_8h.html#a49b4e67d12d0b82395b75063127fff0b">comparator_t</a>, void *)</td></tr>
+<tr class="separator:a9fe1cd732c620d089eaa8a9aef3cd18d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca463c586fb5226f5a1fec7f26d9efcb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="list_8h.html#aca463c586fb5226f5a1fec7f26d9efcb">free_distancelabels</a> (<a class="el" href="util_8h.html#a49b4e67d12d0b82395b75063127fff0b">comparator_t</a>, <a class="el" href="struct__list__t.html">list_t</a> *, <a class="el" href="struct__distance__label__t.html">distance_label_t</a> *)</td></tr>
+<tr class="separator:aca463c586fb5226f5a1fec7f26d9efcb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc91981c2b7f21bb628923e3f90a27a3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="list_8h.html#adc91981c2b7f21bb628923e3f90a27a3">free_dl</a> (<a class="el" href="struct__distance__label__t.html">distance_label_t</a> *)</td></tr>
+<tr class="separator:adc91981c2b7f21bb628923e3f90a27a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af715c06c704af470136b76093778fe8d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="list_8h.html#af715c06c704af470136b76093778fe8d">list_free</a> ()</td></tr>
 <tr class="separator:af715c06c704af470136b76093778fe8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A generic linked list implementation. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
+<a class="anchor" id="aca463c586fb5226f5a1fec7f26d9efcb"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void free_distancelabels </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="util_8h.html#a49b4e67d12d0b82395b75063127fff0b">comparator_t</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct__list__t.html">list_t</a> *&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct__distance__label__t.html">distance_label_t</a> *&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Eget </p>
+
+</div>
+</div>
+<a class="anchor" id="adc91981c2b7f21bb628923e3f90a27a3"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void free_dl </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct__distance__label__t.html">distance_label_t</a> *&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Eget </p>
+
+</div>
+</div>
 <a class="anchor" id="a192e8bf9c9a1102589fcb51cf4468a7b"></a>
 <div class="memitem">
 <div class="memproto">
@@ -258,7 +329,7 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="af2d87c7ca50e9e20fd41655af8facae4"></a>
+<a class="anchor" id="ab7b7f59c12489b690b46a8807dbb8c2a"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -278,19 +349,19 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>start</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>line</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>time</em>&#160;</td>
+          <td class="paramname">&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -407,6 +478,56 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a9fe1cd732c620d089eaa8a9aef3cd18d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool list_is_edge_visited </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct__list__t.html">list_t</a> *&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="util_8h.html#a49b4e67d12d0b82395b75063127fff0b">comparator_t</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Eget </p>
+
+</div>
+</div>
+<a class="anchor" id="a0a828cd7eacdea4de0be89e32af75a61"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void* list_last_element </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct__list__t.html">list_t</a> *&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Eget </p>
+
+</div>
+</div>
 <a class="anchor" id="a60df0d67f9ba7ef08837be69810a868e"></a>
 <div class="memitem">
 <div class="memproto">
@@ -438,6 +559,51 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Create an empty list. </p>
+
+</div>
+</div>
+<a class="anchor" id="a8998c1a08ea7d5292baa3ad1aa18410e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char* list_next_dep_time </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct__list__t.html">list_t</a> *&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Eget </p>
 
 </div>
 </div>
@@ -476,7 +642,46 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="aa65783beb5254a9a9fd791307abff47e"></a>
+<a class="anchor" id="a6e57d125133011456a4489bcc9961d77"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int list_quickest_line </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct__list__t.html">list_t</a> *&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Eget </p>
+
+</div>
+</div>
+<a class="anchor" id="a55c8dfb6d652c964441609e93dd5558a"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -484,7 +689,7 @@ Functions</h2></td></tr>
           <td class="memname">void print_timetable </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="struct__list__t.html">list_t</a> *&#160;</td>
-          <td class="paramname"><em>l</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -496,7 +701,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Oct 5 2015 11:41:46 for IOOPM Travel Planner by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Oct 15 2015 16:27:46 for IOOPM Travel Planner by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.10
 </small></address>

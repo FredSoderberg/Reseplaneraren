@@ -7,6 +7,11 @@ A generic linked list implementation.
 
 {\ttfamily \#include $<$stdbool.\+h$>$}\\*
 {\ttfamily \#include \char`\"{}util.\+h\char`\"{}}\\*
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{struct__distance__label__t}{\+\_\+distance\+\_\+label\+\_\+t}
+\end{DoxyCompactItemize}
 \subsection*{Typedefs}
 \begin{DoxyCompactItemize}
 \item 
@@ -14,6 +19,9 @@ A generic linked list implementation.
 
 \item 
 \hypertarget{list_8h_acaf69c5c30c617e8adb6727a76ada487}{}typedef struct \hyperlink{struct__iter__t}{\+\_\+iter\+\_\+t} {\bfseries iter\+\_\+t}\label{list_8h_acaf69c5c30c617e8adb6727a76ada487}
+
+\item 
+\hypertarget{list_8h_a9aa5dbfe3359cd6cb5d2497026cc09b0}{}typedef struct \hyperlink{struct__distance__label__t}{\+\_\+distance\+\_\+label\+\_\+t} {\bfseries distance\+\_\+label\+\_\+t}\label{list_8h_a9aa5dbfe3359cd6cb5d2497026cc09b0}
 
 \end{DoxyCompactItemize}
 \subsection*{Functions}
@@ -43,9 +51,21 @@ void \hyperlink{list_8h_a4a2b61b11b9898d3bf885ab46cfbc39a}{iter\+\_\+free} (\hyp
 \item 
 \hyperlink{struct__list__t}{list\+\_\+t} $\ast$ \hyperlink{list_8h_a237338d77010c94ff48818cab7117277}{list\+\_\+clone} (\hyperlink{struct__list__t}{list\+\_\+t} $\ast$)
 \item 
-void \hyperlink{list_8h_af2d87c7ca50e9e20fd41655af8facae4}{list\+\_\+add\+\_\+timetable} (void $\ast$, \hyperlink{struct__list__t}{list\+\_\+t} $\ast$, char $\ast$start, int line, char $\ast$time)
+void \hyperlink{list_8h_ab7b7f59c12489b690b46a8807dbb8c2a}{list\+\_\+add\+\_\+timetable} (void $\ast$, \hyperlink{struct__list__t}{list\+\_\+t} $\ast$, char $\ast$, int, char $\ast$)
 \item 
-void \hyperlink{list_8h_aa65783beb5254a9a9fd791307abff47e}{print\+\_\+timetable} (\hyperlink{struct__list__t}{list\+\_\+t} $\ast$l)
+void \hyperlink{list_8h_a55c8dfb6d652c964441609e93dd5558a}{print\+\_\+timetable} (\hyperlink{struct__list__t}{list\+\_\+t} $\ast$)
+\item 
+void $\ast$ \hyperlink{list_8h_a0a828cd7eacdea4de0be89e32af75a61}{list\+\_\+last\+\_\+element} (\hyperlink{struct__list__t}{list\+\_\+t} $\ast$)
+\item 
+char $\ast$ \hyperlink{list_8h_a8998c1a08ea7d5292baa3ad1aa18410e}{list\+\_\+next\+\_\+dep\+\_\+time} (\hyperlink{struct__list__t}{list\+\_\+t} $\ast$, char $\ast$, char $\ast$, int, char $\ast$)
+\item 
+int \hyperlink{list_8h_a6e57d125133011456a4489bcc9961d77}{list\+\_\+quickest\+\_\+line} (\hyperlink{struct__list__t}{list\+\_\+t} $\ast$, char $\ast$, char $\ast$, char $\ast$)
+\item 
+bool \hyperlink{list_8h_a9fe1cd732c620d089eaa8a9aef3cd18d}{list\+\_\+is\+\_\+edge\+\_\+visited} (\hyperlink{struct__list__t}{list\+\_\+t} $\ast$, \hyperlink{util_8h_a49b4e67d12d0b82395b75063127fff0b}{comparator\+\_\+t}, void $\ast$)
+\item 
+void \hyperlink{list_8h_aca463c586fb5226f5a1fec7f26d9efcb}{free\+\_\+distancelabels} (\hyperlink{util_8h_a49b4e67d12d0b82395b75063127fff0b}{comparator\+\_\+t}, \hyperlink{struct__list__t}{list\+\_\+t} $\ast$, \hyperlink{struct__distance__label__t}{distance\+\_\+label\+\_\+t} $\ast$)
+\item 
+void \hyperlink{list_8h_adc91981c2b7f21bb628923e3f90a27a3}{free\+\_\+dl} (\hyperlink{struct__distance__label__t}{distance\+\_\+label\+\_\+t} $\ast$)
 \item 
 void \hyperlink{list_8h_af715c06c704af470136b76093778fe8d}{list\+\_\+free} ()
 \end{DoxyCompactItemize}
@@ -57,7 +77,23 @@ A generic linked list implementation.
 
 
 \subsection{Function Documentation}
-\hypertarget{list_8h_a192e8bf9c9a1102589fcb51cf4468a7b}{}\index{list.\+h@{list.\+h}!iter@{iter}}
+\hypertarget{list_8h_aca463c586fb5226f5a1fec7f26d9efcb}{}\index{list.\+h@{list.\+h}!free\+\_\+distancelabels@{free\+\_\+distancelabels}}
+\index{free\+\_\+distancelabels@{free\+\_\+distancelabels}!list.\+h@{list.\+h}}
+\subsubsection[{free\+\_\+distancelabels(comparator\+\_\+t, list\+\_\+t $\ast$, distance\+\_\+label\+\_\+t $\ast$)}]{\setlength{\rightskip}{0pt plus 5cm}void free\+\_\+distancelabels (
+\begin{DoxyParamCaption}
+\item[{{\bf comparator\+\_\+t}}]{, }
+\item[{{\bf list\+\_\+t} $\ast$}]{, }
+\item[{{\bf distance\+\_\+label\+\_\+t} $\ast$}]{}
+\end{DoxyParamCaption}
+)}\label{list_8h_aca463c586fb5226f5a1fec7f26d9efcb}
+Eget \hypertarget{list_8h_adc91981c2b7f21bb628923e3f90a27a3}{}\index{list.\+h@{list.\+h}!free\+\_\+dl@{free\+\_\+dl}}
+\index{free\+\_\+dl@{free\+\_\+dl}!list.\+h@{list.\+h}}
+\subsubsection[{free\+\_\+dl(distance\+\_\+label\+\_\+t $\ast$)}]{\setlength{\rightskip}{0pt plus 5cm}void free\+\_\+dl (
+\begin{DoxyParamCaption}
+\item[{{\bf distance\+\_\+label\+\_\+t} $\ast$}]{}
+\end{DoxyParamCaption}
+)}\label{list_8h_adc91981c2b7f21bb628923e3f90a27a3}
+Eget \hypertarget{list_8h_a192e8bf9c9a1102589fcb51cf4468a7b}{}\index{list.\+h@{list.\+h}!iter@{iter}}
 \index{iter@{iter}!list.\+h@{list.\+h}}
 \subsubsection[{iter(list\+\_\+t $\ast$)}]{\setlength{\rightskip}{0pt plus 5cm}{\bf iter\+\_\+t}$\ast$ iter (
 \begin{DoxyParamCaption}
@@ -123,17 +159,17 @@ Must only be called if \hyperlink{list_8h_ae87df5ecdcb6f56f562bdae494ca23b8}{ite
 \item[{void $\ast$}]{}
 \end{DoxyParamCaption}
 )}\label{list_8h_a97e5eb115d554d4496fead77273d1e2d}
-Add an item to a list (at the end); \hypertarget{list_8h_af2d87c7ca50e9e20fd41655af8facae4}{}\index{list.\+h@{list.\+h}!list\+\_\+add\+\_\+timetable@{list\+\_\+add\+\_\+timetable}}
+Add an item to a list (at the end); \hypertarget{list_8h_ab7b7f59c12489b690b46a8807dbb8c2a}{}\index{list.\+h@{list.\+h}!list\+\_\+add\+\_\+timetable@{list\+\_\+add\+\_\+timetable}}
 \index{list\+\_\+add\+\_\+timetable@{list\+\_\+add\+\_\+timetable}!list.\+h@{list.\+h}}
-\subsubsection[{list\+\_\+add\+\_\+timetable(void $\ast$, list\+\_\+t $\ast$, char $\ast$start, int line, char $\ast$time)}]{\setlength{\rightskip}{0pt plus 5cm}void list\+\_\+add\+\_\+timetable (
+\subsubsection[{list\+\_\+add\+\_\+timetable(void $\ast$, list\+\_\+t $\ast$, char $\ast$, int, char $\ast$)}]{\setlength{\rightskip}{0pt plus 5cm}void list\+\_\+add\+\_\+timetable (
 \begin{DoxyParamCaption}
 \item[{void $\ast$}]{, }
 \item[{{\bf list\+\_\+t} $\ast$}]{, }
-\item[{char $\ast$}]{start, }
-\item[{int}]{line, }
-\item[{char $\ast$}]{time}
+\item[{char $\ast$}]{, }
+\item[{int}]{, }
+\item[{char $\ast$}]{}
 \end{DoxyParamCaption}
-)}\label{list_8h_af2d87c7ca50e9e20fd41655af8facae4}
+)}\label{list_8h_ab7b7f59c12489b690b46a8807dbb8c2a}
 Eget \hypertarget{list_8h_a237338d77010c94ff48818cab7117277}{}\index{list.\+h@{list.\+h}!list\+\_\+clone@{list\+\_\+clone}}
 \index{list\+\_\+clone@{list\+\_\+clone}!list.\+h@{list.\+h}}
 \subsubsection[{list\+\_\+clone(list\+\_\+t $\ast$)}]{\setlength{\rightskip}{0pt plus 5cm}{\bf list\+\_\+t}$\ast$ list\+\_\+clone (
@@ -186,7 +222,23 @@ Test whether a certain element exists.
 \begin{DoxyReturn}{Returns}
 {\ttfamily true} if there is at least one element in the list that, compared using the \hyperlink{util_8h_a49b4e67d12d0b82395b75063127fff0b}{comparator\+\_\+t}, compares equal to {\ttfamily elt}. 
 \end{DoxyReturn}
-\hypertarget{list_8h_a60df0d67f9ba7ef08837be69810a868e}{}\index{list.\+h@{list.\+h}!list\+\_\+len@{list\+\_\+len}}
+\hypertarget{list_8h_a9fe1cd732c620d089eaa8a9aef3cd18d}{}\index{list.\+h@{list.\+h}!list\+\_\+is\+\_\+edge\+\_\+visited@{list\+\_\+is\+\_\+edge\+\_\+visited}}
+\index{list\+\_\+is\+\_\+edge\+\_\+visited@{list\+\_\+is\+\_\+edge\+\_\+visited}!list.\+h@{list.\+h}}
+\subsubsection[{list\+\_\+is\+\_\+edge\+\_\+visited(list\+\_\+t $\ast$, comparator\+\_\+t, void $\ast$)}]{\setlength{\rightskip}{0pt plus 5cm}bool list\+\_\+is\+\_\+edge\+\_\+visited (
+\begin{DoxyParamCaption}
+\item[{{\bf list\+\_\+t} $\ast$}]{, }
+\item[{{\bf comparator\+\_\+t}}]{, }
+\item[{void $\ast$}]{}
+\end{DoxyParamCaption}
+)}\label{list_8h_a9fe1cd732c620d089eaa8a9aef3cd18d}
+Eget \hypertarget{list_8h_a0a828cd7eacdea4de0be89e32af75a61}{}\index{list.\+h@{list.\+h}!list\+\_\+last\+\_\+element@{list\+\_\+last\+\_\+element}}
+\index{list\+\_\+last\+\_\+element@{list\+\_\+last\+\_\+element}!list.\+h@{list.\+h}}
+\subsubsection[{list\+\_\+last\+\_\+element(list\+\_\+t $\ast$)}]{\setlength{\rightskip}{0pt plus 5cm}void$\ast$ list\+\_\+last\+\_\+element (
+\begin{DoxyParamCaption}
+\item[{{\bf list\+\_\+t} $\ast$}]{}
+\end{DoxyParamCaption}
+)}\label{list_8h_a0a828cd7eacdea4de0be89e32af75a61}
+Eget \hypertarget{list_8h_a60df0d67f9ba7ef08837be69810a868e}{}\index{list.\+h@{list.\+h}!list\+\_\+len@{list\+\_\+len}}
 \index{list\+\_\+len@{list\+\_\+len}!list.\+h@{list.\+h}}
 \subsubsection[{list\+\_\+len(list\+\_\+t $\ast$)}]{\setlength{\rightskip}{0pt plus 5cm}int list\+\_\+len (
 \begin{DoxyParamCaption}
@@ -205,7 +257,18 @@ The list\textquotesingle{}s length.
 {}
 \end{DoxyParamCaption}
 )}\label{list_8h_a9dd3eafdb56dcc64689f78fb4acdff3f}
-Create an empty list. \hypertarget{list_8h_a548a5ca8b83f626bec84d07c3d2980e7}{}\index{list.\+h@{list.\+h}!list\+\_\+nth@{list\+\_\+nth}}
+Create an empty list. \hypertarget{list_8h_a8998c1a08ea7d5292baa3ad1aa18410e}{}\index{list.\+h@{list.\+h}!list\+\_\+next\+\_\+dep\+\_\+time@{list\+\_\+next\+\_\+dep\+\_\+time}}
+\index{list\+\_\+next\+\_\+dep\+\_\+time@{list\+\_\+next\+\_\+dep\+\_\+time}!list.\+h@{list.\+h}}
+\subsubsection[{list\+\_\+next\+\_\+dep\+\_\+time(list\+\_\+t $\ast$, char $\ast$, char $\ast$, int, char $\ast$)}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ list\+\_\+next\+\_\+dep\+\_\+time (
+\begin{DoxyParamCaption}
+\item[{{\bf list\+\_\+t} $\ast$}]{, }
+\item[{char $\ast$}]{, }
+\item[{char $\ast$}]{, }
+\item[{int}]{, }
+\item[{char $\ast$}]{}
+\end{DoxyParamCaption}
+)}\label{list_8h_a8998c1a08ea7d5292baa3ad1aa18410e}
+Eget \hypertarget{list_8h_a548a5ca8b83f626bec84d07c3d2980e7}{}\index{list.\+h@{list.\+h}!list\+\_\+nth@{list\+\_\+nth}}
 \index{list\+\_\+nth@{list\+\_\+nth}!list.\+h@{list.\+h}}
 \subsubsection[{list\+\_\+nth(list\+\_\+t $\ast$, int n, void $\ast$$\ast$res)}]{\setlength{\rightskip}{0pt plus 5cm}bool list\+\_\+nth (
 \begin{DoxyParamCaption}
@@ -221,11 +284,21 @@ Access the nth member of a list. Zero-\/based.
 \begin{DoxyReturn}{Returns}
 {\ttfamily true} if the list is long enough, {\ttfamily false} otherwise. 
 \end{DoxyReturn}
-\hypertarget{list_8h_aa65783beb5254a9a9fd791307abff47e}{}\index{list.\+h@{list.\+h}!print\+\_\+timetable@{print\+\_\+timetable}}
-\index{print\+\_\+timetable@{print\+\_\+timetable}!list.\+h@{list.\+h}}
-\subsubsection[{print\+\_\+timetable(list\+\_\+t $\ast$l)}]{\setlength{\rightskip}{0pt plus 5cm}void print\+\_\+timetable (
+\hypertarget{list_8h_a6e57d125133011456a4489bcc9961d77}{}\index{list.\+h@{list.\+h}!list\+\_\+quickest\+\_\+line@{list\+\_\+quickest\+\_\+line}}
+\index{list\+\_\+quickest\+\_\+line@{list\+\_\+quickest\+\_\+line}!list.\+h@{list.\+h}}
+\subsubsection[{list\+\_\+quickest\+\_\+line(list\+\_\+t $\ast$, char $\ast$, char $\ast$, char $\ast$)}]{\setlength{\rightskip}{0pt plus 5cm}int list\+\_\+quickest\+\_\+line (
 \begin{DoxyParamCaption}
-\item[{{\bf list\+\_\+t} $\ast$}]{l}
+\item[{{\bf list\+\_\+t} $\ast$}]{, }
+\item[{char $\ast$}]{, }
+\item[{char $\ast$}]{, }
+\item[{char $\ast$}]{}
 \end{DoxyParamCaption}
-)}\label{list_8h_aa65783beb5254a9a9fd791307abff47e}
+)}\label{list_8h_a6e57d125133011456a4489bcc9961d77}
+Eget \hypertarget{list_8h_a55c8dfb6d652c964441609e93dd5558a}{}\index{list.\+h@{list.\+h}!print\+\_\+timetable@{print\+\_\+timetable}}
+\index{print\+\_\+timetable@{print\+\_\+timetable}!list.\+h@{list.\+h}}
+\subsubsection[{print\+\_\+timetable(list\+\_\+t $\ast$)}]{\setlength{\rightskip}{0pt plus 5cm}void print\+\_\+timetable (
+\begin{DoxyParamCaption}
+\item[{{\bf list\+\_\+t} $\ast$}]{}
+\end{DoxyParamCaption}
+)}\label{list_8h_a55c8dfb6d652c964441609e93dd5558a}
 Eget 

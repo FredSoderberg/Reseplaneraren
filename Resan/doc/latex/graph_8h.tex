@@ -33,19 +33,24 @@ bool \hyperlink{graph_8h_a3cc6fd01db6550738b9354695a4b811a}{graph\+\_\+has\+\_\+
 \item 
 \hyperlink{struct__list__t}{list\+\_\+t} $\ast$ \hyperlink{graph_8h_a314e9a9cd6dedf883f3be604e8f73525}{graph\+\_\+find\+\_\+neighbors} (\hyperlink{struct__graph__t}{graph\+\_\+t} $\ast$, void $\ast$node)
 \item 
-\hyperlink{struct__list__t}{list\+\_\+t} $\ast$ \hyperlink{graph_8h_a755f2ffd6479fb5e26119bac16825445}{graph\+\_\+find\+\_\+path} (\hyperlink{struct__graph__t}{graph\+\_\+t} $\ast$, void $\ast$from, void $\ast$to)
+\hyperlink{struct__distance__label__t}{distance\+\_\+label\+\_\+t} $\ast$ \hyperlink{graph_8h_ae028b0c280f6442f768e3827fbcadfa2}{graph\+\_\+find\+\_\+path} (\hyperlink{struct__graph__t}{graph\+\_\+t} $\ast$, char $\ast$time, void $\ast$from, void $\ast$to)
 \item 
 void \hyperlink{graph_8h_aa09ef8967d9b1d1adca36624704f2f67}{graph\+\_\+add\+\_\+timetable} (\hyperlink{struct__graph__t}{graph\+\_\+t} $\ast$, char $\ast$bus\+\_\+start, int bus\+\_\+line, char $\ast$bus\+\_\+time)
 \item 
 void $\ast$ \hyperlink{graph_8h_a8e1b4cb5bf6cb4e20f214d5777b0c11d}{graph\+\_\+get\+\_\+edge} (\hyperlink{struct__graph__t}{graph\+\_\+t} $\ast$, int line, void $\ast$, \hyperlink{struct__list__t}{list\+\_\+t} $\ast$visited)
 \item 
-char $\ast$ \hyperlink{graph_8h_aa72699f72eb875a876634c5774f26c20}{graph\+\_\+get\+\_\+edge\+\_\+name} (\hyperlink{struct__graph__t}{graph\+\_\+t} $\ast$, void $\ast$, \hyperlink{struct__list__t}{list\+\_\+t} $\ast$edge)
+char $\ast$ \hyperlink{graph_8h_aaf3a1d3c596bc4b753194befa6c9cb28}{graph\+\_\+next\+\_\+node\+\_\+name} (\hyperlink{struct__graph__t}{graph\+\_\+t} $\ast$, void $\ast$, char $\ast$)
 \item 
 int \hyperlink{graph_8h_ad9f0f0351bc6136df79a93d06f8d4606}{graph\+\_\+get\+\_\+duration} (void $\ast$)
 \item 
-bool \hyperlink{graph_8h_a50ed437287bb69da52df62dbbd74f9c8}{graph\+\_\+check\+\_\+end\+\_\+station} (void $\ast$g, int line, \hyperlink{struct__list__t}{list\+\_\+t} $\ast$visited, void $\ast$)
+bool \hyperlink{graph_8h_a5a41f4d4f59e4bacedbc8177364f8194}{graph\+\_\+check\+\_\+end\+\_\+station} (\hyperlink{struct__graph__t}{graph\+\_\+t} $\ast$g, int line, \hyperlink{struct__list__t}{list\+\_\+t} $\ast$visited\+\_\+edges, void $\ast$)
+\item 
+\hypertarget{graph_8h_a1dddf83bd5e92d527a2fffacdcd2c66d}{}void {\bfseries print\+\_\+edge} (void $\ast$)\label{graph_8h_a1dddf83bd5e92d527a2fffacdcd2c66d}
+
 \item 
 void \hyperlink{graph_8h_a1f6e6ee4af7796685dd29ee54939e868}{graph\+\_\+free} (\hyperlink{struct__graph__t}{graph\+\_\+t} $\ast$)
+\item 
+bool \hyperlink{graph_8h_a9f9de6c25d9663250ad58c66b2800ee4}{graph\+\_\+check\+\_\+node\+\_\+exist} (\hyperlink{struct__graph__t}{graph\+\_\+t} $\ast$g, char $\ast$from, char $\ast$to)
 \item 
 void \hyperlink{graph_8h_a969dbe402aab536612e52313ae9eb12b}{graph\+\_\+print\+\_\+timetable} (\hyperlink{struct__graph__t}{graph\+\_\+t} $\ast$g)
 \end{DoxyCompactItemize}
@@ -111,16 +116,25 @@ The graph\+\_\+t $\ast$ will never deallocate a node. You can deallocate all gra
 \item[{char $\ast$}]{bus\+\_\+time}
 \end{DoxyParamCaption}
 )}\label{graph_8h_aa09ef8967d9b1d1adca36624704f2f67}
-Egen funktion \hypertarget{graph_8h_a50ed437287bb69da52df62dbbd74f9c8}{}\index{graph.\+h@{graph.\+h}!graph\+\_\+check\+\_\+end\+\_\+station@{graph\+\_\+check\+\_\+end\+\_\+station}}
+Egen funktion \hypertarget{graph_8h_a5a41f4d4f59e4bacedbc8177364f8194}{}\index{graph.\+h@{graph.\+h}!graph\+\_\+check\+\_\+end\+\_\+station@{graph\+\_\+check\+\_\+end\+\_\+station}}
 \index{graph\+\_\+check\+\_\+end\+\_\+station@{graph\+\_\+check\+\_\+end\+\_\+station}!graph.\+h@{graph.\+h}}
-\subsubsection[{graph\+\_\+check\+\_\+end\+\_\+station(void $\ast$g, int line, list\+\_\+t $\ast$visited, void $\ast$)}]{\setlength{\rightskip}{0pt plus 5cm}bool graph\+\_\+check\+\_\+end\+\_\+station (
+\subsubsection[{graph\+\_\+check\+\_\+end\+\_\+station(graph\+\_\+t $\ast$g, int line, list\+\_\+t $\ast$visited\+\_\+edges, void $\ast$)}]{\setlength{\rightskip}{0pt plus 5cm}bool graph\+\_\+check\+\_\+end\+\_\+station (
 \begin{DoxyParamCaption}
-\item[{void $\ast$}]{g, }
+\item[{{\bf graph\+\_\+t} $\ast$}]{g, }
 \item[{int}]{line, }
-\item[{{\bf list\+\_\+t} $\ast$}]{visited, }
+\item[{{\bf list\+\_\+t} $\ast$}]{visited\+\_\+edges, }
 \item[{void $\ast$}]{}
 \end{DoxyParamCaption}
-)}\label{graph_8h_a50ed437287bb69da52df62dbbd74f9c8}
+)}\label{graph_8h_a5a41f4d4f59e4bacedbc8177364f8194}
+Egen funktion \hypertarget{graph_8h_a9f9de6c25d9663250ad58c66b2800ee4}{}\index{graph.\+h@{graph.\+h}!graph\+\_\+check\+\_\+node\+\_\+exist@{graph\+\_\+check\+\_\+node\+\_\+exist}}
+\index{graph\+\_\+check\+\_\+node\+\_\+exist@{graph\+\_\+check\+\_\+node\+\_\+exist}!graph.\+h@{graph.\+h}}
+\subsubsection[{graph\+\_\+check\+\_\+node\+\_\+exist(graph\+\_\+t $\ast$g, char $\ast$from, char $\ast$to)}]{\setlength{\rightskip}{0pt plus 5cm}bool graph\+\_\+check\+\_\+node\+\_\+exist (
+\begin{DoxyParamCaption}
+\item[{{\bf graph\+\_\+t} $\ast$}]{g, }
+\item[{char $\ast$}]{from, }
+\item[{char $\ast$}]{to}
+\end{DoxyParamCaption}
+)}\label{graph_8h_a9f9de6c25d9663250ad58c66b2800ee4}
 Egen funktion \hypertarget{graph_8h_a314e9a9cd6dedf883f3be604e8f73525}{}\index{graph.\+h@{graph.\+h}!graph\+\_\+find\+\_\+neighbors@{graph\+\_\+find\+\_\+neighbors}}
 \index{graph\+\_\+find\+\_\+neighbors@{graph\+\_\+find\+\_\+neighbors}!graph.\+h@{graph.\+h}}
 \subsubsection[{graph\+\_\+find\+\_\+neighbors(graph\+\_\+t $\ast$, void $\ast$node)}]{\setlength{\rightskip}{0pt plus 5cm}{\bf list\+\_\+t}$\ast$ graph\+\_\+find\+\_\+neighbors (
@@ -142,15 +156,16 @@ A list containing A\+L\+L direct neighbors of a node in a graph.
 \begin{DoxyWarning}{Warning}
 If the node is not in the graph, behaviour is undefined. 
 \end{DoxyWarning}
-\hypertarget{graph_8h_a755f2ffd6479fb5e26119bac16825445}{}\index{graph.\+h@{graph.\+h}!graph\+\_\+find\+\_\+path@{graph\+\_\+find\+\_\+path}}
+\hypertarget{graph_8h_ae028b0c280f6442f768e3827fbcadfa2}{}\index{graph.\+h@{graph.\+h}!graph\+\_\+find\+\_\+path@{graph\+\_\+find\+\_\+path}}
 \index{graph\+\_\+find\+\_\+path@{graph\+\_\+find\+\_\+path}!graph.\+h@{graph.\+h}}
-\subsubsection[{graph\+\_\+find\+\_\+path(graph\+\_\+t $\ast$, void $\ast$from, void $\ast$to)}]{\setlength{\rightskip}{0pt plus 5cm}{\bf list\+\_\+t}$\ast$ graph\+\_\+find\+\_\+path (
+\subsubsection[{graph\+\_\+find\+\_\+path(graph\+\_\+t $\ast$, char $\ast$time, void $\ast$from, void $\ast$to)}]{\setlength{\rightskip}{0pt plus 5cm}{\bf distance\+\_\+label\+\_\+t}$\ast$ graph\+\_\+find\+\_\+path (
 \begin{DoxyParamCaption}
 \item[{{\bf graph\+\_\+t} $\ast$}]{, }
+\item[{char $\ast$}]{time, }
 \item[{void $\ast$}]{from, }
 \item[{void $\ast$}]{to}
 \end{DoxyParamCaption}
-)}\label{graph_8h_a755f2ffd6479fb5e26119bac16825445}
+)}\label{graph_8h_ae028b0c280f6442f768e3827fbcadfa2}
 Find a path between two nodes.
 
 The path will be a shortest path, assuming equal weights for all nodes.
@@ -222,15 +237,6 @@ Egen funktion \hypertarget{graph_8h_a8e1b4cb5bf6cb4e20f214d5777b0c11d}{}\index{g
 \item[{{\bf list\+\_\+t} $\ast$}]{visited}
 \end{DoxyParamCaption}
 )}\label{graph_8h_a8e1b4cb5bf6cb4e20f214d5777b0c11d}
-Egen funktion \hypertarget{graph_8h_aa72699f72eb875a876634c5774f26c20}{}\index{graph.\+h@{graph.\+h}!graph\+\_\+get\+\_\+edge\+\_\+name@{graph\+\_\+get\+\_\+edge\+\_\+name}}
-\index{graph\+\_\+get\+\_\+edge\+\_\+name@{graph\+\_\+get\+\_\+edge\+\_\+name}!graph.\+h@{graph.\+h}}
-\subsubsection[{graph\+\_\+get\+\_\+edge\+\_\+name(graph\+\_\+t $\ast$, void $\ast$, list\+\_\+t $\ast$edge)}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ graph\+\_\+get\+\_\+edge\+\_\+name (
-\begin{DoxyParamCaption}
-\item[{{\bf graph\+\_\+t} $\ast$}]{, }
-\item[{void $\ast$}]{, }
-\item[{{\bf list\+\_\+t} $\ast$}]{edge}
-\end{DoxyParamCaption}
-)}\label{graph_8h_aa72699f72eb875a876634c5774f26c20}
 Egen funktion \hypertarget{graph_8h_a3cc6fd01db6550738b9354695a4b811a}{}\index{graph.\+h@{graph.\+h}!graph\+\_\+has\+\_\+edge@{graph\+\_\+has\+\_\+edge}}
 \index{graph\+\_\+has\+\_\+edge@{graph\+\_\+has\+\_\+edge}!graph.\+h@{graph.\+h}}
 \subsubsection[{graph\+\_\+has\+\_\+edge(graph\+\_\+t $\ast$, void $\ast$from, void $\ast$to, void $\ast$$\ast$label)}]{\setlength{\rightskip}{0pt plus 5cm}bool graph\+\_\+has\+\_\+edge (
@@ -290,7 +296,16 @@ Allocate a new graph.
 \begin{DoxyReturn}{Returns}
 an empty graph 
 \end{DoxyReturn}
-\hypertarget{graph_8h_a969dbe402aab536612e52313ae9eb12b}{}\index{graph.\+h@{graph.\+h}!graph\+\_\+print\+\_\+timetable@{graph\+\_\+print\+\_\+timetable}}
+\hypertarget{graph_8h_aaf3a1d3c596bc4b753194befa6c9cb28}{}\index{graph.\+h@{graph.\+h}!graph\+\_\+next\+\_\+node\+\_\+name@{graph\+\_\+next\+\_\+node\+\_\+name}}
+\index{graph\+\_\+next\+\_\+node\+\_\+name@{graph\+\_\+next\+\_\+node\+\_\+name}!graph.\+h@{graph.\+h}}
+\subsubsection[{graph\+\_\+next\+\_\+node\+\_\+name(graph\+\_\+t $\ast$, void $\ast$, char $\ast$)}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ graph\+\_\+next\+\_\+node\+\_\+name (
+\begin{DoxyParamCaption}
+\item[{{\bf graph\+\_\+t} $\ast$}]{, }
+\item[{void $\ast$}]{, }
+\item[{char $\ast$}]{}
+\end{DoxyParamCaption}
+)}\label{graph_8h_aaf3a1d3c596bc4b753194befa6c9cb28}
+Egen funktion \hypertarget{graph_8h_a969dbe402aab536612e52313ae9eb12b}{}\index{graph.\+h@{graph.\+h}!graph\+\_\+print\+\_\+timetable@{graph\+\_\+print\+\_\+timetable}}
 \index{graph\+\_\+print\+\_\+timetable@{graph\+\_\+print\+\_\+timetable}!graph.\+h@{graph.\+h}}
 \subsubsection[{graph\+\_\+print\+\_\+timetable(graph\+\_\+t $\ast$g)}]{\setlength{\rightskip}{0pt plus 5cm}void graph\+\_\+print\+\_\+timetable (
 \begin{DoxyParamCaption}
