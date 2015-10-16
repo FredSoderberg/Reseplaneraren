@@ -11,7 +11,7 @@ typedef struct _graph_edge_t edge_t;
 
 struct _graph_edge_t
 {
-    node_t *from; 
+    node_t *from;
     node_t *to;
     void *label;
 };
@@ -22,8 +22,6 @@ struct _graph_t
     list_t *edges;
     comparator_t comp;
 };
-
-
 
 edge_t  *new_edge()
 {
@@ -58,7 +56,7 @@ bool graph_check_node_exist(graph_t *g, char *from, char *to) //EGEN FUNKTION
 {
   if(list_has(g->nodes, g->comp, from) && list_has(g->nodes, g->comp, to)) return true;
   else return false;
-   
+
 }
 
 bool graph_has_node(graph_t *g, void *label)
@@ -211,7 +209,7 @@ void update_distance(list_t *distanceLabels, void *lbl, comparator_t comp,
         {
             list_free(tentativePath);
 	    list_free(tentativeEdgePath);
-	    
+
         }
 }
 
@@ -241,10 +239,10 @@ int graph_add_penalty(edge_t *e, char *arrival_time, char* bussDepart) // Egen f
   assert(arrival_time);
   assert(bussDepart);
   int penalty = time_diff(arrival_time, bussDepart);
- 
+
   int total_penalty = network_get_dur(temp_edge->label) + penalty;
-   
-  return total_penalty; 
+
+  return total_penalty;
 
   // bussen avgår - arrival time + duration = penalty
 }
@@ -264,15 +262,15 @@ void dijkstra(graph_t *g, void *current, void *to, list_t *visited,
 	    list_t *unvisited_neighs = unvisited_neighbors(g, current, visited);
 	    distance_label_t *here =
 	      get_distance_label(distanceLabels, current, g->comp);
-	    
+
 	    iter_t *it;
 	    for (it = iter(unvisited_neighs); !iter_done(it); iter_next(it))
 	      {
 		void *neigh = iter_get(it);
-		
+
 		int line = list_quickest_line(g->nodes, current, neigh, here->arrival_time);
 		//	printf("med linje:%i i dijkstra\n",line);
-		      
+
 		assert(line);
 		edge_t *edge = graph_get_edge(g,line,current,here->path_edges);
 		assert(edge);
@@ -284,9 +282,9 @@ void dijkstra(graph_t *g, void *current, void *to, list_t *visited,
 		char *bussDepart = list_next_dep_time(g->nodes,current,neigh,line,here->arrival_time);
 		assert(bussDepart);
 		int total_distance = graph_add_penalty(edge, here->arrival_time, bussDepart);// egen rad
-		
+
 		char *new_arrival_time = add_duration(bussDepart, network_get_dur(edge->label)); //egen rad
-		//free(bussDepart);	        				  
+		//free(bussDepart);
 		update_distance(distanceLabels, neigh, g->comp, here->dist + total_distance,
 				tentativePath, tentativeEdgePath, new_arrival_time); //la till new_arrival_tim. ost-bågen borde gå in här!!
 	      }
@@ -294,12 +292,12 @@ void dijkstra(graph_t *g, void *current, void *to, list_t *visited,
 	    list_free(unvisited_neighs);
 	  }
 	list_add(visited, current);
-	
+
 	if (g->comp(current, to))
 	  {
 	    return;
 	  }
-	
+
 	current = get_min_distance_node(distanceLabels, g->comp, visited);
 	assert(current);
       }
@@ -310,7 +308,7 @@ void graph_print_trip (graph_t *g, char *time,char *from, distance_label_t *dl)
 
   printf("\nTrip start:%s\n",time);
 
-  
+
   char *tmp_t = time;
   iter_t *it;
   char*tmp_fr = 0;
@@ -325,7 +323,7 @@ void graph_print_trip (graph_t *g, char *time,char *from, distance_label_t *dl)
       puts(tmp_e->to);
     }
   iter_free(it2);
-  */ 
+  */
   for (it = iter(dl->path_edges); !iter_done(it); iter_next(it))
     {
       void *tmp_v = iter_get(it);
@@ -337,13 +335,13 @@ void graph_print_trip (graph_t *g, char *time,char *from, distance_label_t *dl)
       if(tmp_fr == 0) tmp_fr = from;
 
       // printf("linje:%i !%s!",line,tmp_fr);
-      
+
       if(g->comp(tmp_fr,tmp_e->from))tmp_to = tmp_e->to;
-      
+
       else{tmp_to = tmp_e->from;}
 
       //printf(" - !%s! - tid:%s\n",tmp_to,tmp_t);
-      
+
       char *buss_dep = list_next_dep_time(g->nodes,tmp_fr,tmp_to,line,tmp_t);
       char *arr_time = add_duration(buss_dep, network_get_dur(tmp_e->label));
       int durr = network_get_dur(tmp_e->label);
@@ -385,7 +383,7 @@ distance_label_t *graph_find_path(graph_t *g,char *time, void *from, void *to)
     list_free(visited);
 
     graph_print_trip(g,time,from,best);
-    
+
     return best;
 }
 
@@ -416,7 +414,7 @@ void graph_add_timetable(graph_t *g,char* start,int line,char* time) //Egen Funk
       assert(line);
       assert(time);
       list_add_timetable(g, g->nodes, start, line, time);
-    }  
+    }
 }
 
 void graph_print_timetable(graph_t *g)// Egen Funktion
@@ -491,4 +489,3 @@ void graph_free(graph_t *g)// Egen Funktion
     list_free(g->nodes);
     list_free(g->edges);
 }
-
