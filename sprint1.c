@@ -15,7 +15,7 @@ typedef struct ware
   int location_int;
   int price;
   int amount;
-}kul;
+}kul; // konstigt namn.
 
 struct database
 {
@@ -40,7 +40,7 @@ void init_warehouse()
 {
   for(int i = 0; i<120; i++)
     {
-      lager.wares[i].name = strndup(test[i],128);
+      lager.wares[i].name = strndup(test[i],128); //frigörs aldrig
     }
   lager.size = 34;
 }
@@ -51,7 +51,7 @@ struct action_t action_memory = {.type = NOTHING};
 
 
 
- 
+
 
 #define Clear_stdin while (getchar() != '\n')
   ;
@@ -62,7 +62,7 @@ struct action_t action_memory = {.type = NOTHING};
 
    printf("%s [%s]\n", q , alt);
    do {
-    
+
      if (input)
        {
 	 printf("Inget alternativ '%c', försök igen! [%s]\n", input, alt);
@@ -70,17 +70,17 @@ struct action_t action_memory = {.type = NOTHING};
        }
 
      input = getchar();
-   } while (strchr(alt, input) == NULL); //ändra till stora bosktäver enbart så slipper man skriva ut stort och smått i terminalen(?) 
+   } while (strchr(alt, input) == NULL); //ändra till stora bosktäver enbart så slipper man skriva ut stort och smått i terminalen(?)
 
    Clear_stdin;
-  
+
    return input;
  }
 
 
 
  int ask_question_int(char *q)
- { 
+ {
    char input[120];
    bool tillbaka = true;
    while (tillbaka)
@@ -104,10 +104,11 @@ struct action_t action_memory = {.type = NOTHING};
 
 
 
- 
+
 
 void string_fix (char *input)
 {
+
   int längd = strlen(input)-1; //åäö???
   if (input[längd] == '\n') //åäö???
     {
@@ -121,35 +122,34 @@ char add_goods()     //TODO: En lägg till funktion
   bool loop = true; //Kommer aldrig ändras
   char buf[120];
   bool tillbaka = true;
-  
+
   while (loop){ //Kan lika gärna skriva in som true då loop aldrig ändras
-  
+
     puts("Namn:"); //Upprepning..? bryta ut?
   fgets(buf, 120, stdin);
   string_fix(buf);
-  ny_vara.name = strndup(buf,120);
-  
+  ny_vara.name = strndup(buf,120); // frigörs aldrig
+
   puts("Description:");//Upprepning..? bryta ut?
   fgets(buf, 120, stdin);
   string_fix(buf);
-  ny_vara.description = strndup(buf,120);
-  
+  ny_vara.description = strndup(buf,120); // frigörs aldrig
+
   while (tillbaka)
     {
       tillbaka = false; //Negera "tillbaka" i while å initisera med false så är denna rad redundant
-      
       char lager_char = toupper(ask_question_char ("Vilken plats (bokstav):", "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZzÅåÄäÖö"));
       ny_vara.location_char = lager_char;
 
 
-      int lager_int = ask_question_int("Vilken plats (nummer):\n");
+      int lager_int = ask_question_int("Vilken plats (nummer):\n"); // kontrollerar inte om indata är mer än 2 siffror.
       ny_vara.location_int = lager_int;
-  
+
 
 
       for (int i = 0; i < 120; i++)
 	{
-	  
+
 	  if (ny_vara.location_int == toupper(lager.wares[i].location_int) && toupper(ny_vara.location_char) == toupper(lager.wares[i].location_char))
 	    {
 	      puts("Lagerplatsen är tyvärr upptagen försök igen");
@@ -160,14 +160,14 @@ char add_goods()     //TODO: En lägg till funktion
 
   int lager_pris = ask_question_int("Hur mycket kostar varan:\n");
   ny_vara.price = lager_pris;
-  
+
 
   int lager_antal = ask_question_int("Antal:\n");
   ny_vara.amount = lager_antal;
 
-       
+
   puts("=======================");
-  
+
   printf("Namn: %s \n", ny_vara.name);
   printf("Beskrivning: %s \n", ny_vara.description);
   printf("Plats: %c", ny_vara.location_char);
@@ -177,8 +177,9 @@ char add_goods()     //TODO: En lägg till funktion
 
 
   char yesnoedit = toupper(ask_question_char("Vill du verkligen lägga till varan?(Ja[J], Nej[N], Redigera[R]", "JjNnRr"));
+  // finns inget case för R.
  if (yesnoedit == 'J')
-   { 
+   {
      lager.wares[lager.size] = ny_vara;
      action_memory.type = ADD;
      action_memory.edited = &lager.wares[lager.size];
@@ -191,8 +192,9 @@ char add_goods()     //TODO: En lägg till funktion
      puts(""); // Utrycks aldrig?
      loop = false;// Utrycks aldrig?
    }
+   //else saknas
   }
-  
+
   return 0;
 }
 
@@ -213,13 +215,13 @@ char delete_goods(paj) //TODO: En ta bort funktion
       lager.wares[lager.size-1].name = NULL;
       lager.size--;
       break;
-      
+
     case 'N':
       return 0;
       break;
+// defult saknas.
+    }
 
-    } 
-  
   return 0;
 }
 
@@ -228,11 +230,11 @@ char delete_goods(paj) //TODO: En ta bort funktion
 
 char regret_aux() // TODO: Ångra funktion
 {
-  
-  struct ware emptyware = (struct ware){};   
-  
+
+  struct ware emptyware = (struct ware){};
+
   switch (action_memory.type){
-    
+
   case  0:
     printf("Det finns ingenting nytt att ångra!\n");
     break;
@@ -241,7 +243,7 @@ char regret_aux() // TODO: Ångra funktion
     break;
   case  2:
     lager.wares[lager.size] = action_memory.saved; lager.size++; action_memory.type = NOTHING;
-    break;	
+    break;
   case  3:
     *action_memory.edited = action_memory.original; action_memory.type = NOTHING;
     break;
@@ -263,10 +265,11 @@ int regret()
       break;
     case 'N':
       break;
+      //defult saknas
     }
-  return 0; 
+  return 0;
 }
-  
+
 
 
 
@@ -286,12 +289,12 @@ void visa_vara(int paj)  //Visa funktion
   printf("%i kr\n",lager.wares[paj].price);
   puts("Antal:");
   printf("%i\n",lager.wares[paj].amount);
-  puts(""); 
+  puts("");
   }
-       
-  
+
+
  char edit_goods(int i) //TODO: En redigera funktion
-  
+
   {
     bool tillbaka = true;
     char lagra[120];
@@ -299,11 +302,11 @@ void visa_vara(int paj)  //Visa funktion
     action_memory.type = EDIT;
     action_memory.original = lager.wares[i];
     action_memory.edited = &lager.wares[i];
-    
+
     switch(toupper(ask_question_char("Vad vill du redigera? \n"
 				     "[N]amn \n"
 				     "[B]eskrivning \n"
-				     "[L]agerplats \n"			      
+				     "[L]agerplats \n"
 				     "[P]ris \n"
 				     "An[T]al \n"
 				     "[A]vbryt \n", "NnBbLlPpTtAa")))
@@ -314,7 +317,7 @@ void visa_vara(int paj)  //Visa funktion
 	puts("--------------------");
 	puts("Nytt Namn:");
 	fgets(lagra, 120, stdin);
-	lager.wares[i].name = strndup(lagra,120);     
+	lager.wares[i].name = (lagra,120);
 	break;
       case 'B':
 	puts("Nuvarande Beskrivning:");//Upprepning..? bryta ut?
@@ -322,9 +325,9 @@ void visa_vara(int paj)  //Visa funktion
 	puts("--------------------");
 	puts("Ny beskrivning:");
 	fgets(lagra, 120, stdin);
-	lager.wares[i].description = strndup(lagra,120);
+	lager.wares[i].description = strndup(lagra,120); //frigörs aldrig
 	break;
-	
+
       case 'L':
 	while (tillbaka)
 	{
@@ -332,15 +335,14 @@ void visa_vara(int paj)  //Visa funktion
 	  puts("Nuvarande Lagerplats (bokstav):");//Upprepning..? bryta ut?
 	  printf("%c\n",lager.wares[i].location_char);
 	  puts("--------------------");
-	  
+
 	  char ny_lager_char = toupper(ask_question_char ("Ny lagerplats (bokstav):", "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZzÅåÄäÖö"));
 	  typ.location_char =ny_lager_char;
 
-	
 	  puts("Nuvarande Lagerplats (siffra):");//Upprepning..? bryta ut?
 	  printf("%i\n",lager.wares[i].location_int);
 	  puts("--------------------");
-	  
+
 	  int ny_lager_int = ask_question_int("Ny lagerplats (siffra):\n");
 	  typ.location_int =ny_lager_int;
 
@@ -360,7 +362,7 @@ void visa_vara(int paj)  //Visa funktion
 	    }
 	}
 	break;
-	
+
       case 'P':
 	puts("Nuvarande Pris:");//Upprepning..? bryta ut?
 	puts("--------------------");
@@ -379,6 +381,7 @@ void visa_vara(int paj)  //Visa funktion
 	break;
       case 'A':
 	return 0;
+  // defult saknas
       }
     return 0;
   }
@@ -386,7 +389,7 @@ void visa_vara(int paj)  //Visa funktion
 
 
 
-   
+
 void visa_lager(char inputta) //TODO: Lista varor
 {
 
@@ -397,16 +400,16 @@ void visa_lager(char inputta) //TODO: Lista varor
   for (int i = 0; i < 120; i++)
     {
       index++;
-      printf("%d %s\n", index , lager.wares[i].name); 
-      
+      printf("%d %s\n", index , lager.wares[i].name);
+
       if (index == 20 || i == lager.size-1)
-	{
+	     {
 	  char next_page =  ask_question_char("\nVisa nästa sida med varor?", "JjNn");
 	  index = 0;
 	  if (toupper(next_page) == 'J')
 	    {
 	      puts("\n\n");
-	      sida++; 
+	      sida++;
 	    }
 	  else
 	    {
@@ -418,7 +421,7 @@ void visa_lager(char inputta) //TODO: Lista varor
 		  visa_vara(paj);
 		  i = ((sida*20)-21);
 		  switch(toupper(inputta))
-		    {		    
+		    {
 		    case 'H':
 		      efter_visa = ask_question_char("Vill du [F]ortsätta titta i listan eller [A]vbryta?","FfAa");
 		      if (toupper(efter_visa) == 'A')
@@ -432,7 +435,7 @@ void visa_lager(char inputta) //TODO: Lista varor
 		    case 'T':
 		      delete_goods(paj);
 		      break;
-		    }		  
+		    }
 		}
 	      else
 		{
@@ -442,7 +445,7 @@ void visa_lager(char inputta) //TODO: Lista varor
 	}
     }
 }
-  
+
 
 
 
@@ -475,11 +478,11 @@ void visa_lager(char inputta) //TODO: Lista varor
    bool should_quit = false;
 
    while (!should_quit)
-    
+
      {
        puts("\nVälkommen till lagerhantering 1.0!\n"
 	    "====================================\n"
-       
+
 	    "[L]ägg till en vara\n"
 	    "[T]a bort en vara\n"
 	    "[R]edigera en vara\n"
@@ -489,7 +492,7 @@ void visa_lager(char inputta) //TODO: Lista varor
 	    "\n"
 	    );
 
- 
+
        char inputta = toupper(ask_question_char ("Vad vill du göra idag?", "AaLlTtRrGgHh"));
        if (inputta == 'L')
 	 {
@@ -518,7 +521,7 @@ void visa_lager(char inputta) //TODO: Lista varor
 	 }
        else
 	 {
-	   main();
+	   main(); //
 	 }
 
      }
