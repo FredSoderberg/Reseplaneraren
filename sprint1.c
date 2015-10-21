@@ -70,7 +70,7 @@ struct action_t action_memory = {.type = NOTHING};
        }
 
      input = getchar();
-   } while (strchr(alt, input) == NULL); //ändra till stora bosktäver enbart så slipper man skriva ut stort och smått i terminalen(?) 
+   } while (strchr(alt, input) == NULL);
 
    Clear_stdin;
   
@@ -108,35 +108,35 @@ struct action_t action_memory = {.type = NOTHING};
 
 void string_fix (char *input)
 {
-  int längd = strlen(input)-1; //åäö???
-  if (input[längd] == '\n') //åäö???
+  int längd = strlen(input)-1;
+  if (input[längd] == '\n')
     {
-      input[längd] = '\0'; //åäö???
+      input[längd] = '\0';
     }
 }
 
 char add_goods()     //TODO: En lägg till funktion
 {
-  kul ny_vara; // Initieras ej?
-  bool loop = true; //Kommer aldrig ändras
+  kul ny_vara;
+  bool loop = true;
   char buf[120];
   bool tillbaka = true;
   
-  while (loop){ //Kan lika gärna skriva in som true då loop aldrig ändras
+  while (loop){
   
-    puts("Namn:"); //Upprepning..? bryta ut?
+  puts("Namn:");
   fgets(buf, 120, stdin);
   string_fix(buf);
   ny_vara.name = strndup(buf,120);
   
-  puts("Description:");//Upprepning..? bryta ut?
+  puts("Description:");
   fgets(buf, 120, stdin);
   string_fix(buf);
   ny_vara.description = strndup(buf,120);
   
   while (tillbaka)
     {
-      tillbaka = false; //Negera "tillbaka" i while å initisera med false så är denna rad redundant
+      tillbaka = false;
       
       char lager_char = toupper(ask_question_char ("Vilken plats (bokstav):", "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZzÅåÄäÖö"));
       ny_vara.location_char = lager_char;
@@ -188,8 +188,8 @@ char add_goods()     //TODO: En lägg till funktion
  else if (yesnoedit == 'N')
    {
      return 0;
-     puts(""); // Utrycks aldrig?
-     loop = false;// Utrycks aldrig?
+     puts("");
+     loop = false;
    }
   }
   
@@ -295,7 +295,7 @@ void visa_vara(int paj)  //Visa funktion
   {
     bool tillbaka = true;
     char lagra[120];
-    kul typ; // Grundvärde? och torrt skämt
+    kul typ; 
     action_memory.type = EDIT;
     action_memory.original = lager.wares[i];
     action_memory.edited = &lager.wares[i];
@@ -309,7 +309,7 @@ void visa_vara(int paj)  //Visa funktion
 				     "[A]vbryt \n", "NnBbLlPpTtAa")))
       {
       case 'N':
-	puts("Nuvarande Namn:");//Upprepning..? bryta ut?
+	puts("Nuvarande Namn:");
 	printf("%s\n",lager.wares[i].name);
 	puts("--------------------");
 	puts("Nytt Namn:");
@@ -317,7 +317,7 @@ void visa_vara(int paj)  //Visa funktion
 	lager.wares[i].name = strndup(lagra,120);     
 	break;
       case 'B':
-	puts("Nuvarande Beskrivning:");//Upprepning..? bryta ut?
+	puts("Nuvarande Beskrivning:");
 	printf("%s\n",lager.wares[i].description);
 	puts("--------------------");
 	puts("Ny beskrivning:");
@@ -329,7 +329,7 @@ void visa_vara(int paj)  //Visa funktion
 	while (tillbaka)
 	{
 	  tillbaka = false;
-	  puts("Nuvarande Lagerplats (bokstav):");//Upprepning..? bryta ut?
+	  puts("Nuvarande Lagerplats (bokstav):");
 	  printf("%c\n",lager.wares[i].location_char);
 	  puts("--------------------");
 	  
@@ -337,7 +337,7 @@ void visa_vara(int paj)  //Visa funktion
 	  typ.location_char =ny_lager_char;
 
 	
-	  puts("Nuvarande Lagerplats (siffra):");//Upprepning..? bryta ut?
+	  puts("Nuvarande Lagerplats (siffra):");
 	  printf("%i\n",lager.wares[i].location_int);
 	  puts("--------------------");
 	  
@@ -362,7 +362,7 @@ void visa_vara(int paj)  //Visa funktion
 	break;
 	
       case 'P':
-	puts("Nuvarande Pris:");//Upprepning..? bryta ut?
+	puts("Nuvarande Pris:");
 	puts("--------------------");
 	int ny_lager_pris = ask_question_int("Nytt pris:");
 	typ.price = ny_lager_pris;
@@ -371,7 +371,7 @@ void visa_vara(int paj)  //Visa funktion
 
 
       case 'T':
-       	puts("Nuvarande Antal:");//Upprepning..? bryta ut?
+       	puts("Nuvarande Antal:");
 	puts("--------------------");
 	int ny_lager_antal = ask_question_int("Nytt antal:");
 	typ.amount = ny_lager_antal;
@@ -391,9 +391,9 @@ void visa_lager(char inputta) //TODO: Lista varor
 {
 
   int index = 0;
-  char alt; // Grundvärde?
+  char alt;
   int sida = 1;
-  char efter_visa;// Grundvärde?
+  char efter_visa;
   for (int i = 0; i < 120; i++)
     {
       index++;
@@ -524,3 +524,7 @@ void visa_lager(char inputta) //TODO: Lista varor
      }
    return 0;
  }
+
+
+
+
