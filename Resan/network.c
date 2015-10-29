@@ -20,7 +20,7 @@ struct _edge_t
 
 #define BUFSIZE 1000
 
-bool graph_check_exist(network_t *n, char* from, char* to) // Egen funktion
+bool graph_check_exist(network_t *n, char* from, char* to)
 {
   if(graph_check_node_exist(n->g, from, to))return true;
 
@@ -77,7 +77,7 @@ void timetable_parse(network_t *netw,FILE *file) // Egen funktion
 	  graph_add_timetable(netw->g, bus_start_dup, bus_line_dup, bus_time_dup);
 	}
     fclose(file);
-       graph_print_timetable(netw->g);
+    //graph_print_timetable(netw->g);
 }
 
 

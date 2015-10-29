@@ -68,7 +68,7 @@ char *add_min(int hour, int min, int duration)
 char* add_duration(char* depart, int duration)
 {
   int hour, min;
-  int matches = sscanf(depart, "%d:%d", &hour, &min);
+  sscanf(depart, "%d:%d", &hour, &min);
   int calc_hour = hour * 60;
   char* dep = add_min(calc_hour, min, duration);
   return dep;

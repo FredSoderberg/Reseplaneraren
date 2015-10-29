@@ -141,32 +141,43 @@ list_t *graph_find_neighbors(graph_t *, void *node);
 distance_label_t *graph_find_path(graph_t *,char *time, void *from, void *to);
 
 /**
-Egen funktion
+   Adds a timetable to a node.
+  
  */
-void graph_add_timetable(graph_t *,char* bus_start,int bus_line,char* bus_time);
+void graph_add_timetable(graph_t *,char* start,int line,char* time);
 
 /**
-Egen funktion
+   Finds the edge between the current node and it's neighbor.
+
+   \param line The busline
+
+   \param node_el The current node
+
  */
-void *graph_get_edge(graph_t*, int line, void *, list_t *visited);
+void *graph_get_edge(graph_t*, int line, void *node_el, list_t *visited);
 
 /**
-Egen funktion
+   Finds the name of the next station for a certain route.
+
+   \returns the name of the next station.
+
  */
 char *graph_next_node_name(graph_t *, void *, char *);
 
 
 /**
-Egen funktion
+   Finds the duration between two stations.
+
  */
 int graph_get_duration(void *);
 
 /**
-Egen funktion
+   Checks if the the current node is and end station.
+
+   \return true if the node is and end station.
+
  */
 bool graph_check_end_station(graph_t *g,int line, list_t *visited_edges, void *);
-
-void print_edge(void *);
 
 /**
 
@@ -178,12 +189,13 @@ void print_edge(void *);
 void graph_free(graph_t *);
 
 /**
-Egen funktion
+   Checks if a node exists in the graph.
+
  */
 bool graph_check_node_exist(graph_t *g, char *from, char *to); //EGEN FUNKTION
 
 /**
-Egen funktion
+Test function. 
  */
 void graph_print_timetable(graph_t *g);// EGET!!!
 

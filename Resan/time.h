@@ -7,26 +7,20 @@
 
 /**
    
-   Takes two strings, converts them to integers and calculates the time difference of the two integers.
+   Takes two times and calculates the time difference. 
    
-   \param time1. string that represent a value on format HH:MM.
    
-   \param time1. string that represent a value on format HH:MM.
-   
-   \returns returns the total time difference in integer form.
+   \returns  the time difference
    
 */
-Int time_diff(char *time1, char *time2);
+int time_diff(char *time1, char *time2);
 
 /**
 
-   Takes two strings, converts them to integers. We then compare the two integers.
+   Takes two times and compares them according time difference
 
-   \param time1. string that represent a value on format HH:MM.
 
-   \param time1. string that represent a value on format HH:MM.
-
-   \returns the int 0 if the both times are equal. Returns the int 1 if time1 is larger then time 2. Returns the int 2 if time2 is larger then time1.
+   \returns and int that depends on wherever the two times are the same or the first time is bigger than the second and vice versa. 
    
 */
 
