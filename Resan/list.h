@@ -121,42 +121,65 @@ list_t *list_clone(list_t *);
 
 
 /**
-Eget
+   Adds a timetable for each station on the route of a certain busline.
+
+   \param line The busline 
+
+   \param time The starttime for the busline.
+
+
  */
-void list_add_timetable(void *, list_t *, char *, int, char *);
+void list_add_timetable(void *, list_t *, char *start, int line, char *time);
+
 
 /**
-Eget
+   Test function
  */
 void print_timetable(list_t *);
 
 /**
 Eget
  */
-void *list_last_element (list_t *);
+//void *list_last_element (list_t *);
 
 /**
-Eget
+   Finds the next departure time for the supplied bus at the supplied station.
+
+   \param from_node_el The station where we are at
+
+   \param line The busline
+
+   \param start_time The time we arrive at the station
+
+   \returns next departure for the given busline.
+
  */
-char *list_next_dep_time(list_t *, char *,char *, int, char *);
+char *list_next_dep_time(list_t *, char *from_node_el,char *to_node_el, int line, char *start_time);
 
 /**
-Eget
+   Finds the quickest line beetween two stations.
+
+   
  */
 int list_quickest_line(list_t *,char *,char *, char *);
 
 /**
 Eget
  */
-bool list_is_edge_visited(list_t *, comparator_t, void *);
+//bool list_is_edge_visited(list_t *, comparator_t, void *);
 
 /**
-Eget
+A function to free memory allocated in the struct distancelabels. Frees all the distancelabels in the list_t except the supplied distancelabel.
+
+\param comp \ref comparator_t to search with.
+
+\param dl supplied distancelabel
+
  */
-void free_distancelabels(comparator_t,list_t *, distance_label_t *);
+void free_distancelabels(comparator_t comp, list_t *, distance_label_t *dl);
 
 /**
-Eget
+   Frees the memory of distance label.
  */
 void free_dl(distance_label_t *);
 
